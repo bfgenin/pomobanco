@@ -1,0 +1,639 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B52104482C8A4BCC0053CBDB /* PomoBancoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52104472C8A4BCC0053CBDB /* PomoBancoApp.swift */; };
+		B521044A2C8A4BCC0053CBDB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52104492C8A4BCC0053CBDB /* ContentView.swift */; };
+		B521044C2C8A4BCD0053CBDB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B521044B2C8A4BCD0053CBDB /* Assets.xcassets */; };
+		B521044F2C8A4BCD0053CBDB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B521044E2C8A4BCD0053CBDB /* Preview Assets.xcassets */; };
+		B52104592C8A4BCD0053CBDB /* PomoBancoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52104582C8A4BCD0053CBDB /* PomoBancoTests.swift */; };
+		B52104632C8A4BCD0053CBDB /* PomoBancoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52104622C8A4BCD0053CBDB /* PomoBancoUITests.swift */; };
+		B52104652C8A4BCD0053CBDB /* PomoBancoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52104642C8A4BCD0053CBDB /* PomoBancoUITestsLaunchTests.swift */; };
+		B52104722C8A4C000053CBDB /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52104712C8A4C000053CBDB /* Task.swift */; };
+		B52104B62C8BD9F00053CBDB /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52104B52C8BD9F00053CBDB /* TaskView.swift */; };
+		B587E25D2C9E38D500B8E1CD /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B587E25C2C9E38D500B8E1CD /* TimerView.swift */; };
+		B59E6BB32C8E73B200C750B9 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59E6BB22C8E73B200C750B9 /* Project.swift */; };
+		B59E6BB52C8E7D3100C750B9 /* AddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59E6BB42C8E7D3100C750B9 /* AddTaskView.swift */; };
+		B59E79612C90CC9600C3ADD0 /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59E79602C90CC9600C3ADD0 /* TimerModel.swift */; };
+		B59EF4732C90E64700D35E4F /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59EF4722C90E64700D35E4F /* Entry.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B52104552C8A4BCD0053CBDB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B521043C2C8A4BCC0053CBDB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B52104432C8A4BCC0053CBDB;
+			remoteInfo = PomoBanco;
+		};
+		B521045F2C8A4BCD0053CBDB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B521043C2C8A4BCC0053CBDB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B52104432C8A4BCC0053CBDB;
+			remoteInfo = PomoBanco;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B52104442C8A4BCC0053CBDB /* PomoBanco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomoBanco.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B52104472C8A4BCC0053CBDB /* PomoBancoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomoBancoApp.swift; sourceTree = "<group>"; };
+		B52104492C8A4BCC0053CBDB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B521044B2C8A4BCD0053CBDB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B521044E2C8A4BCD0053CBDB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B52104542C8A4BCD0053CBDB /* PomoBancoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PomoBancoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B52104582C8A4BCD0053CBDB /* PomoBancoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomoBancoTests.swift; sourceTree = "<group>"; };
+		B521045E2C8A4BCD0053CBDB /* PomoBancoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PomoBancoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B52104622C8A4BCD0053CBDB /* PomoBancoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomoBancoUITests.swift; sourceTree = "<group>"; };
+		B52104642C8A4BCD0053CBDB /* PomoBancoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomoBancoUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B52104712C8A4C000053CBDB /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		B52104B52C8BD9F00053CBDB /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
+		B587E25C2C9E38D500B8E1CD /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		B59E6BB22C8E73B200C750B9 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		B59E6BB42C8E7D3100C750B9 /* AddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskView.swift; sourceTree = "<group>"; };
+		B59E79602C90CC9600C3ADD0 /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
+		B59EF4722C90E64700D35E4F /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B52104412C8A4BCC0053CBDB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B52104512C8A4BCD0053CBDB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B521045B2C8A4BCD0053CBDB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B521043B2C8A4BCC0053CBDB = {
+			isa = PBXGroup;
+			children = (
+				B52104462C8A4BCC0053CBDB /* PomoBanco */,
+				B52104572C8A4BCD0053CBDB /* PomoBancoTests */,
+				B52104612C8A4BCD0053CBDB /* PomoBancoUITests */,
+				B52104452C8A4BCC0053CBDB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B52104452C8A4BCC0053CBDB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B52104442C8A4BCC0053CBDB /* PomoBanco.app */,
+				B52104542C8A4BCD0053CBDB /* PomoBancoTests.xctest */,
+				B521045E2C8A4BCD0053CBDB /* PomoBancoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B52104462C8A4BCC0053CBDB /* PomoBanco */ = {
+			isa = PBXGroup;
+			children = (
+				B52104472C8A4BCC0053CBDB /* PomoBancoApp.swift */,
+				B52104492C8A4BCC0053CBDB /* ContentView.swift */,
+				B59EF46B2C90D95000D35E4F /* Model */,
+				B59EF46D2C90D97100D35E4F /* View */,
+				B59EF46C2C90D96300D35E4F /* ViewModel */,
+				B521044B2C8A4BCD0053CBDB /* Assets.xcassets */,
+				B521044D2C8A4BCD0053CBDB /* Preview Content */,
+			);
+			path = PomoBanco;
+			sourceTree = "<group>";
+		};
+		B521044D2C8A4BCD0053CBDB /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				B521044E2C8A4BCD0053CBDB /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		B52104572C8A4BCD0053CBDB /* PomoBancoTests */ = {
+			isa = PBXGroup;
+			children = (
+				B52104582C8A4BCD0053CBDB /* PomoBancoTests.swift */,
+			);
+			path = PomoBancoTests;
+			sourceTree = "<group>";
+		};
+		B52104612C8A4BCD0053CBDB /* PomoBancoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				B52104622C8A4BCD0053CBDB /* PomoBancoUITests.swift */,
+				B52104642C8A4BCD0053CBDB /* PomoBancoUITestsLaunchTests.swift */,
+			);
+			path = PomoBancoUITests;
+			sourceTree = "<group>";
+		};
+		B59EF46B2C90D95000D35E4F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B52104712C8A4C000053CBDB /* Task.swift */,
+				B59EF4722C90E64700D35E4F /* Entry.swift */,
+				B59E6BB22C8E73B200C750B9 /* Project.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B59EF46C2C90D96300D35E4F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B59E79602C90CC9600C3ADD0 /* TimerModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B59EF46D2C90D97100D35E4F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B52104B52C8BD9F00053CBDB /* TaskView.swift */,
+				B587E25C2C9E38D500B8E1CD /* TimerView.swift */,
+				B59E6BB42C8E7D3100C750B9 /* AddTaskView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B52104432C8A4BCC0053CBDB /* PomoBanco */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B52104682C8A4BCD0053CBDB /* Build configuration list for PBXNativeTarget "PomoBanco" */;
+			buildPhases = (
+				B52104402C8A4BCC0053CBDB /* Sources */,
+				B52104412C8A4BCC0053CBDB /* Frameworks */,
+				B52104422C8A4BCC0053CBDB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PomoBanco;
+			productName = PomoBanco;
+			productReference = B52104442C8A4BCC0053CBDB /* PomoBanco.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B52104532C8A4BCD0053CBDB /* PomoBancoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B521046B2C8A4BCD0053CBDB /* Build configuration list for PBXNativeTarget "PomoBancoTests" */;
+			buildPhases = (
+				B52104502C8A4BCD0053CBDB /* Sources */,
+				B52104512C8A4BCD0053CBDB /* Frameworks */,
+				B52104522C8A4BCD0053CBDB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B52104562C8A4BCD0053CBDB /* PBXTargetDependency */,
+			);
+			name = PomoBancoTests;
+			productName = PomoBancoTests;
+			productReference = B52104542C8A4BCD0053CBDB /* PomoBancoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B521045D2C8A4BCD0053CBDB /* PomoBancoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B521046E2C8A4BCD0053CBDB /* Build configuration list for PBXNativeTarget "PomoBancoUITests" */;
+			buildPhases = (
+				B521045A2C8A4BCD0053CBDB /* Sources */,
+				B521045B2C8A4BCD0053CBDB /* Frameworks */,
+				B521045C2C8A4BCD0053CBDB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B52104602C8A4BCD0053CBDB /* PBXTargetDependency */,
+			);
+			name = PomoBancoUITests;
+			productName = PomoBancoUITests;
+			productReference = B521045E2C8A4BCD0053CBDB /* PomoBancoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B521043C2C8A4BCC0053CBDB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					B52104432C8A4BCC0053CBDB = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					B52104532C8A4BCD0053CBDB = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = B52104432C8A4BCC0053CBDB;
+					};
+					B521045D2C8A4BCD0053CBDB = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = B52104432C8A4BCC0053CBDB;
+					};
+				};
+			};
+			buildConfigurationList = B521043F2C8A4BCC0053CBDB /* Build configuration list for PBXProject "PomoBanco" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B521043B2C8A4BCC0053CBDB;
+			productRefGroup = B52104452C8A4BCC0053CBDB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B52104432C8A4BCC0053CBDB /* PomoBanco */,
+				B52104532C8A4BCD0053CBDB /* PomoBancoTests */,
+				B521045D2C8A4BCD0053CBDB /* PomoBancoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B52104422C8A4BCC0053CBDB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B521044F2C8A4BCD0053CBDB /* Preview Assets.xcassets in Resources */,
+				B521044C2C8A4BCD0053CBDB /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B52104522C8A4BCD0053CBDB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B521045C2C8A4BCD0053CBDB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B52104402C8A4BCC0053CBDB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B587E25D2C9E38D500B8E1CD /* TimerView.swift in Sources */,
+				B521044A2C8A4BCC0053CBDB /* ContentView.swift in Sources */,
+				B52104722C8A4C000053CBDB /* Task.swift in Sources */,
+				B52104482C8A4BCC0053CBDB /* PomoBancoApp.swift in Sources */,
+				B59E6BB52C8E7D3100C750B9 /* AddTaskView.swift in Sources */,
+				B59E79612C90CC9600C3ADD0 /* TimerModel.swift in Sources */,
+				B59EF4732C90E64700D35E4F /* Entry.swift in Sources */,
+				B59E6BB32C8E73B200C750B9 /* Project.swift in Sources */,
+				B52104B62C8BD9F00053CBDB /* TaskView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B52104502C8A4BCD0053CBDB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B52104592C8A4BCD0053CBDB /* PomoBancoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B521045A2C8A4BCD0053CBDB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B52104632C8A4BCD0053CBDB /* PomoBancoUITests.swift in Sources */,
+				B52104652C8A4BCD0053CBDB /* PomoBancoUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B52104562C8A4BCD0053CBDB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B52104432C8A4BCC0053CBDB /* PomoBanco */;
+			targetProxy = B52104552C8A4BCD0053CBDB /* PBXContainerItemProxy */;
+		};
+		B52104602C8A4BCD0053CBDB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B52104432C8A4BCC0053CBDB /* PomoBanco */;
+			targetProxy = B521045F2C8A4BCD0053CBDB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		B52104662C8A4BCD0053CBDB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B52104672C8A4BCD0053CBDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B52104692C8A4BCD0053CBDB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"PomoBanco/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = beelzee.PomoBanco;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B521046A2C8A4BCD0053CBDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"PomoBanco/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = beelzee.PomoBanco;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B521046C2C8A4BCD0053CBDB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = beelzee.PomoBancoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PomoBanco.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PomoBanco";
+			};
+			name = Debug;
+		};
+		B521046D2C8A4BCD0053CBDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = beelzee.PomoBancoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PomoBanco.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PomoBanco";
+			};
+			name = Release;
+		};
+		B521046F2C8A4BCD0053CBDB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = beelzee.PomoBancoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PomoBanco;
+			};
+			name = Debug;
+		};
+		B52104702C8A4BCD0053CBDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = beelzee.PomoBancoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PomoBanco;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B521043F2C8A4BCC0053CBDB /* Build configuration list for PBXProject "PomoBanco" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B52104662C8A4BCD0053CBDB /* Debug */,
+				B52104672C8A4BCD0053CBDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B52104682C8A4BCD0053CBDB /* Build configuration list for PBXNativeTarget "PomoBanco" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B52104692C8A4BCD0053CBDB /* Debug */,
+				B521046A2C8A4BCD0053CBDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B521046B2C8A4BCD0053CBDB /* Build configuration list for PBXNativeTarget "PomoBancoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B521046C2C8A4BCD0053CBDB /* Debug */,
+				B521046D2C8A4BCD0053CBDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B521046E2C8A4BCD0053CBDB /* Build configuration list for PBXNativeTarget "PomoBancoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B521046F2C8A4BCD0053CBDB /* Debug */,
+				B52104702C8A4BCD0053CBDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B521043C2C8A4BCC0053CBDB /* Project object */;
+}
