@@ -50,7 +50,7 @@ struct AddTaskView: View {
             let project = Project(tasks: [Task](), title: title, details: details, entries: [Entry]())
             modelContext.insert(project)
         } else {
-            let task = Task(name: title, details: details, time: Double(0), entries: [Entry]())
+            let task = Task(name: title, details: details, entries: [Entry]())
             modelContext.insert(task)
         }
     }

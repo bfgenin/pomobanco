@@ -10,11 +10,11 @@ import SwiftData
 
 @Model
 class Entry {
-    var Date: Date
-    var Duration: Float
+    var date: Date
+    var duration: Float
     
-    init(Date: Date, Duration: Float) {
-        self.Date = Date
-        self.Duration = Duration
+    init(date: Date, duration: Float) {
+        self.date = date
+        self.duration = duration
     }
 }

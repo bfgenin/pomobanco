@@ -78,12 +78,12 @@ struct TimerView: View {
     }
     
     private func addTime(time: Float) {
-        let entry = Entry(Date: .now, Duration: time)
-
-         // Ensure task is mutable and add the entry
-         guard let task = task else { return }
-         task.entries.append(entry) // Adjust according to your Task structure
-
+        let entry = Entry(date: Date.now, duration: time)
+        
+        // Ensure task is mutable and add the entry
+        guard let task = task else { return }
+        task.addEntry(entry)// Adjust according to your Task structure
+        print("Task: \(task.name) Entry Date: \(entry.date)  Entry Time\(entry.duration)")
          do {
              // Save the context if needed
              try modelContext.save() // Ensure you save changes to the model context
