@@ -8,10 +8,10 @@
 import SwiftUI
 import SwiftData
 
-struct TaskView: View {
+struct ProjectView: View {
     @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) var dismiss
-    var task: Task
+    var task: Project
     var focusMode: Bool
     var width: Double = 200
     var onSelect: (() -> Void)?
@@ -21,8 +21,6 @@ struct TaskView: View {
     
     var body: some View {
         ZStack {
-            
-          Color.darkPink
             ZStack {
                 VStack(alignment: .leading, spacing: 0) {
                     HStack() {
@@ -32,7 +30,7 @@ struct TaskView: View {
                             .foregroundColor(.darkBlue)
                         
                         //Spacer()
-                        Text(String(task.time))
+                        Text(String(task.formatTime(for: Date.now)))
                             .frame(width: 50, height: 17)
                             .background(focusMode ? .darkBlue : .darkPink)
                             .foregroundColor(.white)
@@ -88,7 +86,7 @@ struct TaskView: View {
 }
 
 struct EditTask: View {
-    var task: Task
+    var task: Project
 
     var body: some View {
         VStack {
@@ -105,9 +103,16 @@ struct EditTask: View {
 #Preview {
     do {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Task.self, configurations: config)
-        let fatTask = Task(name: "Fat Task", details:  "Oh boy, I am a big task, I have so many details and information that I just can't help but be huge...MMM...I ate many subtasks, lol!", entries: [Entry]())
-        return TaskView(task: fatTask, focusMode: false)
+        let container = try ModelContainer(for: Project.self, configurations: config)
+        // Create an entry
+        let aEntry = Entry(date: .now, duration: 6000.7800)
+//          
+//        // Initialize testEntries and append the entry
+        var testEntries = [Entry]()
+//        testEntries.append(aEntry)
+                           
+        let fatTask = Project(name: "Fat Task", details:  "Oh boy, I am a big task, I have so many details and information that I just can't help but be huge...MMM...I ate many subtasks, lol!", entries: testEntries)
+        return ProjectView(task: fatTask, focusMode: false)
             .modelContainer(container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
