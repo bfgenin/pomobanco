@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftData
 
-struct EditProjectView: View {
+struct OldEditProjectView: View {
     @State var project: Project
     @State private var focusMode = false
 
@@ -101,7 +101,7 @@ struct EditProjectView: View {
         
         let project = Project(name: "Test Project", details: "TEST PROJECT DETAILS", startDate: .now, tasks: tasks, entries: [Entry]())
         
-        return EditProjectView(project: project)
+        return OldEditProjectView(project: project)
             .modelContainer(container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
