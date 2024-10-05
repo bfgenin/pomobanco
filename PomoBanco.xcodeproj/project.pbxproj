@@ -15,6 +15,8 @@
 		B52104632C8A4BCD0053CBDB /* PomoBancoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52104622C8A4BCD0053CBDB /* PomoBancoUITests.swift */; };
 		B52104652C8A4BCD0053CBDB /* PomoBancoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52104642C8A4BCD0053CBDB /* PomoBancoUITestsLaunchTests.swift */; };
 		B52104B62C8BD9F00053CBDB /* OldProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52104B52C8BD9F00053CBDB /* OldProjectView.swift */; };
+		B52D758D2CB06A1600943C62 /* RectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52D758C2CB06A1600943C62 /* RectangleView.swift */; };
+		B52D758F2CB1E16000943C62 /* AddNewProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52D758E2CB1E16000943C62 /* AddNewProject.swift */; };
 		B53790332CADB03A00E7FDCE /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53790322CADB03A00E7FDCE /* ProjectListView.swift */; };
 		B53790352CADB67C00E7FDCE /* SelectedProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53790342CADB67C00E7FDCE /* SelectedProjectView.swift */; };
 		B552BC852CA0C250002AD4F5 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = B552BC842CA0C250002AD4F5 /* Project.swift */; };
@@ -57,6 +59,8 @@
 		B52104622C8A4BCD0053CBDB /* PomoBancoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomoBancoUITests.swift; sourceTree = "<group>"; };
 		B52104642C8A4BCD0053CBDB /* PomoBancoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomoBancoUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		B52104B52C8BD9F00053CBDB /* OldProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldProjectView.swift; sourceTree = "<group>"; };
+		B52D758C2CB06A1600943C62 /* RectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleView.swift; sourceTree = "<group>"; };
+		B52D758E2CB1E16000943C62 /* AddNewProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewProject.swift; sourceTree = "<group>"; };
 		B53790322CADB03A00E7FDCE /* ProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListView.swift; sourceTree = "<group>"; };
 		B53790342CADB67C00E7FDCE /* SelectedProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedProjectView.swift; sourceTree = "<group>"; };
 		B552BC842CA0C250002AD4F5 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
@@ -120,6 +124,7 @@
 			children = (
 				B52104472C8A4BCC0053CBDB /* PomoBancoApp.swift */,
 				B52104492C8A4BCC0053CBDB /* ContentView.swift */,
+				B552BCAC2CA61FBA002AD4F5 /* Old Views */,
 				B59EF46D2C90D97100D35E4F /* View */,
 				B59EF46B2C90D95000D35E4F /* Model */,
 				B59EF46C2C90D96300D35E4F /* ViewModel */,
@@ -179,7 +184,6 @@
 		B59EF46C2C90D96300D35E4F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				B552BCAC2CA61FBA002AD4F5 /* Old Views */,
 				B59E79602C90CC9600C3ADD0 /* TimerModel.swift */,
 			);
 			path = ViewModel;
@@ -189,7 +193,9 @@
 			isa = PBXGroup;
 			children = (
 				B587E25C2C9E38D500B8E1CD /* TimerView.swift */,
+				B52D758E2CB1E16000943C62 /* AddNewProject.swift */,
 				B53790342CADB67C00E7FDCE /* SelectedProjectView.swift */,
+				B52D758C2CB06A1600943C62 /* RectangleView.swift */,
 				B53790322CADB03A00E7FDCE /* ProjectListView.swift */,
 			);
 			path = View;
@@ -333,12 +339,14 @@
 				B59E79612C90CC9600C3ADD0 /* TimerModel.swift in Sources */,
 				B59EF4732C90E64700D35E4F /* Entry.swift in Sources */,
 				B52104B62C8BD9F00053CBDB /* OldProjectView.swift in Sources */,
+				B52D758F2CB1E16000943C62 /* AddNewProject.swift in Sources */,
 				B552BC8D2CA48F1F002AD4F5 /* MainView.swift in Sources */,
 				B552BC892CA0C490002AD4F5 /* Task.swift in Sources */,
 				B552BC8B2CA21347002AD4F5 /* OldEditProjectView.swift in Sources */,
 				B53790352CADB67C00E7FDCE /* SelectedProjectView.swift in Sources */,
 				B552BC852CA0C250002AD4F5 /* Project.swift in Sources */,
 				B53790332CADB03A00E7FDCE /* ProjectListView.swift in Sources */,
+				B52D758D2CB06A1600943C62 /* RectangleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

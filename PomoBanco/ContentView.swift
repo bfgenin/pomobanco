@@ -8,15 +8,35 @@ struct ContentView: View {
     
     @State private var focusMode = false
     @State private var selectedProject: Project? = nil
-    @State var show = false
+    @State var bottomShow = false
+    @State var topShow = false
+    @State var isExpanded = false
     
     @Namespace var namespace
     
     var body: some View {
         ZStack {
-            // BOTTOM:
-            ProjectListView(show: $show, selectedProject: $selectedProject, projects: projects)
+            // ** MIDDLE SECTION
             
+            SelectedProjectView(project: selectedProject, isExpanded: $isExpanded)
+                .onChange(of: isExpanded) { oldValue, newValue in
+//                    if newValue == false {
+//                        withAnimation {
+//                            topShow = false
+//                            bottomShow = false
+//                        }
+//                    } else if newValue == true {
+//                        withAnimation {
+//                            topShow = true
+//                            bottomShow = true
+//                        }
+//                    }
+                }
+                .blur(radius: !topShow && isExpanded ? 10 : 0)
+                .offset(y: isExpanded ? 0 : 50)
+            // BOTTOM:
+            ProjectListView(bottomShow: $bottomShow, selectedProject: $selectedProject, projects: projects)
+               // .offset(y: bottomShow ? 500 : 300)
             // TOP:
             VStack {
     
@@ -28,33 +48,23 @@ struct ContentView: View {
                         .frame(height: 410)
                         .opacity(0.4)
                         .shadow(color: Color.lightPink.opacity(0.9), radius: 50, x: 0, y: 2)
+                        .onTapGesture {
+                            withAnimation {
+                                topShow.toggle()
+                            }
+                        }
                     TimerView(project: selectedProject, focusMode: $focusMode)
                         .zIndex(1)
                         .frame(width: 250, height: 250)
                         .shadow(color: Color.hotPink.opacity(0.9), radius: 50, x: 0, y: 0)
                 }
-                //.offset(y: show ? -300 : 0)
+                .blur(radius: topShow ? 0.4 : 0)
+                .offset(y: topShow ? -340 : 0)
                 
                 // ** END: TIMER VIEW
                 
                 // ** SELECTED PROJECT:
-                if let project = selectedProject {
-//                    SelectedProjectView(project: project, show: $show)
-                } else {
-                    Text("select a project")
-                        .foregroundStyle(.white)
-                        .font(.custom("Avenir", size: 24))
-                        .fontWeight(.bold)
-                        .opacity(0.20)
-                        .matchedGeometryEffect(id: "selected-project", in: namespace)
-                        .frame(width: 380, height: 100)
-                        .onTapGesture {
-                            withAnimation (.spring(response: 0.4, dampingFraction: 0.6)) {
-                                show.toggle()
-                            }
-                        }
-           
-                }
+               
 
                 // STYLING
                 Spacer()
@@ -118,6 +128,47 @@ struct AddProjectView: View {
 }
 
 #Preview {
-    ContentView()
+    do {
+        // Create a model configuration for in-memory storage
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: Project.self, configurations: config)
+        
+        // Create a sample project
+        let sampleProject = Project(
+            name: "Sample Project",
+            details: "This is a sample project for preview purposes.",
+            startDate: .now,
+            tasks: [],
+            entries: []
+        )
+        
+        // Insert the sample project into the context
+        let modelContext = container.mainContext
+        modelContext.insert(sampleProject)
+        
+        // Create a Binding for the selected project
+        var selectedProject: Project? = sampleProject
+        let selectedProjectBinding = Binding<Project?>(
+            get: { selectedProject },
+            set: { selectedProject = $0 }
+        )
+        
+        // Create a Binding for showing the project view
+        var show = false
+        let showBinding = Binding<Bool>(
+            get: { show },
+            set: { show = $0 }
+        )
+        
+        // Return the ContentView with the model container
+        return ContentView()
+            .modelContainer(container)
+            .environment(\.modelContext, modelContext)
+         
+            
+    } catch {
+        return Text("Failed to create preview: \(error.localizedDescription)")
+    }
 }
+
 

@@ -11,19 +11,25 @@ import SwiftData
 struct ProjectListView: View {
     @Environment(\.modelContext) var modelContext
     
-    @Binding var show: Bool
+    @Binding var bottomShow: Bool
     @Binding var selectedProject: Project?
     
     var projects: [Project]
+    
+    @State var projectToDelete: Project? = nil
+    @State var addProject = false
+    @State var deleteConfirmation = false
     
     @Namespace var namespace
     
     var body: some View {
         ZStack {
+            
+            
             RoundedRectangle(cornerRadius: 35)
                 .fill(LinearGradient(gradient: Gradient(stops: [
-                    .init(color: .darkPink, location: 0.0),
-                    .init(color: .medPink, location: 0.8),
+                    .init(color: .darkPink, location: 0.34),
+                    .init(color: .medPink, location: 0.7),
                     .init(color: .lightPink, location: 0.9)
                 ]),
                                      startPoint: .top,
@@ -32,21 +38,83 @@ struct ProjectListView: View {
                 .frame(height: 354)
                 .shadow(color: Color.hotPink.opacity(0.8), radius: 20, x: 0, y: -15)
                 .matchedGeometryEffect(id: "blue-section", in: namespace)
-                .offset(y: show ? 500 : 300)
+                .offset(y: bottomShow ? 500 : 300)
             
-            List {
-                ForEach(projects, id: \.self) { project in
-                    ReducedProjectView(project: project, selectedProject: $selectedProject)
-                        .listRowBackground(Color.clear)
+            VStack {
+                
+                HStack{
+                    Button("Add Project") {
+                        withAnimation(){
+                            addProject.toggle()
+                        }
+                        
+                    }
+                    .foregroundStyle(.white)
+                    .frame(width: 100, alignment: .leading)
+                    
+                    Spacer()
+                    
+                    RoundedRectangle(cornerRadius: 40)
+                        .fill(.lightPink)
+                        .contentShape(Rectangle())
+                        .frame(width: 80, height: 10)
+                        .opacity(0.5)
+                        .onTapGesture {
+                            withAnimation() {
+                                bottomShow.toggle()
+                            }
+                        }
+                    
                 }
+                
+                List {
+                    if addProject {
+                        AddNewProject(addProject: $addProject)
+                            .listRowBackground(Color.clear)
+                            .padding(.bottom)
+                    }
+                    ForEach(projects, id: \.self) { project in
+                        ReducedProjectView(project: project, selectedProject: $selectedProject)
+                            .listRowBackground(Color.clear)
+                           
+                    }
+                    .onDelete(perform: deleteProject)
+                }
+             
+                .disabled(bottomShow)
+                .frame(width: 380)
+                .matchedGeometryEffect(id: "list-section", in: namespace)
+                .listStyle(PlainListStyle())
             }
-            .frame(maxWidth: 350, maxHeight: 354)
-            .matchedGeometryEffect(id: "list-section", in: namespace)
-            .listStyle(PlainListStyle())
-            .offset(y: show ? 520 : 320)
-            .blur(radius: show ? 1 : 0)
+            .frame(width: 390, height: 400)
+            .offset(y: bottomShow ? 530 : 330)
+            .blur(radius: bottomShow ? 1 : 0)
+            .alert(isPresented: $deleteConfirmation) {
+                Alert(
+                    title: Text("Delete Project"),
+                    message: Text("Are you sure you want to delete this project? "),
+                    
+                    primaryButton: .destructive(Text("Delete")) {
+                        if let projectToDelete = projectToDelete {
+                            modelContext.delete(projectToDelete)
+                        }
+                    },
+                    secondaryButton: .cancel {
+                        projectToDelete = nil
+                    }
+                )
+            }
         }
     }
+    
+    private func deleteProject(at offsets: IndexSet) {
+        if let index = offsets.first {
+            projectToDelete = projects[index]
+            deleteConfirmation = true
+        }
+    }
+    
+    
 }
 
 
@@ -54,25 +122,23 @@ struct ProjectListView: View {
 struct ReducedProjectView: View {
     var project: Project
     @Binding var selectedProject: Project?
+    @State private var isAnimating = false
     
     var body: some View {
         HStack {
-            //
-            ZStack {
-                Circle()
-                    .fill(Color.hotPink.opacity(0.5))
-                    .frame(width: 11, height: 11)
-                
-                Circle()
-                    .stroke(Color.white, lineWidth: 1)
-                    .frame(width: 10, height: 10)
+            if let tag = project.tag {
+                Text(tag)
+                    .padding(.leading, 10)
+                    .frame(width: 60, height: 20, alignment: .leading)
+                    .background(Color.red.opacity(0.8))
+                    .clipShape(.capsule)
+                    .padding(.leading, 10)
+            } else {
+                Text("")
+                    .frame(width: 60, height: 20, alignment: .leading)
+                    .frame(height: 20, alignment: .leading)
+                    .padding(.leading, 10)
             }
-            .padding(.leading, 11)
-            
-            Text(project.tag ?? "")
-                .padding(.horizontal, 5)
-                .frame(maxWidth: 80, alignment: .leading)
-            
             Text(project.name)
                 .truncationMode(.tail)
                 .frame(maxWidth: 150, alignment: .leading)
@@ -81,14 +147,27 @@ struct ReducedProjectView: View {
                 .padding(.trailing)
             
         }
-        
+        .onAppear {
+            withAnimation(.easeIn(duration: 4)) { // Apply custom animation on appear
+                isAnimating = true
+            }
+        }
         .frame(width: 333, height: 40)
         .font(.custom("Avenir", size: 16))
         .foregroundStyle(.white)
-        .border(.white, width: 1.5)
+        .overlay(
+            RoundedRectangle(cornerRadius: 25)
+                .fill(Color.white.opacity(0.08))
+                .stroke(Color.white.opacity(0.5), lineWidth: 2)
+                .frame(width: 350, height: 40)
+        )
+       // .border(.white, width: 1.5)
+        .contentShape(Rectangle())
         .onTapGesture {
             withAnimation {
+
                 selectedProject = project
+                
             }
         }
         .onLongPressGesture {
@@ -113,7 +192,7 @@ struct ReducedProjectView: View {
         @State var show = false
         @State var selectedProject: Project? = nil
         
-        return ProjectListView(show: $show, selectedProject: $selectedProject, projects: projects)
+        return ProjectListView(bottomShow: $show, selectedProject: $selectedProject, projects: projects)
             .modelContainer(container)
         
     } catch {

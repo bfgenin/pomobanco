@@ -21,7 +21,8 @@ final class Project {
     }
     
     func addTask(_ task: Task) {
-        self.tasks.append(task)
+        tasks.append(task)
+        //task.project = self
     }
     
     func finishProject() {

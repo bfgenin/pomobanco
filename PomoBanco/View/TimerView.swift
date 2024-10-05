@@ -115,6 +115,7 @@ struct TimerView: View {
         
         // Ensure task is mutable and add the entry
         guard let project = project else { return }
+        
         project.addEntry(entry)// Adjust according to your Task structure
         print("Task: \(project.name) Entry Date: \(entry.date)  Entry Time\(entry.duration)")
          do {
