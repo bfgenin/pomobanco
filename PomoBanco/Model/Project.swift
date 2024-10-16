@@ -46,7 +46,8 @@ final class Project {
     }
     
     
-    init(name: String, details: String, complete: Bool = false, startDate: Date, endDate: Date? = nil, tasks: [Task], entries: [Entry]) {
+    init(id: UUID, name: String, details: String, complete: Bool = false, startDate: Date, endDate: Date? = nil, tasks: [Task], entries: [Entry]) {
+        self.id = id 
         self.name = name
         self.details = details
         self.complete = complete
@@ -57,5 +58,5 @@ final class Project {
         self.tag = "health"
     }
 
-    static let example = Project(name: "Test Project", details: "This is a Test Project", startDate: .distantPast, tasks: [Task](), entries: [Entry]())
+    static let example = Project(id: UUID(), name: "Test Project", details: "This is a Test Project", startDate: .distantPast, tasks: [Task](), entries: [Entry]())
 }

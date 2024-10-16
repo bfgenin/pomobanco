@@ -10,7 +10,6 @@ import SwiftData
 
 struct AddNewProject: View {
     @Environment(\.modelContext) private var modelContext
-    @Environment(\.dismiss) var dismiss
     
     @State var name: String = ""
     @State var details: String = ""
@@ -18,52 +17,42 @@ struct AddNewProject: View {
     @Binding var addProject: Bool
     
     var body: some View {
-        ZStack {
-           
-            VStack {
-                
-                ZStack {
-                    RoundedRectangle(cornerRadius: 25)
-                        .fill(Color.darkPink)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 25)
-                                .stroke(Color.white.opacity(1), lineWidth: 2)
-                        )
-                        .frame(width: 317, height: 38)
-                    
-                    TextField("add a title.", text: $name)
-                        .padding(.leading, 20)
-                        .frame(width: 317, height: 38)
-                        .background(Color.clear)
-                }
-                ZStack {
-                    RoundedRectangle(cornerRadius: 25)
-                        .stroke(Color.white.opacity(0.8), lineWidth: 2)
-                        .frame(width: 317, height: 181)
-                    TextEditor(text: $details)
-                        .scrollContentBackground(.hidden)
-                        .padding(.horizontal, 15)
-                        .frame(width: 317, height: 120)
-                    
-                }
-                Button(action: save) {
-                    Text("Save")
-                        .background(.hotPink)
-                        .frame(width: 100)
-                }
-                .font(.custom("Avenir", size: 20))
+        
+        VStack(spacing: 0) {
+            TextField("add a title.", text: $name)
+                .wrappedTextFieldStyle(rectangleWidth: 317, rectangleHeight: 38)
+        
+            
+            TextEditor(text: $details)
+                .scrollContentBackground(.hidden)
+                .frame(width: 317, height: 80)
+                .wrappedTextFieldStyle(rectangleWidth: 317, rectangleHeight: 80)
+
+            
+            Button(action: save) {
+                Text("Save")
+                    .background(.hotPink)
+                    .frame(width: 100)
             }
         }
+        .font(.custom("Avenir", size: 20))
         .foregroundStyle(.white)
+       // .background(.darkPink)
     }
-    
+
     func save() {
-        let newProject = Project(name: name, details: details, startDate: .now, tasks: [Task](), entries: [Entry]())
-        modelContext.insert(newProject)
-        withAnimation {
+        let newProject = Project(id: UUID(), name: name, details: details, startDate: .now, tasks: [], entries: [])
+    
+        do {
+            modelContext.insert(newProject)
+            try modelContext.save()
+            
             addProject = false
+            // TO DO:
+            // reset animation + fields empty 
+        } catch {
+            print("Failed to save project: \(error.localizedDescription)")
         }
-        dismiss()
     }
 }
 

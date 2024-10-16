@@ -19,7 +19,7 @@ struct SelectedProjectView: View {
     
     @Namespace private var namespace
     
-    // no select project / selected: reg. / selecteD: expanded.
+    // no select project / selected: reg. / selected: expanded.
     
     init(project: Project?, isExpanded: Binding<Bool>) {
         self.project = project
@@ -30,6 +30,7 @@ struct SelectedProjectView: View {
     
     var body: some View {
         ZStack {
+         //   Color.darkPink.ignoresSafeArea()
             
             if let project = project {
                 
@@ -43,23 +44,23 @@ struct SelectedProjectView: View {
                         }
                     
                     if isExpanded {
-                       ExpandedView(project: project)
+                        ExpandedView(project: project)
                             .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
                     }
                 }
-          
+                
             } else {
-                    Text("select a project")
-                        .foregroundStyle(.white)
-                        .font(.custom("Avenir", size: 24))
-                        .fontWeight(.bold)
-                        .opacity(0.20)
-                        .matchedGeometryEffect(id: "selected-project", in: namespace)
-                        .frame(width: 380, height: 100)
-                    
-                }
+                Text("select a project")
+                    .foregroundStyle(.white)
+                    .font(.custom("Avenir", size: 24))
+                    .fontWeight(.bold)
+                    .opacity(0.20)
+                    .matchedGeometryEffect(id: "selected-project", in: namespace)
+                    .frame(width: 380, height: 100)
+                
             }
         }
+    }
     
     private func addNewTask() {
         let task1 = Task(title: "hello, I'm a cute task.", complete: false)
@@ -107,57 +108,30 @@ struct SelectedProjectView: View {
     }
     
     private func ExpandedView(project: Project) -> some View {
-        VStack {
-            DisclosureGroup("       DESCRIPTION", isExpanded: $isDescription) {
-                VStack(alignment: .leading) {
-                    TextEditor(text: $details)
-                        .scrollContentBackground(.hidden)
-                        .padding(.horizontal, 15)
-                        .frame(maxHeight: 158)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 25)
-                                .stroke(Color.white.opacity(0.5), lineWidth: 2)
-                                .frame(width: 345, height: 158)
-                        )
-                }
-                .frame(width: 350, height: 170)
-            }
+        VStack(spacing: 5){
             
-            
-            DisclosureGroup("       TASKS", isExpanded: $isSubTasks) {
-                ScrollView {
+            Text("DESCRIPTION")
+               
+            TextField("add description here", text: $details)
+                .wrappedTextFieldStyle(rectangleWidth: 345, rectangleHeight: 181)
+            Text("Tasks")
+            ScrollView {
                     ForEach(project.tasks, id: \.id) { task in
                         Text(task.title)
                     }
+                  
                 }
-                .overlay(
-                    RoundedRectangle(cornerRadius: 25)
-                        .stroke(Color.white.opacity(0.5), lineWidth: 2)
-                        .frame(width: 345, height: 112)
-                )
-                .frame(width: 350, height: 112)
-            }
-            
-            DisclosureGroup("       CHART", isExpanded: $isChart) {
-                VStack(alignment: .leading) {
-                    Text("Hello")
-                        .padding(.horizontal, 15)
-                        .frame(maxHeight: 158)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 25)
-                                .stroke(Color.white.opacity(0.5), lineWidth: 2)
-                                .frame(width: 345, height: 190)
-                        )
-                }
-                .frame(width: 350, height: 190)
-            }
-            
+                
+                .wrappedTextFieldStyle(rectangleWidth: 345, rectangleHeight: 112)
+            Text("Chart")
+            Text("Hello")
+                .wrappedTextFieldStyle(rectangleWidth: 345, rectangleHeight: 119)
+             
             Text("Created: \(DateFormatter.localizedString(from: project.startDate, dateStyle: .long, timeStyle: .short))")
                 .font(.custom("Avenir", size: 10))
         }
         .foregroundStyle(.white)
         .font(.custom("Avenir", size: 16))
-        .ignoresSafeArea()
     }
 }
 
@@ -167,6 +141,7 @@ struct SelectedProjectView: View {
         let container = try ModelContainer(for: Project.self, configurations: config)
         
         var project1 = Project(
+            id: UUID(),
             name: "name 1",
             details: "Sample project details that go on for a while.",
             startDate: .now,
@@ -174,7 +149,7 @@ struct SelectedProjectView: View {
             entries: []
         )
         
-        var show = false
+        var show = true
         
         let showBinding = Binding<Bool>(
             get: { show },

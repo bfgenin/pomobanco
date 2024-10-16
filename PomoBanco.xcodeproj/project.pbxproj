@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B50CAA6C2CB4B527007D3CD2 /* stackedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50CAA6B2CB4B527007D3CD2 /* stackedTextField.swift */; };
 		B52104482C8A4BCC0053CBDB /* PomoBancoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52104472C8A4BCC0053CBDB /* PomoBancoApp.swift */; };
 		B521044A2C8A4BCC0053CBDB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52104492C8A4BCC0053CBDB /* ContentView.swift */; };
 		B521044C2C8A4BCD0053CBDB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B521044B2C8A4BCD0053CBDB /* Assets.xcassets */; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B50CAA6B2CB4B527007D3CD2 /* stackedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stackedTextField.swift; sourceTree = "<group>"; };
 		B52104442C8A4BCC0053CBDB /* PomoBanco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomoBanco.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B52104472C8A4BCC0053CBDB /* PomoBancoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomoBancoApp.swift; sourceTree = "<group>"; };
 		B52104492C8A4BCC0053CBDB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				B52D758E2CB1E16000943C62 /* AddNewProject.swift */,
 				B53790342CADB67C00E7FDCE /* SelectedProjectView.swift */,
 				B52D758C2CB06A1600943C62 /* RectangleView.swift */,
+				B50CAA6B2CB4B527007D3CD2 /* stackedTextField.swift */,
 				B53790322CADB03A00E7FDCE /* ProjectListView.swift */,
 			);
 			path = View;
@@ -339,6 +342,7 @@
 				B59E79612C90CC9600C3ADD0 /* TimerModel.swift in Sources */,
 				B59EF4732C90E64700D35E4F /* Entry.swift in Sources */,
 				B52104B62C8BD9F00053CBDB /* OldProjectView.swift in Sources */,
+				B50CAA6C2CB4B527007D3CD2 /* stackedTextField.swift in Sources */,
 				B52D758F2CB1E16000943C62 /* AddNewProject.swift in Sources */,
 				B552BC8D2CA48F1F002AD4F5 /* MainView.swift in Sources */,
 				B552BC892CA0C490002AD4F5 /* Task.swift in Sources */,

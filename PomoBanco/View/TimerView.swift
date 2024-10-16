@@ -34,7 +34,7 @@ struct TimerView: View {
                     .frame(width: width)
                     .font(.custom("Copperplate", size: 70)).monospacedDigit()
                     //.font(Font.system(size: 70).monospacedDigit())
-                    .foregroundColor(focusMode ? Color.darkPink : Color.darkBlue)
+                    .foregroundStyle(focusMode ? Color.darkPink : Color.darkBlue)
        
                 
                 // @ TO CHANGE: when 3d model in place
@@ -154,7 +154,9 @@ struct TimerView: View {
      private func handleDragEnded(_ value: DragGesture.Value) {
          withAnimation(.spring()) {
              if abs(value.translation.width) > 30 {
-                 focusMode = value.translation.width > 0 ? false : true
+                 withAnimation {
+                     focusMode = value.translation.width > 0 ? false : true
+                 }
              } else if value.translation.height < 20 {
                  editTimer = true
              } else if value.translation.height > 20 {
@@ -171,7 +173,7 @@ struct TimerView: View {
     do {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: Project.self, configurations: config)
-        let previewProject = Project(name: "Preview Project", details: "Details For Preview Project", startDate: .now, tasks: [Task](), entries: [Entry]())
+        let previewProject = Project(id: UUID(), name: "Preview Project", details: "Details For Preview Project", startDate: .now, tasks: [Task](), entries: [Entry]())
         return TimerView(project: previewProject, focusMode: .constant(true))
             .modelContainer(container)
     } catch {

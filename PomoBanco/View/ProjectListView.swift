@@ -24,35 +24,26 @@ struct ProjectListView: View {
     
     var body: some View {
         ZStack {
-            
-            
-            RoundedRectangle(cornerRadius: 35)
-                .fill(LinearGradient(gradient: Gradient(stops: [
-                    .init(color: .darkPink, location: 0.34),
-                    .init(color: .medPink, location: 0.7),
-                    .init(color: .lightPink, location: 0.9)
-                ]),
-                                     startPoint: .top,
-                                     endPoint: .bottom)
-                )
-                .frame(height: 354)
-                .shadow(color: Color.hotPink.opacity(0.8), radius: 20, x: 0, y: -15)
-                .matchedGeometryEffect(id: "blue-section", in: namespace)
-                .offset(y: bottomShow ? 500 : 300)
-            
+    
             VStack {
                 
                 HStack{
-                    Button("Add Project") {
+                    Button("     +     ") {
                         withAnimation(){
                             addProject.toggle()
                         }
                         
                     }
+                    .overlay(
+                        RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
+                            .stroke(lineWidth: 1)
+                    )
                     .foregroundStyle(.white)
+                    .padding(.leading, 10)
                     .frame(width: 100, alignment: .leading)
                     
                     Spacer()
+                        .frame(width: 150)
                     
                     RoundedRectangle(cornerRadius: 40)
                         .fill(.lightPink)
@@ -64,15 +55,18 @@ struct ProjectListView: View {
                                 bottomShow.toggle()
                             }
                         }
-                    
+                     
                 }
+            
                 
                 List {
                     if addProject {
                         AddNewProject(addProject: $addProject)
                             .listRowBackground(Color.clear)
-                            .padding(.bottom)
+                            .padding(.bottom, 20)
+                            
                     }
+                     
                     ForEach(projects, id: \.self) { project in
                         ReducedProjectView(project: project, selectedProject: $selectedProject)
                             .listRowBackground(Color.clear)
@@ -80,14 +74,13 @@ struct ProjectListView: View {
                     }
                     .onDelete(perform: deleteProject)
                 }
-             
-                .disabled(bottomShow)
                 .frame(width: 380)
                 .matchedGeometryEffect(id: "list-section", in: namespace)
                 .listStyle(PlainListStyle())
+            
             }
-            .frame(width: 390, height: 400)
-            .offset(y: bottomShow ? 530 : 330)
+            .frame(width: 390, height: 500)
+            .offset(y: bottomShow ? 530 : 430)
             .blur(radius: bottomShow ? 1 : 0)
             .alert(isPresented: $deleteConfirmation) {
                 Alert(
@@ -157,22 +150,14 @@ struct ReducedProjectView: View {
         .foregroundStyle(.white)
         .overlay(
             RoundedRectangle(cornerRadius: 25)
-                .fill(Color.white.opacity(0.08))
                 .stroke(Color.white.opacity(0.5), lineWidth: 2)
                 .frame(width: 350, height: 40)
         )
-       // .border(.white, width: 1.5)
         .contentShape(Rectangle())
         .onTapGesture {
             withAnimation {
-
                 selectedProject = project
-                
             }
-        }
-        .onLongPressGesture {
-            // enter edit mode
-            
         }
     }
 }
@@ -182,9 +167,9 @@ struct ReducedProjectView: View {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: Project.self, configurations: config)
         
-        let project1 = Project(name: "name 1", details: "test one", startDate: .now, tasks: [], entries: [])
-        let project2 = Project(name: "name 2", details: "test two", startDate: .now, tasks: [], entries: [])
-        let project3 = Project(name: "name 3", details: "test 3", startDate: .now, tasks: [], entries: [])
+        let project1 = Project(id: UUID(), name: "name 1", details: "test one", startDate: .now, tasks: [], entries: [])
+        let project2 = Project(id: UUID(), name: "name 2", details: "test two", startDate: .now, tasks: [], entries: [])
+        let project3 = Project(id: UUID(), name: "name 3", details: "test 3", startDate: .now, tasks: [], entries: [])
         
         let projects = [project1, project2, project3]
 

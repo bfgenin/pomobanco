@@ -99,7 +99,7 @@ struct OldEditProjectView: View {
         let task2 = Task(title: "love myself", complete: false)
         let tasks: [Task] = [task1, task2]
         
-        let project = Project(name: "Test Project", details: "TEST PROJECT DETAILS", startDate: .now, tasks: tasks, entries: [Entry]())
+        let project = Project(id: UUID(), name: "Test Project", details: "TEST PROJECT DETAILS", startDate: .now, tasks: tasks, entries: [Entry]())
         
         return OldEditProjectView(project: project)
             .modelContainer(container)
