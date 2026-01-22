@@ -11,6 +11,9 @@ struct TimerView: View {
     @Environment(\.modelContext) var modelContext
     @StateObject private var vm = TimerModel()
 
+    
+    @Binding var isTimerRunning: Bool
+    
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     let width: Double = 200
     let presetWorkTime: [Float] = [25.0, 35.0, 45.0]
@@ -19,7 +22,8 @@ struct TimerView: View {
 
     @Binding var focusMode: Bool
     @State var editTimer: Bool = false
-    
+    @State private var showSkipAlert = false
+
     // offset/drag effects
     @State private var x_offset: CGFloat = 0.0
     @State private var y_offset: CGFloat = 0.0
@@ -76,6 +80,7 @@ struct TimerView: View {
                             let elapsed = vm.elapsedTime
                             addTime(time: elapsed)
                             vm.end()
+                            isTimerRunning = false
                         }
                         .tint(.red)
                         .disabled(!vm.isActive)
@@ -84,14 +89,11 @@ struct TimerView: View {
                 .frame(width: width)
                 
                 Button("Skip") {
-                    if focusMode {
-                        vm.reset()
-                    } else {
-                        vm.end()
-                    }
+                    showSkipAlert = true
                 }
                 .tint(.white)
                 .disabled(!vm.isActive)
+            
             }
                 
         }
@@ -101,6 +103,22 @@ struct TimerView: View {
             } else {
                 vm.updateCountdown()
             }
+        }
+        .alert("Are you sure?", isPresented: $showSkipAlert) {
+            Button("Cancel", role: .cancel) {}
+
+            Button("Skip Session", role: .destructive) {
+                if focusMode {
+                    vm.reset()
+                } else {
+                    vm.end()
+                }
+            }
+        } message: {
+            Text("Skipping will reset all time and will not be saved.")
+        }
+        .onChange(of: vm.isActive) { _, newValue in
+            isTimerRunning = newValue
         }
         .frame(width: 300, height: 300)
         .background(focusMode ? Color.darkBlue : Color.darkPink)
@@ -170,13 +188,30 @@ struct TimerView: View {
 }
 
 #Preview {
-    do {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Project.self, configurations: config)
-        let previewProject = Project(id: UUID(), name: "Preview Project", details: "Details For Preview Project", startDate: .now, tasks: [Task](), entries: [Entry]())
-        return TimerView(project: previewProject, focusMode: .constant(true))
-            .modelContainer(container)
-    } catch {
-        return Text("Failed to create preview: \(error.localizedDescription)")
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(for: Project.self, configurations: config)
+
+    let previewProject = Project(
+        id: UUID(),
+        name: "Preview Project",
+        details: "Details For Preview Project",
+        startDate: .now,
+        entries: []
+    )
+
+    struct PreviewWrapper: View {
+        let project: Project
+        @State var isTimerRunning = false
+        @State var focusMode = true
+
+        var body: some View {
+            TimerView(
+                isTimerRunning: $isTimerRunning, project: project,
+                focusMode: $focusMode
+            )
+        }
     }
+
+    return PreviewWrapper(project: previewProject)
+        .modelContainer(container)
 }

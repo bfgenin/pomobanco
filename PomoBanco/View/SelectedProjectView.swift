@@ -4,13 +4,12 @@ import SwiftData
 struct SelectedProjectView: View {
     @Environment(\.modelContext) var modelContext
     
-    var project: Project? // keep this optional
-    
+    @Binding var selectedProject: Project?
     @Binding var isExpanded: Bool
     
     // strings
-    @State private var details: String
-    @State private var name: String
+    @State private var details: String = ""
+    @State private var name: String = ""
     
     // display for disclosed groups
     @State private var isDescription = true
@@ -20,70 +19,77 @@ struct SelectedProjectView: View {
     @Namespace private var namespace
     
     // no select project / selected: reg. / selected: expanded.
-    
-    init(project: Project?, isExpanded: Binding<Bool>) {
-        self.project = project
-        self._isExpanded = isExpanded
-        self._details = State(initialValue: project?.details ?? "")
-        self._name = State(initialValue: project?.name ?? "")
-    }
-    
+    //
+    //    init(selectedProject: Binding<Project?>, isExpanded: Binding<Bool>) {
+    //        self.project = project
+    //        self._isExpanded = isExpanded
+    //        self._details = State(initialValue: project?.details ?? "")
+    //        self._name = State(initialValue: project?.name ?? "")
+    //    }
+    //
     var body: some View {
-        ZStack {
-         //   Color.darkPink.ignoresSafeArea()
+        
+        if let selectedProject = selectedProject {
             
-            if let project = project {
-                
-                VStack(spacing: 0) {
-                    HeaderView(project: project)
-                        .frame(width: 380, height: 90)
-                        .onTapGesture {
-                            withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
-                                isExpanded.toggle()
-                            }
+            VStack(alignment: .center, spacing: 0) {
+                HeaderView(project: selectedProject)
+                    .onTapGesture {
+                        withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
+                            isExpanded.toggle()
                         }
-                    
-                    if isExpanded {
-                        ExpandedView(project: project)
-                            .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
                     }
+                    .frame(height: 70)
+                    .gesture(
+                        DragGesture()
+                            .onEnded { value in
+                                if value.translation.width < -100 {
+                                    withAnimation {
+                                        deselectProject()
+                                    }
+                                }
+                            }
+                    )
+                
+                if isExpanded {
+                    ExpandedView(project: selectedProject)
+                        .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
+                        
                 }
-                
-            } else {
-                Text("select a project")
-                    .foregroundStyle(.white)
-                    .font(.custom("Avenir", size: 24))
-                    .fontWeight(.bold)
-                    .opacity(0.20)
-                    .matchedGeometryEffect(id: "selected-project", in: namespace)
-                    .frame(width: 380, height: 100)
-                
             }
+            .background(.darkPink)
+            
+        } else {
+            Text("select a project")
+                .foregroundStyle(.white)
+                .font(.custom("Avenir", size: 24))
+                .fontWeight(.bold)
+                .opacity(0.20)
+                .matchedGeometryEffect(id: "selected-project", in: namespace)
+                .background(
+                    .ultraThinMaterial.opacity(0.2), in: RoundedRectangle(cornerRadius: 25, style: .continuous)
+                 )
+//                .background(.darkPink)
+//            
+            
         }
     }
     
-    private func addNewTask() {
-        let task1 = Task(title: "hello, I'm a cute task.", complete: false)
-        
-        guard let project = project else { return }
-        project.addTask(task1)
-        do {
-            try modelContext.save() // Ensure you save changes to the model context
-        } catch {
-            print("Failed to save entry: \(error.localizedDescription)")
-        }
+    private func deselectProject() {
+        // Reset the project state to deselect the project
+        selectedProject = nil
+        isExpanded = false
+        details = ""
+        name = ""
     }
     
     private func HeaderView(project: Project) -> some View {
         HStack {
             if let tag = project.tag  {
-                Text(tag)
-                    .padding(.leading, 15)
-                    .frame(width: 85, height: 28, alignment: .leading)
-                    .background(.red)
-                    .clipShape(.capsule)
-                    .font(.custom("Avenir", size: 24))
-                    .matchedGeometryEffect(id: "project-tag", in: namespace)
+                Circle()
+                    .frame(width: 20, height: 20)
+                    .foregroundStyle(Color.from(name: tag.color))
+                
+                
             } else {
                 Text("")
                     .padding(.leading, 10)
@@ -105,60 +111,89 @@ struct SelectedProjectView: View {
         }
         .foregroundStyle(.white)
         .font(.custom("Avenir", size: 24))
+        .background(
+            .ultraThinMaterial.opacity(0.2), in: RoundedRectangle(cornerRadius: 25, style: .continuous)
+          
+        )
     }
     
     private func ExpandedView(project: Project) -> some View {
-        VStack(spacing: 5){
+        VStack(alignment: .leading, spacing: 5){
+           
+            if let tag = project.tag  {
+                Text(tag.name)
+            }
             
             Text("DESCRIPTION")
-               
+                
             TextField("add description here", text: $details)
                 .wrappedTextFieldStyle(rectangleWidth: 345, rectangleHeight: 181)
-            Text("Tasks")
-            ScrollView {
-                    ForEach(project.tasks, id: \.id) { task in
-                        Text(task.title)
-                    }
-                  
-                }
+            
+            Text("CHART")
+            if (selectedProject != nil) {
+                ChartView(project: project)
+                    .wrappedTextFieldStyle(rectangleWidth: 345, rectangleHeight: 300)
+            }
                 
-                .wrappedTextFieldStyle(rectangleWidth: 345, rectangleHeight: 112)
-            Text("Chart")
-            Text("Hello")
-                .wrappedTextFieldStyle(rectangleWidth: 345, rectangleHeight: 119)
+            
+//            Text("View Place Holder")
+//                .wrappedTextFieldStyle(rectangleWidth: 345, rectangleHeight: 181)
              
             Text("Created: \(DateFormatter.localizedString(from: project.startDate, dateStyle: .long, timeStyle: .short))")
-                .font(.custom("Avenir", size: 10))
+                .font(.custom("Avenir", size: 12))
         }
         .foregroundStyle(.white)
         .font(.custom("Avenir", size: 16))
     }
 }
 
-#Preview {
-    do {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Project.self, configurations: config)
-        
-        var project1 = Project(
-            id: UUID(),
-            name: "name 1",
-            details: "Sample project details that go on for a while.",
-            startDate: .now,
-            tasks: [],
-            entries: []
+#Preview("SelectedProjectView") {
+    @Previewable @State var isExpanded = false
+    @Previewable @State var selectedProject: Project? = nil
+
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(for: Project.self, configurations: config)
+
+    let sampleProject = createSampleProject()
+
+    SelectedProjectView(selectedProject: $selectedProject, isExpanded: $isExpanded)
+        .modelContainer(container)
+        .task {
+            container.mainContext.insert(sampleProject)
+            selectedProject = sampleProject
+            // try? container.mainContext.save() // optional
+        }
+}
+
+
+private func createSampleProject() -> Project {
+    let tag = Tag(
+        name: "sample",
+        color:"#FF6B3B"
         )
-        
-        var show = true
-        
-        let showBinding = Binding<Bool>(
-            get: { show },
-            set: { show = $0 }
-        )
-        
-        return SelectedProjectView(project: project1, isExpanded: showBinding)
-            .modelContainer(container)
-    } catch {
-        return Text("Failed to create preview: \(error.localizedDescription)")
-    }
+    
+    let project = Project(
+        id: UUID(),
+        name: "Sample Project",
+        details: "A project with sample entries for chart preview",
+        complete: false,
+        startDate: .now,
+        tag: tag,
+        endDate: nil,
+        entries: []
+    )
+
+    let calendar = Calendar.current
+    let sampleEntries = [
+        Entry(date: .now, duration: 10005),
+        Entry(date: .now, duration: 10005),
+        Entry(date: calendar.date(byAdding: .day, value: -1, to: .now) ?? .now, duration: 1000),
+        Entry(date: calendar.date(byAdding: .day, value: -1, to: .now) ?? .now, duration: 1.0),
+        Entry(date: calendar.date(byAdding: .day, value: -2, to: .now) ?? .now, duration: 3.0),
+        Entry(date: calendar.date(byAdding: .day, value: -3, to: .now) ?? .now, duration: 2.5),
+        Entry(date: calendar.date(byAdding: .day, value: -4, to: .now) ?? .now, duration: 1.5)
+    ]
+
+    project.entries = sampleEntries
+    return project
 }

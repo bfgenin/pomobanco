@@ -102,19 +102,19 @@ struct OldEditTask: View {
 
 
 
-#Preview {
-    do {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Project.self, configurations: config)
-        
-        let fatDetails = "Oh boy, I am a big task, I have so many details and information that I just can't help but be huge...MMM...I ate many subtasks, lol!"
-        
-        let previewProject = Project(id: UUID(), name: "Preview Project", details: fatDetails, startDate: .now, tasks: [Task](), entries: [Entry]())
-        
-        return OldProjectView(task: previewProject, focusMode: false)
-            .modelContainer(container)
-    } catch {
-        return Text("Failed to create preview: \(error.localizedDescription)")
-    }
-}
-
+//#Preview {
+//    do {
+//        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+//        let container = try ModelContainer(for: Project.self, configurations: config)
+//        
+//        let fatDetails = "Oh boy, I am a big task, I have so many details and information that I just can't help but be huge...MMM...I ate many subtasks, lol!"
+//        
+//        let previewProject = Project(id: UUID(), name: "Preview Project", details: fatDetails, startDate: .now, entries: [Entry]())
+//        
+//        return OldProjectView(task: previewProject, focusMode: false)
+//            .modelContainer(container)
+//    } catch {
+//        return Text("Failed to create preview: \(error.localizedDescription)")
+//    }
+//}
+//

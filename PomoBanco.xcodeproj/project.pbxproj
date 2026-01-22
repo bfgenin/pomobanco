@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B50CAA6C2CB4B527007D3CD2 /* stackedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50CAA6B2CB4B527007D3CD2 /* stackedTextField.swift */; };
+		B517B4CA2CEBCC5300478EE6 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B517B4C92CEBCC5300478EE6 /* Entry.swift */; };
+		B517B4CC2CEBFE0000478EE6 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = B517B4CB2CEBFE0000478EE6 /* Background.swift */; };
 		B52104482C8A4BCC0053CBDB /* PomoBancoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52104472C8A4BCC0053CBDB /* PomoBancoApp.swift */; };
 		B521044A2C8A4BCC0053CBDB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52104492C8A4BCC0053CBDB /* ContentView.swift */; };
 		B521044C2C8A4BCD0053CBDB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B521044B2C8A4BCD0053CBDB /* Assets.xcassets */; };
@@ -16,19 +18,23 @@
 		B52104632C8A4BCD0053CBDB /* PomoBancoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52104622C8A4BCD0053CBDB /* PomoBancoUITests.swift */; };
 		B52104652C8A4BCD0053CBDB /* PomoBancoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52104642C8A4BCD0053CBDB /* PomoBancoUITestsLaunchTests.swift */; };
 		B52104B62C8BD9F00053CBDB /* OldProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52104B52C8BD9F00053CBDB /* OldProjectView.swift */; };
+		B52393B92CD5ADFD00BC3657 /* BlurBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52393B82CD5ADFD00BC3657 /* BlurBackground.swift */; };
 		B52D758D2CB06A1600943C62 /* RectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52D758C2CB06A1600943C62 /* RectangleView.swift */; };
 		B52D758F2CB1E16000943C62 /* AddNewProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52D758E2CB1E16000943C62 /* AddNewProject.swift */; };
 		B53790332CADB03A00E7FDCE /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53790322CADB03A00E7FDCE /* ProjectListView.swift */; };
 		B53790352CADB67C00E7FDCE /* SelectedProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53790342CADB67C00E7FDCE /* SelectedProjectView.swift */; };
 		B552BC852CA0C250002AD4F5 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = B552BC842CA0C250002AD4F5 /* Project.swift */; };
 		B552BC872CA0C40B002AD4F5 /* OldAddProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B552BC862CA0C40B002AD4F5 /* OldAddProjectView.swift */; };
-		B552BC892CA0C490002AD4F5 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = B552BC882CA0C490002AD4F5 /* Task.swift */; };
 		B552BC8B2CA21347002AD4F5 /* OldEditProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B552BC8A2CA21347002AD4F5 /* OldEditProjectView.swift */; };
 		B552BC8D2CA48F1F002AD4F5 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B552BC8C2CA48F1F002AD4F5 /* MainView.swift */; };
 		B552BCAE2CA62019002AD4F5 /* OldContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B552BCAD2CA62019002AD4F5 /* OldContentView.swift */; };
+		B57388692F2194F100B18F0D /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57388682F2194F100B18F0D /* Tag.swift */; };
+		B573886B2F21A0DD00B18F0D /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573886A2F21A0DD00B18F0D /* TagModel.swift */; };
+		B573886D2F21AC9E00B18F0D /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573886C2F21AC9E00B18F0D /* Color+Extensions.swift */; };
+		B580BC5E2CD589D9002EB3CD /* SplineRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = B580BC5D2CD589D9002EB3CD /* SplineRuntime */; };
+		B580BC622CD592F7002EB3CD /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B580BC612CD592F7002EB3CD /* ChartView.swift */; };
 		B587E25D2C9E38D500B8E1CD /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B587E25C2C9E38D500B8E1CD /* TimerView.swift */; };
 		B59E79612C90CC9600C3ADD0 /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59E79602C90CC9600C3ADD0 /* TimerModel.swift */; };
-		B59EF4732C90E64700D35E4F /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59EF4722C90E64700D35E4F /* Entry.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +56,8 @@
 
 /* Begin PBXFileReference section */
 		B50CAA6B2CB4B527007D3CD2 /* stackedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stackedTextField.swift; sourceTree = "<group>"; };
+		B517B4C92CEBCC5300478EE6 /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
+		B517B4CB2CEBFE0000478EE6 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		B52104442C8A4BCC0053CBDB /* PomoBanco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomoBanco.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B52104472C8A4BCC0053CBDB /* PomoBancoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomoBancoApp.swift; sourceTree = "<group>"; };
 		B52104492C8A4BCC0053CBDB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -61,19 +69,22 @@
 		B52104622C8A4BCD0053CBDB /* PomoBancoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomoBancoUITests.swift; sourceTree = "<group>"; };
 		B52104642C8A4BCD0053CBDB /* PomoBancoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomoBancoUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		B52104B52C8BD9F00053CBDB /* OldProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldProjectView.swift; sourceTree = "<group>"; };
+		B52393B82CD5ADFD00BC3657 /* BlurBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurBackground.swift; sourceTree = "<group>"; };
 		B52D758C2CB06A1600943C62 /* RectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleView.swift; sourceTree = "<group>"; };
 		B52D758E2CB1E16000943C62 /* AddNewProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewProject.swift; sourceTree = "<group>"; };
 		B53790322CADB03A00E7FDCE /* ProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListView.swift; sourceTree = "<group>"; };
 		B53790342CADB67C00E7FDCE /* SelectedProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedProjectView.swift; sourceTree = "<group>"; };
 		B552BC842CA0C250002AD4F5 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		B552BC862CA0C40B002AD4F5 /* OldAddProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldAddProjectView.swift; sourceTree = "<group>"; };
-		B552BC882CA0C490002AD4F5 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		B552BC8A2CA21347002AD4F5 /* OldEditProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldEditProjectView.swift; sourceTree = "<group>"; };
 		B552BC8C2CA48F1F002AD4F5 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		B552BCAD2CA62019002AD4F5 /* OldContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldContentView.swift; sourceTree = "<group>"; };
+		B57388682F2194F100B18F0D /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		B573886A2F21A0DD00B18F0D /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
+		B573886C2F21AC9E00B18F0D /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		B580BC612CD592F7002EB3CD /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		B587E25C2C9E38D500B8E1CD /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		B59E79602C90CC9600C3ADD0 /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
-		B59EF4722C90E64700D35E4F /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B580BC5E2CD589D9002EB3CD /* SplineRuntime in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,9 +188,9 @@
 		B59EF46B2C90D95000D35E4F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B59EF4722C90E64700D35E4F /* Entry.swift */,
-				B552BC882CA0C490002AD4F5 /* Task.swift */,
+				B517B4C92CEBCC5300478EE6 /* Entry.swift */,
 				B552BC842CA0C250002AD4F5 /* Project.swift */,
+				B57388682F2194F100B18F0D /* Tag.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -187,6 +199,8 @@
 			isa = PBXGroup;
 			children = (
 				B59E79602C90CC9600C3ADD0 /* TimerModel.swift */,
+				B573886C2F21AC9E00B18F0D /* Color+Extensions.swift */,
+				B573886A2F21A0DD00B18F0D /* TagModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -200,6 +214,9 @@
 				B52D758C2CB06A1600943C62 /* RectangleView.swift */,
 				B50CAA6B2CB4B527007D3CD2 /* stackedTextField.swift */,
 				B53790322CADB03A00E7FDCE /* ProjectListView.swift */,
+				B580BC612CD592F7002EB3CD /* ChartView.swift */,
+				B52393B82CD5ADFD00BC3657 /* BlurBackground.swift */,
+				B517B4CB2CEBFE0000478EE6 /* Background.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -220,6 +237,9 @@
 			dependencies = (
 			);
 			name = PomoBanco;
+			packageProductDependencies = (
+				B580BC5D2CD589D9002EB3CD /* SplineRuntime */,
+			);
 			productName = PomoBanco;
 			productReference = B52104442C8A4BCC0053CBDB /* PomoBanco.app */;
 			productType = "com.apple.product-type.application";
@@ -292,6 +312,9 @@
 				Base,
 			);
 			mainGroup = B521043B2C8A4BCC0053CBDB;
+			packageReferences = (
+				B580BC5C2CD589D9002EB3CD /* XCRemoteSwiftPackageReference "spline-ios" */,
+			);
 			productRefGroup = B52104452C8A4BCC0053CBDB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -339,13 +362,18 @@
 				B552BC872CA0C40B002AD4F5 /* OldAddProjectView.swift in Sources */,
 				B52104482C8A4BCC0053CBDB /* PomoBancoApp.swift in Sources */,
 				B552BCAE2CA62019002AD4F5 /* OldContentView.swift in Sources */,
+				B517B4CC2CEBFE0000478EE6 /* Background.swift in Sources */,
+				B580BC622CD592F7002EB3CD /* ChartView.swift in Sources */,
+				B517B4CA2CEBCC5300478EE6 /* Entry.swift in Sources */,
 				B59E79612C90CC9600C3ADD0 /* TimerModel.swift in Sources */,
-				B59EF4732C90E64700D35E4F /* Entry.swift in Sources */,
+				B573886D2F21AC9E00B18F0D /* Color+Extensions.swift in Sources */,
 				B52104B62C8BD9F00053CBDB /* OldProjectView.swift in Sources */,
 				B50CAA6C2CB4B527007D3CD2 /* stackedTextField.swift in Sources */,
 				B52D758F2CB1E16000943C62 /* AddNewProject.swift in Sources */,
+				B57388692F2194F100B18F0D /* Tag.swift in Sources */,
 				B552BC8D2CA48F1F002AD4F5 /* MainView.swift in Sources */,
-				B552BC892CA0C490002AD4F5 /* Task.swift in Sources */,
+				B52393B92CD5ADFD00BC3657 /* BlurBackground.swift in Sources */,
+				B573886B2F21A0DD00B18F0D /* TagModel.swift in Sources */,
 				B552BC8B2CA21347002AD4F5 /* OldEditProjectView.swift in Sources */,
 				B53790352CADB67C00E7FDCE /* SelectedProjectView.swift in Sources */,
 				B552BC852CA0C250002AD4F5 /* Project.swift in Sources */,
@@ -674,6 +702,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B580BC5C2CD589D9002EB3CD /* XCRemoteSwiftPackageReference "spline-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/splinetool/spline-ios";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B580BC5D2CD589D9002EB3CD /* SplineRuntime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B580BC5C2CD589D9002EB3CD /* XCRemoteSwiftPackageReference "spline-ios" */;
+			productName = SplineRuntime;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B521043C2C8A4BCC0053CBDB /* Project object */;
 }

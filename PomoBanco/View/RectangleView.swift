@@ -26,32 +26,28 @@ extension View {
 
 struct AnimateRectangleView: View {
     @State private var animate: Bool = false
+    @State private var showAdditionalRectangles = false
     
     var rectangleWidth: CGFloat
     var rectangleHeight: CGFloat
     
     var body: some View {
         ZStack {
-            //Color.purple.ignoresSafeArea()
+    
+//                    FullRectanngle(animate: animate, color: .white, lineWidth: 2, width: 317, height: 161, cornerRadius: 25)
             HalfRectangle(animate: animate, color: .white, lineWidth: 2, width: rectangleWidth, height: rectangleHeight, cornerRadius: 25, leftStart: true)
                 .opacity(1)
             HalfRectangle(animate: animate, color: .white, lineWidth: 2, width: rectangleWidth, height: rectangleHeight, cornerRadius: 25, leftStart: false)
                 .opacity(1)
-           
+            
+         
         }
+//        .background(.darkPink)
         .onAppear {
             withAnimation(.easeIn(duration: 1.4)) {
                 animate = true
             }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                HalfRectangle(animate: animate, color: .white, lineWidth: 2, width: rectangleWidth, height: rectangleHeight, cornerRadius: 25, leftStart: true)
-                    .opacity(0.4)
-                
-                HalfRectangle(animate: animate, color: .white, lineWidth: 2, width: rectangleWidth, height: rectangleHeight, cornerRadius: 25, leftStart: false)
-                    .opacity(1)
-                
-                }
+        
         }
     }
 }

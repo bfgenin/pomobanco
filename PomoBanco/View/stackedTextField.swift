@@ -10,28 +10,53 @@ import SwiftUI
 struct stackedTextField: View {
     @Binding var headline: String
     @Binding var description: String
+    @Binding var placeHolderEditor: String
+    
+    var placeHolderField: String
+
+    @State var isDisabled: Bool = false
+    var color: Color
     
     var body: some View {
-        ZStack {
+        VStack(alignment: .leading, spacing: 0) {
             
-            TextField("", text: $headline)
+            TextField(placeHolderField, text: $headline)
                 .padding(.leading, 10)
                 .overlay (
                     RoundedRectangle(cornerRadius: 25.0)
                         .stroke(lineWidth: 1)
+                        .scale(y: 1.2)
+                    
                 )
-            
-            TextField("hello", text: $description)
-                .padding(.leading, 10)
-                .padding(.top, 20)
-                .frame(height: 200)
                 .overlay (
                     BottomRectangle(width: 300, height: 150, cornerRadius: 24, lineWidth: 1)
-                        .offset(y: 60)
                 )
-                .offset(CGSize(width: 0, height: 20))
+            
+            ZStack {
+                if description.isEmpty && !isDisabled {
+                    TextEditor(text: $placeHolderEditor)
+                        .padding(.leading, 10)
+                        .lineLimit(6)
+                        .scrollContentBackground(.hidden)
+                        .frame(maxHeight: 120)
+                }
+                TextEditor(text: $description)
+                    .padding(.leading, 10)
+                    .lineLimit(6)
+                    .scrollContentBackground(.hidden)
+                    .frame(maxHeight: 120)
+                    .onTapGesture {
+                        withAnimation {
+                            isDisabled = true
+                        }
+                    }
+                    .onDisappear {
+                        isDisabled = false
+                    }
+            }
             
         }
+        .foregroundStyle(color)
         .frame(width: 300)
     }
 }
@@ -46,7 +71,7 @@ struct BottomRectangle: View {
         
         Path { path in
         
-            path.move(to: CGPoint(x: width, y: cornerRadius))
+            path.move(to: CGPoint(x: width, y: cornerRadius - 10))
             // right-bottom arc
             path.addLine(to: CGPoint(x: width, y: height - cornerRadius))
             path.addArc(center: CGPoint(x: width - cornerRadius, y: height - cornerRadius),
@@ -63,7 +88,7 @@ struct BottomRectangle: View {
                         clockwise: false)
             
             // Left edge
-            path.addLine(to: CGPoint(x: 0, y: cornerRadius))
+            path.addLine(to: CGPoint(x: 0, y: cornerRadius - 10))
         }
         .stroke(lineWidth: lineWidth)
     }
@@ -71,10 +96,14 @@ struct BottomRectangle: View {
 
 #Preview {
     do {
-        @State var headline = "add title here"
-        @State var description = "add description here"
+        @State var headline = ""
+        @State var description = ""
         
-        return stackedTextField(headline: $headline, description: $description)
+        @State var placeHolderEdtior = "add details here"
+        
+        var placeHolderField = "add title here "
+        
+        return stackedTextField(headline: $headline, description: $description, placeHolderEditor: $placeHolderEdtior, placeHolderField: placeHolderField, color: .blue)
     } catch {
         // failed
     }

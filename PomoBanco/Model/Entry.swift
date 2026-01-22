@@ -17,4 +17,5 @@ class Entry {
         self.date = date
         self.duration = duration
     }
+    
 }

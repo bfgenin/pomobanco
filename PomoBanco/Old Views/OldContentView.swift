@@ -23,7 +23,7 @@ struct OldContentView: View {
                        .ignoresSafeArea()
                    
                    VStack {
-                       TimerView(project: selectedProject, focusMode: $focusMode)
+//                       TimerView(project: selectedProject, isTimerRunning: <#Binding<Bool>#>, focusMode: $focusMode)
                        
                        
                        if let selectedTask = selectedProject {
@@ -63,6 +63,6 @@ struct OldContentView: View {
 
 
 
-#Preview {
-    OldContentView()
-}
+//#Preview {
+//    OldContentView()
+//}

@@ -24,26 +24,12 @@ struct ProjectListView: View {
     
     var body: some View {
         ZStack {
-    
+//            Color.darkBlue
+//                .ignoresSafeArea()
+            
             VStack {
-                
+   
                 HStack{
-                    Button("     +     ") {
-                        withAnimation(){
-                            addProject.toggle()
-                        }
-                        
-                    }
-                    .overlay(
-                        RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
-                            .stroke(lineWidth: 1)
-                    )
-                    .foregroundStyle(.white)
-                    .padding(.leading, 10)
-                    .frame(width: 100, alignment: .leading)
-                    
-                    Spacer()
-                        .frame(width: 150)
                     
                     RoundedRectangle(cornerRadius: 40)
                         .fill(.lightPink)
@@ -59,26 +45,19 @@ struct ProjectListView: View {
                 }
             
                 
-                List {
-                    if addProject {
-                        AddNewProject(addProject: $addProject)
-                            .listRowBackground(Color.clear)
-                            .padding(.bottom, 20)
-                            
+                ScrollView {
+                    LazyVStack(spacing: 10) {
+                        ForEach(projects.filter { $0.id != selectedProject?.id }, id: \.id) { project in
+                            ReducedProjectView(project: project, selectedProject: $selectedProject)
+                                .transition(.move(edge: .top).combined(with: .opacity))
+                        }
                     }
-                     
-                    ForEach(projects, id: \.self) { project in
-                        ReducedProjectView(project: project, selectedProject: $selectedProject)
-                            .listRowBackground(Color.clear)
-                           
-                    }
-                    .onDelete(perform: deleteProject)
+                    .padding(.vertical, 8)
                 }
-                .frame(width: 380)
-                .matchedGeometryEffect(id: "list-section", in: namespace)
-                .listStyle(PlainListStyle())
-            
+                .animation(.easeInOut(duration: 0.25), value: selectedProject?.id)
+
             }
+            
             .frame(width: 390, height: 500)
             .offset(y: bottomShow ? 530 : 430)
             .blur(radius: bottomShow ? 1 : 0)
@@ -120,12 +99,10 @@ struct ReducedProjectView: View {
     var body: some View {
         HStack {
             if let tag = project.tag {
-                Text(tag)
-                    .padding(.leading, 10)
-                    .frame(width: 60, height: 20, alignment: .leading)
-                    .background(Color.red.opacity(0.8))
-                    .clipShape(.capsule)
-                    .padding(.leading, 10)
+                Circle()
+                    .frame(width: 20, height: 20)
+                    .foregroundStyle(Color.from(name: tag.color))
+            
             } else {
                 Text("")
                     .frame(width: 60, height: 20, alignment: .leading)
@@ -138,44 +115,74 @@ struct ReducedProjectView: View {
             Spacer()
             Text(project.formatTime(for: .now))
                 .padding(.trailing)
-            
+        
         }
-        .onAppear {
-            withAnimation(.easeIn(duration: 4)) { // Apply custom animation on appear
-                isAnimating = true
-            }
-        }
+     
+//        .onAppear {
+//            withAnimation(.easeIn(duration: 4)) {
+//                isAnimating = true
+//            }
+//        }
         .frame(width: 333, height: 40)
         .font(.custom("Avenir", size: 16))
         .foregroundStyle(.white)
-        .overlay(
-            RoundedRectangle(cornerRadius: 25)
-                .stroke(Color.white.opacity(0.5), lineWidth: 2)
-                .frame(width: 350, height: 40)
+        .background(
+            .ultraThinMaterial.opacity(0.2), in: RoundedRectangle(cornerRadius: 25, style: .continuous)
+          
         )
-        .contentShape(Rectangle())
         .onTapGesture {
-            withAnimation {
+            withAnimation(.easeInOut(duration: 0.25)) {
                 selectedProject = project
             }
         }
+
     }
 }
 
+private func createSampleProject() -> Project {
+    let project = Project(
+        id: UUID(),
+        name: "Sample Project",
+        details: "A project with sample entries for chart preview",
+        complete: false,
+        startDate: .now,
+        endDate: nil,
+        entries: []
+    )
+    
+    let calendar = Calendar.current
+    let sampleEntries = [
+        Entry(date: .now, duration: 10005),
+        Entry(date: .now, duration: 10005),
+        Entry(date: calendar.date(byAdding: .day, value: -1, to: .now) ?? .now, duration: 1000),
+        Entry(date: calendar.date(byAdding: .day, value: -1, to: .now) ?? .now, duration: 1.0),
+        Entry(date: calendar.date(byAdding: .day, value: -2, to: .now) ?? .now, duration: 3.0),
+        Entry(date: calendar.date(byAdding: .day, value: -3, to: .now) ?? .now, duration: 2.5),
+        Entry(date: calendar.date(byAdding: .day, value: -4, to: .now) ?? .now, duration: 1.5)
+    ]
+    
+    project.entries = sampleEntries
+    return project
+}
+
 #Preview {
+    @Previewable @State var show = false
+    @Previewable @State var selectedProject: Project? = nil
+    
     do {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Project.self, configurations: config)
+        let container = try ModelContainer(for: Project.self, Tag.self, configurations: config)
         
-        let project1 = Project(id: UUID(), name: "name 1", details: "test one", startDate: .now, tasks: [], entries: [])
-        let project2 = Project(id: UUID(), name: "name 2", details: "test two", startDate: .now, tasks: [], entries: [])
-        let project3 = Project(id: UUID(), name: "name 3", details: "test 3", startDate: .now, tasks: [], entries: [])
+        let tag = Tag(name: "health", color: "blue")
+        let tag2 = Tag(name: "work", color: "red")
+        
+        
+        let project1 = Project(id: UUID(), name: "name 1", details: "test one", startDate: .now, tag: tag, entries: [])
+        let project2 = Project(id: UUID(), name: "name 2", details: "test two", startDate: .now, tag: tag2, entries: [])
+        let project3 = Project(id: UUID(), name: "name 3", details: "test 3", startDate: .now,  tag: tag, entries: [])
         
         let projects = [project1, project2, project3]
-
-        // State variables for the preview
-        @State var show = false
-        @State var selectedProject: Project? = nil
+      
         
         return ProjectListView(bottomShow: $show, selectedProject: $selectedProject, projects: projects)
             .modelContainer(container)
