@@ -1,154 +1,153 @@
 import SwiftUI
 import SwiftData
 
-
 struct AddNewProject: View {
     @Environment(\.modelContext) private var modelContext
+
+    @Binding var isExpanded: Bool
 
     // Fields
     @State private var name: String = ""
     @State private var details: String = ""
 
-
-    private let defaultTags = [
-        "Work",
-        "Personal",
-        "Health",
-        "School"
-    ]
+    private let defaultTags = ["Work", "Personal", "Health", "School"]
 
     @Query(sort: \Tag.name) private var tags: [Tag]
     @State private var selectedTag: Tag? = nil
-    
-    // UI state
-    @State private var expandProject: Bool = false
-    @State private var showTagMenu: Bool = false
+
     @State private var showAddTagDialog: Bool = false
     @State private var newTagName: String = ""
 
-
     var body: some View {
-        VStack(spacing: 0) {
+        VStack(alignment: .center, spacing: 8) {
+            HeaderRow
 
-            // Top handle + (optional) title row
-            VStack(spacing: 12) {
-                Button {
-                    withAnimation { expandProject.toggle() }
-                } label: {
-                    RoundedRectangle(cornerRadius: 10)
-                        .frame(width: 50, height: 10)
-                        .padding(.vertical)
-                }
-
-                if expandProject {
-                    Text("New Project")
-                        .font(.custom("Avenir", size: 22))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.horizontal)
-                }
+            if isExpanded {
+                ExpandedForm
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
             }
-            .frame(maxWidth: .infinity, alignment: .top)
+        }
+        .padding(.vertical, 8)
+        .font(.custom("Avenir", size: 20))
+        .foregroundStyle(.white)
+        .background(.darkPink)
+        .onAppear { seedDefaultTagsIfNeeded() }
+    }
 
-            if expandProject {
-                // Use ScrollView so it behaves well on small screens / with keyboard
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 16) {
+    private var HeaderRow: some View {
+        HStack {
+            Text("New Project")
+                .font(.custom("Avenir", size: 24))
+                .fontWeight(.bold)
 
-                        // 1) Name
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("Name")
-                                .font(.custom("Avenir", size: 16))
-                                .opacity(0.9)
+            Spacer()
 
-                            TextField("add a title", text: $name)
-                                .textInputAutocapitalization(.sentences)
-                                .padding(12)
-                                .background(RoundedRectangle(cornerRadius: 12).fill(Color.white.opacity(0.12)))
-                        }
+            Image(systemName: isExpanded ? "chevron.down" : "chevron.up")
+                .font(.system(size: 16, weight: .semibold))
+                .opacity(0.9)
+        }
+        .padding(.horizontal, 16)
+        .frame(height: 70)
+        .background(
+            .ultraThinMaterial.opacity(0.2),
+            in: RoundedRectangle(cornerRadius: 25, style: .continuous)
+        )
+        .contentShape(Rectangle())
+        .onTapGesture {
+            withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
+                isExpanded.toggle()
+            }
+        }
+    }
 
-                        // 2) Description
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("Description")
-                                .font(.custom("Avenir", size: 16))
-                                .opacity(0.9)
+    private var ExpandedForm: some View {
+        // Keep ScrollView so it behaves well with keyboard
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
 
-                            TextField("optional: add details", text: $details, axis: .vertical)
-                                .lineLimit(3...8)
-                                .padding(12)
-                                .background(RoundedRectangle(cornerRadius: 12).fill(Color.white.opacity(0.12)))
-                        }
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Name")
+                        .font(.custom("Avenir", size: 16))
+                        .opacity(0.9)
 
-                        // 3) Tag selection
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("Tag")
-                                .font(.custom("Avenir", size: 16))
-                                .opacity(0.9)
+                    TextField("add a title", text: $name)
+                        .textInputAutocapitalization(.sentences)
+                        .padding(12)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color.white.opacity(0.8), lineWidth: 1)
+                        )
+                }
 
-                            Menu {
-                                ForEach(tags) { tag in
-                                    Button {
-                                        selectedTag = tag
-                                    } label: {
-                                        if selectedTag?.id == tag.id {
-                                            Label(tag.name, systemImage: "checkmark")
-                                        } else {
-                                            Text(tag.name)
-                                        }
-                                    }
-                                }
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Description")
+                        .font(.custom("Avenir", size: 16))
+                        .opacity(0.9)
 
-                                Divider()
+                    TextField("optional: add details", text: $details, axis: .vertical)
+                        .lineLimit(3...8)
+                        .padding(12)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color.white.opacity(0.8), lineWidth: 1)
+                        )
+                }
 
-                                Button {
-                                    showAddTagDialog = true
-                                } label: {
-                                    Label("Add new label", systemImage: "plus")
-                                }
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Tag")
+                        .font(.custom("Avenir", size: 16))
+                        .opacity(0.9)
+
+                    Menu {
+                        ForEach(tags) { tag in
+                            Button {
+                                selectedTag = tag
                             } label: {
-                                HStack {
-                                    Text(selectedTag?.name ?? "Select a tag")
-                                    Spacer()
-                                    Image(systemName: "chevron.down")
+                                if selectedTag?.id == tag.id {
+                                    Label(tag.name, systemImage: "checkmark")
+                                } else {
+                                    Text(tag.name)
                                 }
                             }
                         }
 
-                        // Push Save to bottom (within scroll content, this ensures spacing)
-                        Spacer(minLength: 24)
+                        Divider()
 
-                        Button(action: save) {
-                            Text("Save")
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 14)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .fill(canSave ? Color.gray : Color.gray.opacity(0.4))
-                                )
+                        Button {
+                            showAddTagDialog = true
+                        } label: {
+                            Label("Add new label", systemImage: "plus")
                         }
-                        .disabled(!canSave)
-                        .padding(.top, 8)
+                    } label: {
+                        HStack {
+                            Text(selectedTag?.name ?? "Select a tag")
+                            Spacer()
+                            Image(systemName: "chevron.down")
+                        }
+                        .padding(12)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color.white.opacity(0.8), lineWidth: 1)
+                        )
                     }
-                    .padding(.horizontal)
-                    .padding(.bottom, 24)
                 }
-                .scrollDismissesKeyboard(.interactively)
-            } else {
-                // collapsed height filler if you want
-                Spacer(minLength: 0)
+
+                Button(action: save) {
+                    Text("Save")
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 14)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(canSave ? Color.gray : Color.gray.opacity(0.4))
+                        )
+                }
+                .disabled(!canSave)
+                .padding(.top, 8)
             }
+            .padding(.horizontal)
+            .padding(.bottom, 24)
         }
-        // THIS is the key to “don’t center when expanded”
-        // Keep everything pinned to the top
-        .frame(maxWidth: .infinity, maxHeight: expandProject ? 500 : 200, alignment: .top)
-
-        .font(.custom("Avenir", size: 20))
-        .foregroundStyle(.white)
-        .background(.darkPink)
-        .onAppear {
-            seedDefaultTagsIfNeeded()
-        }
-
-        // Add-tag dialog
+        .scrollDismissesKeyboard(.interactively)
         .alert("New label", isPresented: $showAddTagDialog) {
             TextField("Label name", text: $newTagName)
             Button("Cancel", role: .cancel) { newTagName = "" }
@@ -158,19 +157,15 @@ struct AddNewProject: View {
         }
     }
 
-    private func seedDefaultTagsIfNeeded() {
-        // If ANY tags already exist, do nothing
-        guard tags.isEmpty else { return }
-
-        defaultTags.forEach { name in
-            _ = TagModel.createOrFetch(
-                name: name,
-                context: modelContext
-            )
-        }
-    }
     private var canSave: Bool {
         !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+
+    private func seedDefaultTagsIfNeeded() {
+        guard tags.isEmpty else { return }
+        defaultTags.forEach { name in
+            _ = TagModel.createOrFetch(name: name, context: modelContext)
+        }
     }
 
     private func addTag() {
@@ -180,7 +175,6 @@ struct AddNewProject: View {
         let tag = TagModel.createOrFetch(name: trimmed, context: modelContext)
         selectedTag = tag
         newTagName = ""
-
     }
 
     private func save() {
@@ -200,20 +194,23 @@ struct AddNewProject: View {
             modelContext.insert(newProject)
             try modelContext.save()
 
-            // reset + collapse
+            // reset + collapse (same feel)
             name = ""
             details = ""
             selectedTag = nil
-            withAnimation { expandProject = false }
+            withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
+                isExpanded = false
+            }
         } catch {
             print("Failed to save project: \(error.localizedDescription)")
         }
     }
 }
 
-
-
 #Preview {
+    
+        @Previewable @State var isExpanded = false
+    
     do {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: Project.self, configurations: config)
@@ -224,7 +221,7 @@ struct AddNewProject: View {
             set: { addProject = $0 }
         )
         
-        return AddNewProject()
+        return AddNewProject(isExpanded: $isExpanded)
             .modelContainer(container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")

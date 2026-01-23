@@ -31,6 +31,9 @@
 		B57388692F2194F100B18F0D /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57388682F2194F100B18F0D /* Tag.swift */; };
 		B573886B2F21A0DD00B18F0D /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573886A2F21A0DD00B18F0D /* TagModel.swift */; };
 		B573886D2F21AC9E00B18F0D /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573886C2F21AC9E00B18F0D /* Color+Extensions.swift */; };
+		B573886F2F21C93A00B18F0D /* ProjectViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573886E2F21C93A00B18F0D /* ProjectViewRow.swift */; };
+		B57388712F22E90600B18F0D /* PreviewSamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57388702F22E90600B18F0D /* PreviewSamples.swift */; };
+		B57388732F22EA8B00B18F0D /* GlassCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57388722F22EA8B00B18F0D /* GlassCard.swift */; };
 		B580BC5E2CD589D9002EB3CD /* SplineRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = B580BC5D2CD589D9002EB3CD /* SplineRuntime */; };
 		B580BC622CD592F7002EB3CD /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B580BC612CD592F7002EB3CD /* ChartView.swift */; };
 		B587E25D2C9E38D500B8E1CD /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B587E25C2C9E38D500B8E1CD /* TimerView.swift */; };
@@ -82,6 +85,9 @@
 		B57388682F2194F100B18F0D /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		B573886A2F21A0DD00B18F0D /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
 		B573886C2F21AC9E00B18F0D /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		B573886E2F21C93A00B18F0D /* ProjectViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViewRow.swift; sourceTree = "<group>"; };
+		B57388702F22E90600B18F0D /* PreviewSamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewSamples.swift; sourceTree = "<group>"; };
+		B57388722F22EA8B00B18F0D /* GlassCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassCard.swift; sourceTree = "<group>"; };
 		B580BC612CD592F7002EB3CD /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		B587E25C2C9E38D500B8E1CD /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		B59E79602C90CC9600C3ADD0 /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
@@ -138,6 +144,7 @@
 			children = (
 				B52104472C8A4BCC0053CBDB /* PomoBancoApp.swift */,
 				B52104492C8A4BCC0053CBDB /* ContentView.swift */,
+				B57388702F22E90600B18F0D /* PreviewSamples.swift */,
 				B552BCAC2CA61FBA002AD4F5 /* Old Views */,
 				B59EF46D2C90D97100D35E4F /* View */,
 				B59EF46B2C90D95000D35E4F /* Model */,
@@ -181,6 +188,8 @@
 				B552BC862CA0C40B002AD4F5 /* OldAddProjectView.swift */,
 				B552BCAD2CA62019002AD4F5 /* OldContentView.swift */,
 				B552BC8A2CA21347002AD4F5 /* OldEditProjectView.swift */,
+				B50CAA6B2CB4B527007D3CD2 /* stackedTextField.swift */,
+				B52D758C2CB06A1600943C62 /* RectangleView.swift */,
 			);
 			path = "Old Views";
 			sourceTree = "<group>";
@@ -211,12 +220,12 @@
 				B587E25C2C9E38D500B8E1CD /* TimerView.swift */,
 				B52D758E2CB1E16000943C62 /* AddNewProject.swift */,
 				B53790342CADB67C00E7FDCE /* SelectedProjectView.swift */,
-				B52D758C2CB06A1600943C62 /* RectangleView.swift */,
-				B50CAA6B2CB4B527007D3CD2 /* stackedTextField.swift */,
 				B53790322CADB03A00E7FDCE /* ProjectListView.swift */,
+				B573886E2F21C93A00B18F0D /* ProjectViewRow.swift */,
 				B580BC612CD592F7002EB3CD /* ChartView.swift */,
 				B52393B82CD5ADFD00BC3657 /* BlurBackground.swift */,
 				B517B4CB2CEBFE0000478EE6 /* Background.swift */,
+				B57388722F22EA8B00B18F0D /* GlassCard.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -358,6 +367,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B587E25D2C9E38D500B8E1CD /* TimerView.swift in Sources */,
+				B57388732F22EA8B00B18F0D /* GlassCard.swift in Sources */,
 				B521044A2C8A4BCC0053CBDB /* ContentView.swift in Sources */,
 				B552BC872CA0C40B002AD4F5 /* OldAddProjectView.swift in Sources */,
 				B52104482C8A4BCC0053CBDB /* PomoBancoApp.swift in Sources */,
@@ -371,6 +381,7 @@
 				B50CAA6C2CB4B527007D3CD2 /* stackedTextField.swift in Sources */,
 				B52D758F2CB1E16000943C62 /* AddNewProject.swift in Sources */,
 				B57388692F2194F100B18F0D /* Tag.swift in Sources */,
+				B57388712F22E90600B18F0D /* PreviewSamples.swift in Sources */,
 				B552BC8D2CA48F1F002AD4F5 /* MainView.swift in Sources */,
 				B52393B92CD5ADFD00BC3657 /* BlurBackground.swift in Sources */,
 				B573886B2F21A0DD00B18F0D /* TagModel.swift in Sources */,
@@ -378,6 +389,7 @@
 				B53790352CADB67C00E7FDCE /* SelectedProjectView.swift in Sources */,
 				B552BC852CA0C250002AD4F5 /* Project.swift in Sources */,
 				B53790332CADB03A00E7FDCE /* ProjectListView.swift in Sources */,
+				B573886F2F21C93A00B18F0D /* ProjectViewRow.swift in Sources */,
 				B52D758D2CB06A1600943C62 /* RectangleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
