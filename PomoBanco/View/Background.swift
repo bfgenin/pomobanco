@@ -13,8 +13,8 @@ struct Background: View {
                   gradient: Gradient(
                       stops: [
                         .init(color: .darkPink, location: 0.0),
-                        .init(color: .darkPink, location: 0.63),
-                        .init(color: .medPink, location: 0.86),
+                        .init(color: .darkPink, location: 0.70),
+                        .init(color: .medPink, location: 0.95),
                         .init(color: .lightPink, location: 1.0)
                       ]
                   ),
