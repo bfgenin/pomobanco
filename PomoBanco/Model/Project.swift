@@ -3,17 +3,18 @@ import SwiftData
 
 @Model
 final class Project {
-    let id = UUID()
+    var id = UUID()
     var name: String
     var details: String
-    var time: Float {
-        entries.reduce(0) { $0 + $1.duration }
-    }
     var complete = false
     var startDate: Date
     var endDate: Date?
     var entries: [Entry]
     var tag: Tag?
+    
+    var time: Float {
+        entries.reduce(0) { $0 + $1.duration }
+    }
     
     func addEntry(_ entry: Entry) {
         self.entries.append(entry)

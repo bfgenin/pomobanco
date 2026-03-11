@@ -18,26 +18,25 @@ struct ProjectRowView: View {
     var onTap: (() -> Void)? = nil
 
     var body: some View {
-        HStack {
-            if let tag = project.tag {
-                Circle()
-                    .frame(width: 20, height: 20)
-                    .foregroundStyle(Color.from(name: tag.color))
-            } else {
-                // keeps alignment stable if no tag
-                Circle()
-                    .frame(width: 20, height: 20)
-                    .opacity(0)
+        ZStack {
+            HStack {
+                if let tag = project.tag {
+                    Circle()
+                        .frame(width: 20, height: 20)
+                        .foregroundStyle(Color.from(name: tag.color))
+                } else {
+                    Circle()
+                        .frame(width: 20, height: 20)
+                        .opacity(0)
+                }
+                Spacer()
+                Text(project.formatTime(for: .now))
             }
-
+            
             Text(project.name)
                 .truncationMode(.tail)
-                .frame(maxWidth: 220, alignment: .leading)
                 .fontWeight(fontSize >= 22 ? .bold : .regular)
-
-            Spacer()
-
-            Text(project.formatTime(for: .now))
+                .frame(maxWidth: .infinity, alignment: .center)
         }
         .frame(height: height)
         .font(.custom("Avenir", size: fontSize))
@@ -48,7 +47,6 @@ struct ProjectRowView: View {
                 .fill(.ultraThinMaterial)
                 .opacity(showBackground ? 0.2 : 0)
         }
-
         .onTapGesture {
             onTap?()
         }
@@ -56,6 +54,17 @@ struct ProjectRowView: View {
 }
 
 
-#Preview {
-//    ProjectViewRow()
+
+#Preview("ProjectRowView") {
+    @Previewable @State var isExpanded = true
+    @Previewable @State var selectedProject: Project? = nil
+    
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(for: Project.self, Tag.self, configurations: config)
+    
+    let sampleProject = PreviewSamples.sampleProject()
+    
+    return ProjectRowView(project: sampleProject)
 }
+
+  

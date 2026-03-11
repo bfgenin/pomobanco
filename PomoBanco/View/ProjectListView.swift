@@ -3,31 +3,28 @@ import SwiftData
 
 struct ProjectListView: View {
     @Environment(\.modelContext) var modelContext
-
+    
     @Binding var bottomShow: Bool
     @Binding var selectedProject: Project?
-
+    
     var projects: [Project]
-
-    // ✅ geometry-driven sizing from parent
+    
+    // geometry-driven sizing from parent
     let sheetHeight: CGFloat
     let peekHeight: CGFloat
     let pushDown: CGFloat
-
+    
     @State var projectToDelete: Project? = nil
     @State var deleteConfirmation = false
     @State var isExpanded = false
     
     var body: some View {
         VStack {
-            // your handle / header / add-new etc...
-            // Keep your existing internal layout here.
-            // (No screen offsets.)
             VStack {
-      
+                
                 ScrollView {
                     
-                 //   AddNewProject(isExpanded: $isExpanded)
+                    
                     
                     LazyVStack(spacing: 10) {
                         ForEach(projects.filter { $0.id != selectedProject?.id }, id: \.id) { project in
@@ -47,7 +44,7 @@ struct ProjectListView: View {
         }
         .frame(height: sheetHeight)
         .frame(maxWidth: .infinity)
-        // ✅ bottom-sheet behavior
+        
         
         .offset(y: (bottomShow ? 0 : (sheetHeight - peekHeight)) + pushDown)
         .animation(.spring(response: 0.55, dampingFraction: 0.85), value: bottomShow)
@@ -76,8 +73,6 @@ struct ProjectListView: View {
 //        }
 //    }
     
-    
-
 
 
 #Preview("ProjectListView") {
@@ -95,7 +90,8 @@ struct ProjectListView: View {
         peekHeight: 120,
         pushDown: 0
     )
-    .frame(height: 700) // enough room to see it anchor + slide
+    .background(Color.darkBlue)
+    .frame(height: 700)
     .padding()
     .modelContainer(container)
 }

@@ -37,8 +37,8 @@ enum PreviewSamples {
         let project1 = Project(id: UUID(), name: "name 1", details: "test one", startDate: .now, tag: tag, entries: [])
         let project2 = Project(id: UUID(), name: "name 2", details: "test two", startDate: .now, tag: tag2, entries: [])
         let project3 = Project(id: UUID(), name: "name 3", details: "test 3", startDate: .now,  tag: tag, entries: [])
-        
-        let projects = [project1, project2, project3]
+        let project4 = Project(id: UUID(), name: "no tag", details: "test 4", startDate: .now, entries: [])
+        let projects = [project1, project2, project3, project4]
         
         return projects
     }

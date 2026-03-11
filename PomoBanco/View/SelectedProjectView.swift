@@ -1,130 +1,174 @@
 import SwiftUI
 import SwiftData
 
+private let titleLimit = 20
+private let descLimit  = 100
+
 struct SelectedProjectView: View {
     @Environment(\.modelContext) var modelContext
-
+    @Query(sort: \Tag.name) private var tags: [Tag]
+    
     @Binding var selectedProject: Project?
     @Binding var isExpanded: Bool
-
-    // ✅ geometry-driven sizing from parent
+    
+    @State private var showAddTagDialog: Bool = false
+    @State private var newTagName: String = ""
+    
+    // geometry-driven sizing from parent
     let maxExpandedHeight: CGFloat
     let collapsedHeight: CGFloat
-
+    
     // strings
     @State private var details: String = ""
     @State private var name: String = ""
-
-    @State private var isDescription = true
-    @State private var isSubTasks = true
-    @State private var isChart = true
-
+    
     @Namespace private var namespace
-
+    
     private var barColor: Color {
         Color.from(name: selectedProject?.tag?.color ?? "red")
     }
-
-    private var barGradient: LinearGradient {
-        LinearGradient(
-            colors: [barColor.opacity(0.95), barColor.opacity(0.55)],
-            startPoint: .top,
-            endPoint: .bottom
-        )
-    }
-
+    
     var body: some View {
-        if let selectedProject = selectedProject {
-
-            VStack(alignment: .center, spacing: 2) {
-                ProjectRowView(project: selectedProject, fontSize: 24, height: 70, cornerRadius: 25) {
-                    withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
+        VStack(spacing: 5) {
+            if let selectedProject {
+                
+                ProjectRowView(
+                    project: selectedProject,
+                    fontSize: 24,
+                    height: 55,
+                    cornerRadius: 20
+                ) {
+                    withAnimation(.spring(response: 0.6, dampingFraction: 0.85)) {
                         isExpanded.toggle()
                     }
                 }
                 .gesture(
-                    DragGesture()
+                    DragGesture(minimumDistance: 40, coordinateSpace: .local)
                         .onEnded { value in
-                            if value.translation.width < -100 {
-                                withAnimation { deselectProject() }
+                            // Swipe left to deselect
+                            if value.translation.width < -40 {
+                                withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
+                                    deselectProject()
+                                }
                             }
                         }
                 )
-
+                
                 if isExpanded {
-                    ScrollView(showsIndicators: true) {
+                    ScrollView {
                         ExpandedView(project: selectedProject)
                     }
-                    .transition(.move(edge: .bottom).combined(with: .opacity))
+                    .transition(.move(edge: .top).combined(with: .opacity))
                 }
             }
-            // ✅ cap height: expand within available space
-//            .frame(maxWidth: .infinity, alignment: .top)
-            //    .frame(height: isExpanded ? maxExpandedHeight : collapsedHeight, alignment: .top)
-      //      .clipped()
-            .animation(.spring(response: 0.6, dampingFraction: 0.8), value: isExpanded)
-
-        } else {
-            Text("select a project")
-                .foregroundStyle(.white)
-                .font(.custom("Avenir", size: 24))
-                .fontWeight(.bold)
-                .opacity(0.20)
-                .matchedGeometryEffect(id: "selected-project", in: namespace)
-                .background(
-                    .ultraThinMaterial.opacity(0.2),
-                    in: RoundedRectangle(cornerRadius: 25, style: .continuous)
-                )
         }
+        .frame(maxWidth: .infinity)
+        
     }
-
     private func deselectProject() {
         selectedProject = nil
         isExpanded = false
         details = ""
         name = ""
     }
-
-    // ✅ unchanged styling inside
+    private func addNewTag() {
+        let trimmed = newTagName.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return }
+        let tag = TagModel.createOrFetch(name: trimmed, context: modelContext)
+        selectedProject?.tag = tag
+        newTagName = ""
+    }
+    
     private func ExpandedView(project: Project) -> some View {
-        VStack(alignment: .leading, spacing: 5){
-            if let tag = project.tag  {
-                Text(tag.name)
-                    .padding(.horizontal, 8)
-                    .background(barColor)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-            }
-
-            Text("DESCRIPTION")
-
-            TextField("add description here", text: $details)
-                .background(
-                    ZStack {
-                        Rectangle().fill(.ultraThinMaterial)
-                        Rectangle().fill(Color.darkPink.opacity(0.20))
-                    }
-                )
-                .clipShape(RoundedRectangle(cornerRadius: 16))
-
-            Text("CHART")
-            if (selectedProject != nil) {
-                ChartView(project: project)
-                    .background(
-                        ZStack {
-                            Rectangle().fill(.ultraThinMaterial)
-                            Rectangle().fill(Color.hotPink.opacity(0.20))
+        let totalSeconds = Int(project.time)
+        let hours = totalSeconds / 3600
+        let minutes = (totalSeconds % 3600) / 60
+        
+        return VStack(alignment: .leading, spacing: 16) {
+            
+            HStack {
+                Menu {
+                    ForEach(tags) { tag in
+                        Button {
+                            project.tag = tag
+                        } label: {
+                            if project.tag?.id == tag.id {
+                                Label(tag.name, systemImage: "checkmark")
+                            } else {
+                                Text(tag.name)
+                            }
                         }
-                    )
-                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                    }
+                    Button {
+                        showAddTagDialog = true
+                    } label: {
+                        Label("Add new label", systemImage: "plus")
+                    }
+                } label: {
+                    Text(project.tag?.name ?? "Add a tag")
+                        .padding(.horizontal, 10)
+                        .background(project.tag != nil ? barColor : Color.white.opacity(0.2))
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                }
+                
+                Spacer()
+                
+                HStack(spacing: 4) {
+                    Image(systemName: "clock")
+                        .font(.caption2)
+                    Text("\(hours)h \(minutes)m")
+                        .font(.custom("Avenir", size: 12))
+                }
+                .foregroundStyle(.white.opacity(0.75))
+                .padding(.horizontal, 10)
+                .padding(.vertical, 5)
+                .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 10))
             }
-
+            .padding(.horizontal, 6)
+        
+            TextField(
+                "add description here",
+                text: Binding(
+                    get: { project.details },
+                    set: { newVal in
+                        project.details = String(newVal.prefix(descLimit))
+                    }
+                ),
+                axis: .vertical
+            )
+            .lineLimit(3...8)
+            .padding(12)
+            .background(
+                .ultraThinMaterial.opacity(0.2),
+                in: RoundedRectangle(cornerRadius: 12, style: .continuous)
+            )
+            
+            if selectedProject != nil {
+                ChartView(project: project)
+                    .frame(maxHeight: 355)
+                    .background(
+                        .ultraThinMaterial.opacity(0.2),
+                        in: RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    )
+            }
             Text("Created: \(DateFormatter.localizedString(from: project.startDate, dateStyle: .long, timeStyle: .short))")
                 .font(.custom("Avenir", size: 12))
+                .frame(maxWidth: .infinity, alignment: .center)
+                .multilineTextAlignment(.center)
+        }
+        .alert("New label", isPresented: $showAddTagDialog) {
+            TextField("Label name", text: $newTagName)
+            Button("Cancel", role: .cancel) { newTagName = "" }
+            Button("Add") { addNewTag() }
+        } message: {
+            Text("Create a new tag for this project.")
         }
         .foregroundStyle(.white)
-        .font(.custom("Avenir", size: 16))
+        .font(.custom("Avenir", size: 18))
     }
 }
+
+
 
 #Preview("SelectedProjectView") {
     @Previewable @State var isExpanded = true
@@ -141,11 +185,10 @@ struct SelectedProjectView: View {
         maxExpandedHeight: 420,
         collapsedHeight: 72
     )
-    .frame(width: 360, height: 700) // gives it room to show scroll behavior
-    .padding()
     .modelContainer(container)
     .task {
         container.mainContext.insert(sampleProject)
         selectedProject = sampleProject
     }
+    .background(Color.darkBlue)
 }

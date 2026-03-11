@@ -28,6 +28,7 @@ struct ChartView: View {
             endPoint: .bottom
         )
     }
+    
 
     // 2 hours in seconds
     private let yStep: Double = 2 * 60 * 60
@@ -45,19 +46,29 @@ struct ChartView: View {
     }
 
     var body: some View {
-        VStack(spacing: 2) {
-
-            Text(weekLabel(weekStart))
-                .foregroundStyle(.white.opacity(0.9))
-                .font(.headline)
-          
+        VStack {
+            HStack(spacing: 4) {
+                Text(weekBoundLabel(weekStart, isEnd: false))
+                    .contentTransition(.numericText())
+                    .monospacedDigit()
+                    .frame(width: 60, alignment: .trailing)
+                Text("–")
+                Text(weekBoundLabel(weekStart, isEnd: true))
+                    .contentTransition(.numericText())
+                    .monospacedDigit()
+                    .frame(width: 60, alignment: .leading)
+            }
+            .foregroundStyle(.white.opacity(0.9))
+            .font(.headline)
+            .padding(.top, 8)
+            
             Chart(displayWeekData) { d in
                 BarMark(
                     x: .value("Date", d.date, unit: .day),
                     y: .value("Duration", d.duration)
                 )
                 .foregroundStyle(barGradient)
-                .cornerRadius(6)
+                .cornerRadius(50)
             }
             .chartYScale(domain: 0...yAxisMax(for: displayWeekData))
             .chartXAxis {
@@ -80,10 +91,10 @@ struct ChartView: View {
                     }
                 }
             }
-            .frame(height: 250)
-            .padding()
-
-            // Buttons back
+            .frame(height: 200)
+            .padding(.horizontal)
+                
+            // Buttons
             HStack {
                 Button { moveWeek(-1) } label: {
                     Image(systemName: "chevron.left")
@@ -109,8 +120,6 @@ struct ChartView: View {
             }
             .padding(.horizontal)
         }
-        .padding(.vertical, 8)
-//        .background(.darkPink)
         .onAppear {
             refreshChart(animated: false)
         }
@@ -144,8 +153,6 @@ struct ChartView: View {
 
     private func refreshChart(animated: Bool) {
         let real = makeWeekData()
-
-        // keep IDs stable per date so bars animate instead of "replacing"
         let idByDate = Dictionary(uniqueKeysWithValues: displayWeekData.map { ($0.date, $0.id) })
 
         let realStable: [DailyDuration] = real.map { d in
@@ -195,14 +202,15 @@ struct ChartView: View {
         return ceil(capped / yStep) * yStep
     }
 
-    // MARK: - Labels
+    // Labels
 
-    private func weekLabel(_ start: Date) -> String {
-        let cal = Calendar.current
-        let end = cal.date(byAdding: .day, value: 6, to: start) ?? start
+    private func weekBoundLabel(_ start: Date, isEnd: Bool) -> String {
+        let date = isEnd
+        ? (Calendar.current.date(byAdding: .day, value: 6, to: start) ?? start)
+        : start
         let fmt = DateFormatter()
-        fmt.dateFormat = "MMM d"
-        return "\(fmt.string(from: start)) – \(fmt.string(from: end))"
+        fmt.dateFormat = "MMM dd"
+        return fmt.string(from: date)
     }
 }
 
@@ -222,4 +230,5 @@ private extension Calendar {
 
     ChartView(project: PreviewSamples.sampleProject())
         .modelContainer(container)
+        .background(Color.blue)
 }

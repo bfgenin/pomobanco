@@ -1,9 +1,11 @@
 import SwiftUI
 import SwiftData
 
+private let titleLimit = 20
+private let descLimit  = 100
+
 struct AddNewProject: View {
     @Environment(\.modelContext) private var modelContext
-
     @Binding var isExpanded: Bool
 
     // Fields
@@ -19,85 +21,107 @@ struct AddNewProject: View {
     @State private var newTagName: String = ""
 
     var body: some View {
-        VStack(alignment: .center, spacing: 8) {
+        VStack(spacing: 0) {
+            
             HeaderRow
-
-            if isExpanded {
-                ExpandedForm
-                    .transition(.move(edge: .bottom).combined(with: .opacity))
-            }
+                .zIndex(2)
+            
+//        ZStack(alignment: .top) {
+                if isExpanded {
+                    ExpandedForm
+                        .transition(.move(edge: .top).combined(with: .opacity))
+                }
+          //  }
+          //  .frame(maxHeight: isExpanded ? 425 : 0, alignment: .top)
         }
+
         .padding(.vertical, 8)
         .font(.custom("Avenir", size: 20))
         .foregroundStyle(.white)
-        .background(.darkPink)
         .onAppear { seedDefaultTagsIfNeeded() }
+        
     }
 
     private var HeaderRow: some View {
         HStack {
-            Text("New Project")
-                .font(.custom("Avenir", size: 24))
-                .fontWeight(.bold)
-
-            Spacer()
-
-            Image(systemName: isExpanded ? "chevron.down" : "chevron.up")
+            Image(systemName: isExpanded ? "chevron.up" : "plus")
                 .font(.system(size: 16, weight: .semibold))
                 .opacity(0.9)
+                .padding(.horizontal, 16)
+                .padding(.vertical)
+                .background(
+                    
+                    .ultraThinMaterial.opacity(0.2),
+                    in: RoundedRectangle(cornerRadius: 25, style: .continuous)
+                )
+                .contentShape(Rectangle())
+            
+            
+            if isExpanded {
+                Text("New Project")
+                    .font(.custom("Avenir", size: 24))
+                    .fontWeight(.bold)
+                
+            }
+            Spacer()
         }
-        .padding(.horizontal, 16)
-        .frame(height: 70)
-        .background(
-            .ultraThinMaterial.opacity(0.2),
-            in: RoundedRectangle(cornerRadius: 25, style: .continuous)
-        )
-        .contentShape(Rectangle())
+        //.padding(.horizontal, 16)
+        .frame(height: 48  )
+        
         .onTapGesture {
-            withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
+            withAnimation(.spring(response: 0.6, dampingFraction: 0.85)) {
                 isExpanded.toggle()
             }
         }
     }
 
     private var ExpandedForm: some View {
-        // Keep ScrollView so it behaves well with keyboard
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-
+                
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Name")
                         .font(.custom("Avenir", size: 16))
                         .opacity(0.9)
-
+                    
                     TextField("add a title", text: $name)
                         .textInputAutocapitalization(.sentences)
                         .padding(12)
                         .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .stroke(Color.white.opacity(0.8), lineWidth: 1)
+                            .ultraThinMaterial.opacity(0.2),
+                            in: RoundedRectangle(cornerRadius: 12, style: .continuous)
                         )
+                        .onChange(of: name) { _, newVal in
+                            if newVal.count > titleLimit {
+                                name = String(newVal.prefix(titleLimit))
+                            }
+                        }
                 }
-
+                
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Description")
                         .font(.custom("Avenir", size: 16))
                         .opacity(0.9)
-
+                    
                     TextField("optional: add details", text: $details, axis: .vertical)
                         .lineLimit(3...8)
                         .padding(12)
                         .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .stroke(Color.white.opacity(0.8), lineWidth: 1)
+                            .ultraThinMaterial.opacity(0.2),
+                            in: RoundedRectangle(cornerRadius: 12, style: .continuous)
                         )
+                        .onChange(of: details) { _, newVal in
+                            if newVal.count > descLimit {
+                                details = String(newVal.prefix(descLimit))
+                            }
+                        }
                 }
-
+                
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Tag")
                         .font(.custom("Avenir", size: 16))
-                        .opacity(0.9)
-
+                        .opacity(1)
+                    
                     Menu {
                         ForEach(tags) { tag in
                             Button {
@@ -110,9 +134,9 @@ struct AddNewProject: View {
                                 }
                             }
                         }
-
+                        
                         Divider()
-
+                        
                         Button {
                             showAddTagDialog = true
                         } label: {
@@ -126,27 +150,30 @@ struct AddNewProject: View {
                         }
                         .padding(12)
                         .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .stroke(Color.white.opacity(0.8), lineWidth: 1)
+                            .ultraThinMaterial.opacity(0.2),
+                            in: RoundedRectangle(cornerRadius: 12, style: .continuous)
                         )
                     }
                 }
-
+                
                 Button(action: save) {
                     Text("Save")
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 14)
+                        .padding(.vertical, 10)
+                        .foregroundStyle(canSave ? .white : .white.opacity(0.4))
                         .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(canSave ? Color.gray : Color.gray.opacity(0.4))
+                            .ultraThinMaterial.opacity(0.2),
+                            in: RoundedRectangle(cornerRadius: 12, style: .continuous)
                         )
                 }
                 .disabled(!canSave)
                 .padding(.top, 8)
             }
-            .padding(.horizontal)
+            .frame(maxWidth: .infinity)
+          //  .padding(.horizontal)
             .padding(.bottom, 24)
         }
+        
         .scrollDismissesKeyboard(.interactively)
         .alert("New label", isPresented: $showAddTagDialog) {
             TextField("Label name", text: $newTagName)
@@ -194,7 +221,7 @@ struct AddNewProject: View {
             modelContext.insert(newProject)
             try modelContext.save()
 
-            // reset + collapse (same feel)
+            // reset + collapse
             name = ""
             details = ""
             selectedTag = nil
@@ -222,6 +249,7 @@ struct AddNewProject: View {
         )
         
         return AddNewProject(isExpanded: $isExpanded)
+            .background(.darkPink)
             .modelContainer(container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
