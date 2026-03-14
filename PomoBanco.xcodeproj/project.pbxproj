@@ -28,7 +28,6 @@
 		B573886D2F21AC9E00B18F0D /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573886C2F21AC9E00B18F0D /* Color+Extensions.swift */; };
 		B573886F2F21C93A00B18F0D /* ProjectRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573886E2F21C93A00B18F0D /* ProjectRowView.swift */; };
 		B57388712F22E90600B18F0D /* PreviewSamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57388702F22E90600B18F0D /* PreviewSamples.swift */; };
-		B57388732F22EA8B00B18F0D /* GlassCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57388722F22EA8B00B18F0D /* GlassCard.swift */; };
 		B580BC5E2CD589D9002EB3CD /* SplineRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = B580BC5D2CD589D9002EB3CD /* SplineRuntime */; };
 		B580BC622CD592F7002EB3CD /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B580BC612CD592F7002EB3CD /* ChartView.swift */; };
 		B587E25D2C9E38D500B8E1CD /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B587E25C2C9E38D500B8E1CD /* TimerView.swift */; };
@@ -62,6 +61,7 @@
 		B517B4CB2CEBFE0000478EE6 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		B51D800B2F295E9100006974 /* TomatoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TomatoView.swift; sourceTree = "<group>"; };
 		B51D802A2F316BB900006974 /* tom.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = tom.usdz; sourceTree = "<group>"; };
+		B5RES0102F316BB900006974 /* Resources */ = {isa = PBXGroup; children = (B51D802A2F316BB900006974 /* tom.usdz */); path = Resources; sourceTree = "<group>"; };
 		B52104442C8A4BCC0053CBDB /* PomoBanco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomoBanco.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B52104472C8A4BCC0053CBDB /* PomoBancoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomoBancoApp.swift; sourceTree = "<group>"; };
 		B52104492C8A4BCC0053CBDB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -82,7 +82,6 @@
 		B573886C2F21AC9E00B18F0D /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		B573886E2F21C93A00B18F0D /* ProjectRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRowView.swift; sourceTree = "<group>"; };
 		B57388702F22E90600B18F0D /* PreviewSamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewSamples.swift; sourceTree = "<group>"; };
-		B57388722F22EA8B00B18F0D /* GlassCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassCard.swift; sourceTree = "<group>"; };
 		B580BC612CD592F7002EB3CD /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		B587E25C2C9E38D500B8E1CD /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		B59E79602C90CC9600C3ADD0 /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
@@ -149,6 +148,7 @@
 				B59EF46D2C90D97100D35E4F /* View */,
 				B59EF46B2C90D95000D35E4F /* Model */,
 				B59EF46C2C90D96300D35E4F /* ViewModel */,
+				B5RES0102F316BB900006974 /* Resources */,
 				B521044B2C8A4BCD0053CBDB /* Assets.xcassets */,
 				B521044D2C8A4BCD0053CBDB /* Preview Content */,
 			);
@@ -218,14 +218,12 @@
 				B5A1000B2F33000300B18F0D /* AddTagAlert.swift */,
 				B52D758E2CB1E16000943C62 /* AddNewProject.swift */,
 				B51D800B2F295E9100006974 /* TomatoView.swift */,
-				B51D802A2F316BB900006974 /* tom.usdz */,
 				B53790342CADB67C00E7FDCE /* SelectedProjectView.swift */,
 				B53790322CADB03A00E7FDCE /* ProjectListView.swift */,
 				B573886E2F21C93A00B18F0D /* ProjectRowView.swift */,
 				B580BC612CD592F7002EB3CD /* ChartView.swift */,
 				B52393B82CD5ADFD00BC3657 /* BlurBackground.swift */,
 				B517B4CB2CEBFE0000478EE6 /* Background.swift */,
-				B57388722F22EA8B00B18F0D /* GlassCard.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -368,7 +366,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B587E25D2C9E38D500B8E1CD /* TimerView.swift in Sources */,
-				B57388732F22EA8B00B18F0D /* GlassCard.swift in Sources */,
 				B521044A2C8A4BCC0053CBDB /* ContentView.swift in Sources */,
 				B52104482C8A4BCC0053CBDB /* PomoBancoApp.swift in Sources */,
 				B51D800C2F295E9100006974 /* TomatoView.swift in Sources */,

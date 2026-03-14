@@ -17,20 +17,20 @@ struct ProjectListView: View {
     @State var projectToDelete: Project? = nil
     @State var deleteConfirmation = false
     @State var isExpanded = false
-    
-    private func deleteProject(at offsets: IndexSet) {
-        if let index = offsets.first {
-            projectToDelete = projects[index]
-            deleteConfirmation = true
-        }
+
+    /// Exclude selected project, sorted alphabetically by name.
+    private var displayedProjects: [Project] {
+        projects
+            .filter { $0.id != selectedProject?.id }
+            .sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
     }
-    
+
     var body: some View {
         VStack {
             VStack {
                 ScrollView {
                     LazyVStack(spacing: 10) {
-                        ForEach(projects.filter { $0.id != selectedProject?.id }, id: \.id) { project in
+                        ForEach(displayedProjects, id: \.id) { project in
                             ProjectRowView(project: project, fontSize: AppTheme.avenirBody, height: AppLayout.rowHeightCompact, cornerRadius: AppLayout.cornerRadiusPill) {
                                 withAnimation(.easeInOut(duration: 0.25)) {
                                     selectedProject = project
