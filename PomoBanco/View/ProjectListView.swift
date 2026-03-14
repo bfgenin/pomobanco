@@ -18,19 +18,30 @@ struct ProjectListView: View {
     @State var deleteConfirmation = false
     @State var isExpanded = false
     
+    private func deleteProject(at offsets: IndexSet) {
+        if let index = offsets.first {
+            projectToDelete = projects[index]
+            deleteConfirmation = true
+        }
+    }
+    
     var body: some View {
         VStack {
             VStack {
-                
                 ScrollView {
-                    
-                    
-                    
                     LazyVStack(spacing: 10) {
                         ForEach(projects.filter { $0.id != selectedProject?.id }, id: \.id) { project in
                             ProjectRowView(project: project, fontSize: 16, height: 40, cornerRadius: 25) {
                                 withAnimation(.easeInOut(duration: 0.25)) {
                                     selectedProject = project
+                                }
+                            }
+                            .contextMenu {
+                                Button(role: .destructive) {
+                                    projectToDelete = project
+                                    deleteConfirmation = true
+                                } label: {
+                                    Label("Delete", systemImage: "trash")
                                 }
                             }
                             .transition(.move(edge: .top).combined(with: .opacity))
@@ -52,11 +63,13 @@ struct ProjectListView: View {
         .alert(isPresented: $deleteConfirmation) {
             Alert(
                 title: Text("Delete Project"),
-                message: Text("Are you sure you want to delete this project? "),
+                message: Text("Are you sure you want to delete this project permanently?"),
                 primaryButton: .destructive(Text("Delete")) {
                     if let projectToDelete = projectToDelete {
-                        modelContext.delete(projectToDelete)
-                    }
+                          withAnimation(.spring(response: 0.45, dampingFraction: 0.82)) {
+                              modelContext.delete(projectToDelete)
+                          }
+                      }
                 },
                 secondaryButton: .cancel {
                     projectToDelete = nil
@@ -66,12 +79,7 @@ struct ProjectListView: View {
     }
 }
 
-//    private func deleteProject(at offsets: IndexSet) {
-//        if let index = offsets.first {
-//            projectToDelete = projects[index]
-//            deleteConfirmation = true
-//        }
-//    }
+   
     
 
 

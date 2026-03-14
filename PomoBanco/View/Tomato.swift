@@ -39,7 +39,7 @@ struct Tomato: View {
                             let rootEntity = try await Entity(named: "tom")
                             self.root = rootEntity
                             
-                            // Preserving original rotation that gave the correct angle
+                        
                             rootEntity.transform.rotation = simd_quatf(angle: .pi, axis: [0, 0, 1])
                             
                             if let topCube = rootEntity.findEntity(named: "TopCube") as? ModelEntity,
@@ -102,7 +102,7 @@ struct Tomato: View {
                             print("Failed to load entity: \(error)")
                         }
                     }
-                    // .frame(width: 300, height: 350)
+ 
                 } else {
                     // Fallback on earlier versions
                 }
@@ -222,5 +222,5 @@ struct Tomato: View {
     @Previewable @State var focusMode = false
     
     Tomato(focusMode: $focusMode)
-        //.frame(width: 300, height: 300)
+      
 }

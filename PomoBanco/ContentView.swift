@@ -69,15 +69,20 @@ struct ContentView: View {
                     workspaceTop: workspaceTop,
                     workspaceHeight: workspaceHeight,
                     safeBottom: safeBottom,
+                    isTimerRunning: isTimerRunning,
                     projects: projects,
                     selectedProject: $selectedProject,
                     isExpanded: $isExpanded,
                     isAdding: $isAdding,
                     bottomShow: $bottomShow,
                     showDebugFrames: showDebugFrames
+                    
                 )
+                .blur(radius: isTimerRunning && focusMode ? 3 : 0)
                 .blur(radius: topShow ? 10 : 0)
+                .animation(.easeInOut(duration: 0.8), value: isTimerRunning)
                 .zIndex(5)
+                
                 .overlay(alignment: .top) {
                     TimerLayer(
                         isTimerRunning: $isTimerRunning,
@@ -87,7 +92,6 @@ struct ContentView: View {
                         timerLift: timerLift,
                         topShow: $topShow
                     )
-        
                     .zIndex(10)
                 }
             }
@@ -133,15 +137,10 @@ private struct TimerLayer: View {
             )
             .padding(.top, timerTopPadding)
             .contentShape(Rectangle())
-            .onTapGesture {
-                withAnimation(.spring(response: 0.55, dampingFraction: 0.85)) {
-                    topShow.toggle()
-                }
-            }
+            
         }
         .frame(maxWidth: .infinity, alignment: .top)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-     //   .contentShape(Path())
         .offset(y: topShow ? -timerLift : 0)
     }}
 
@@ -150,6 +149,7 @@ private struct WorkspaceLayer: View {
     let workspaceTop: CGFloat
     let workspaceHeight: CGFloat
     let safeBottom: CGFloat
+    let isTimerRunning: Bool
     
     let projects: [Project]
     
@@ -166,6 +166,7 @@ private struct WorkspaceLayer: View {
                 workspaceHeight: workspaceHeight,
                 safeBottom: safeBottom,
                 projects: projects,
+                isTimerRunning: isTimerRunning,
                 selectedProject: $selectedProject,
                 isExpanded: $isExpanded,
                 isAdding: $isAdding,
@@ -184,6 +185,7 @@ private struct WorkspaceContent: View {
     let workspaceHeight: CGFloat
     let safeBottom: CGFloat
     let projects: [Project]
+    let isTimerRunning: Bool
     
     @Binding var selectedProject: Project?
     @Binding var isExpanded: Bool
@@ -200,6 +202,7 @@ private struct WorkspaceContent: View {
                 .opacity(isExpanded ? 0 : 1)
                 .frame(height: isExpanded ? 0 : nil)
                 .clipped()
+                .disabled(isTimerRunning)
             
             SelectedProjectView(
                 selectedProject: $selectedProject,
@@ -232,6 +235,7 @@ private struct WorkspaceContent: View {
             .padding(.bottom, safeBottom + 70)
             .padding(.horizontal, 16)
             .opacity(isExpanded || isAdding ? 0 : 1)
+            .disabled(isTimerRunning)
             .frame(height: isExpanded || isAdding ? 0 : nil)
             .clipped()
         }

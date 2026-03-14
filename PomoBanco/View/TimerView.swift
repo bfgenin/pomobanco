@@ -116,7 +116,7 @@ struct TimerView: View {
                 }
             }
         } message: {
-            Text("Skipping will reset all time and will not be saved.")
+            Text("Skipping will reset the timer and the elapsed time will not be saved.")
         }
         .onChange(of: vm.isActive) { _, newValue in
             isTimerRunning = newValue
