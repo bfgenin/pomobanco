@@ -31,9 +31,9 @@ struct SelectedProjectView: View {
                 
                 ProjectRowView(
                     project: selectedProject,
-                    fontSize: 24,
-                    height: 55,
-                    cornerRadius: 20
+                    fontSize: AppTheme.avenirHeadline,
+                    height: AppLayout.rowHeightExpanded,
+                    cornerRadius: AppLayout.cornerRadiusRow
                 ) {
                     withAnimation(.spring(response: 0.6, dampingFraction: 0.85)) {
                         isExpanded.toggle()
@@ -81,8 +81,7 @@ struct SelectedProjectView: View {
         let hours = totalSeconds / 3600
         let minutes = (totalSeconds % 3600) / 60
         
-        return VStack(alignment: .leading, spacing: 16) {
-            
+        return VStack(alignment: .leading, spacing: AppLayout.spacingLarge) {
             HStack {
                 Menu {
                     ForEach(tags) { tag in
@@ -103,26 +102,23 @@ struct SelectedProjectView: View {
                     }
                 } label: {
                     Text(project.tag?.name ?? AppStrings.addTag)
-                        .padding(.horizontal, 10)
+                        .padding(.horizontal, AppLayout.paddingMedium)
                         .background(project.tag != nil ? barColor : Color.white.opacity(0.2))
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .clipShape(RoundedRectangle(cornerRadius: AppLayout.cornerRadiusSmall))
                 }
-                
                 Spacer()
-                
-                HStack(spacing: 4) {
+                HStack(spacing: AppLayout.spacingTight) {
                     Image(systemName: "clock")
                         .font(.caption2)
                     Text("\(hours)h \(minutes)m")
-                        .font(.custom("Avenir", size: 12))
+                        .font(AppTheme.avenir(size: AppTheme.avenirCaption))
                 }
                 .foregroundStyle(.white.opacity(0.75))
-                .padding(.horizontal, 10)
-                .padding(.vertical, 5)
-                .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 10))
+                .padding(.horizontal, AppLayout.paddingMedium)
+                .padding(.vertical, AppLayout.paddingSmall / 2)
+                .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: AppLayout.cornerRadiusSmall))
             }
-            .padding(.horizontal, 6)
-        
+            .padding(.horizontal, AppLayout.paddingTight)
             TextField(
                 AppStrings.addDescriptionPlaceholder,
                 text: Binding(
@@ -134,34 +130,32 @@ struct SelectedProjectView: View {
                 axis: .vertical
             )
             .lineLimit(3...8)
-            .padding(12)
+            .padding(AppLayout.paddingStandard)
             .background(
                 .ultraThinMaterial.opacity(0.2),
-                in: RoundedRectangle(cornerRadius: 12, style: .continuous)
+                in: RoundedRectangle(cornerRadius: AppLayout.cornerRadiusMedium, style: .continuous)
             )
-            
             if selectedProject != nil {
                 ChartView(project: project)
                     .frame(maxHeight: 355)
                     .background(
                         .ultraThinMaterial.opacity(0.2),
-                        in: RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        in: RoundedRectangle(cornerRadius: AppLayout.cornerRadiusMedium, style: .continuous)
                     )
             }
             Text("Created: \(DateFormatter.localizedString(from: project.startDate, dateStyle: .long, timeStyle: .short))")
-                .font(.custom("Avenir", size: 12))
+                .font(AppTheme.avenir(size: AppTheme.avenirCaption))
                 .frame(maxWidth: .infinity, alignment: .center)
                 .multilineTextAlignment(.center)
         }
-        .alert(AppStrings.newLabel, isPresented: $showAddTagDialog) {
-            TextField(AppStrings.labelName, text: $newTagName)
-            Button(AppStrings.cancel, role: .cancel) { newTagName = "" }
-            Button(AppStrings.add) { addNewTag() }
-        } message: {
-            Text(AppStrings.createTagMessageEdit)
-        }
+        .addTagAlert(
+            isPresented: $showAddTagDialog,
+            tagName: $newTagName,
+            message: AppStrings.createTagMessageEdit,
+            onAdd: addNewTag
+        )
         .foregroundStyle(.white)
-        .font(.custom("Avenir", size: 18))
+        .font(AppTheme.avenir(size: AppTheme.avenirBodyLarge))
     }
 }
 

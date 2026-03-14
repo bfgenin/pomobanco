@@ -31,7 +31,7 @@ struct ProjectListView: View {
                 ScrollView {
                     LazyVStack(spacing: 10) {
                         ForEach(projects.filter { $0.id != selectedProject?.id }, id: \.id) { project in
-                            ProjectRowView(project: project, fontSize: 16, height: 40, cornerRadius: 25) {
+                            ProjectRowView(project: project, fontSize: AppTheme.avenirBody, height: AppLayout.rowHeightCompact, cornerRadius: AppLayout.cornerRadiusPill) {
                                 withAnimation(.easeInOut(duration: 0.25)) {
                                     selectedProject = project
                                 }
@@ -47,7 +47,7 @@ struct ProjectListView: View {
                             .transition(.move(edge: .top).combined(with: .opacity))
                         }
                     }
-                    .padding(.vertical, 8)
+                    .padding(.vertical, AppLayout.paddingSmall)
                 }
                 .animation(.easeInOut(duration: 0.25), value: selectedProject?.id)
             }

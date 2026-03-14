@@ -1,10 +1,9 @@
 //
-//  ProjectViewRow.swift
+//  ProjectRowView.swift
 //  PomoBanco
 //
 //  Created by Belish Genin on 1/21/26.
 //
-
 
 import SwiftUI
 import SwiftData
@@ -22,11 +21,11 @@ struct ProjectRowView: View {
             HStack {
                 if let tag = project.tag {
                     Circle()
-                        .frame(width: 20, height: 20)
+                        .frame(width: AppLayout.tagDotSize, height: AppLayout.tagDotSize)
                         .foregroundStyle(Color.from(name: tag.color))
                 } else {
                     Circle()
-                        .frame(width: 20, height: 20)
+                        .frame(width: AppLayout.tagDotSize, height: AppLayout.tagDotSize)
                         .opacity(0)
                 }
                 Spacer()
@@ -39,9 +38,9 @@ struct ProjectRowView: View {
                 .frame(maxWidth: .infinity, alignment: .center)
         }
         .frame(height: height)
-        .font(.custom("Avenir", size: fontSize))
+        .font(AppTheme.avenir(size: fontSize))
         .foregroundStyle(.white)
-        .padding(.horizontal, 14)
+        .padding(.horizontal, AppLayout.paddingRowHorizontal)
         .background {
             RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
                 .fill(.ultraThinMaterial)
@@ -52,8 +51,6 @@ struct ProjectRowView: View {
         }
     }
 }
-
-
 
 #Preview("ProjectRowView") {
     @Previewable @State var isExpanded = true
@@ -66,5 +63,3 @@ struct ProjectRowView: View {
     
     return ProjectRowView(project: sampleProject)
 }
-
-  

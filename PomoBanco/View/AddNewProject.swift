@@ -32,8 +32,8 @@ struct AddNewProject: View {
           //  .frame(maxHeight: isExpanded ? 425 : 0, alignment: .top)
         }
 
-        .padding(.vertical, 8)
-        .font(.custom("Avenir", size: 20))
+        .padding(.vertical, AppLayout.paddingSmall)
+        .font(AppTheme.avenir(size: AppTheme.avenirTitle))
         .foregroundStyle(.white)
         .onAppear { seedDefaultTagsIfNeeded() }
         
@@ -42,28 +42,25 @@ struct AddNewProject: View {
     private var HeaderRow: some View {
         HStack {
             Image(systemName: isExpanded ? "chevron.up" : "plus")
-                .font(.system(size: 16, weight: .semibold))
+                .font(AppTheme.system(size: AppTheme.systemButton, weight: .semibold))
                 .opacity(0.9)
-                .padding(.horizontal, 16)
+                .padding(.horizontal, AppLayout.paddingScreenHorizontal)
                 .padding(.vertical)
                 .background(
-                    
                     .ultraThinMaterial.opacity(0.2),
-                    in: RoundedRectangle(cornerRadius: 25, style: .continuous)
+                    in: RoundedRectangle(cornerRadius: AppLayout.cornerRadiusPill, style: .continuous)
                 )
                 .contentShape(Rectangle())
             
             
             if isExpanded {
                 Text(AppStrings.newProject)
-                    .font(.custom("Avenir", size: 24))
+                    .font(AppTheme.avenir(size: AppTheme.avenirHeadline))
                     .fontWeight(.bold)
-                
             }
             Spacer()
         }
-        //.padding(.horizontal, 16)
-        .frame(height: 48  )
+        .frame(height: AppLayout.headerRowHeight)
         
         .onTapGesture {
             withAnimation(.spring(response: 0.6, dampingFraction: 0.85)) {
@@ -74,19 +71,17 @@ struct AddNewProject: View {
 
     private var ExpandedForm: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                
-                VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: AppLayout.spacingLarge) {
+                VStack(alignment: .leading, spacing: AppLayout.spacingSmall) {
                     Text(AppStrings.name)
-                        .font(.custom("Avenir", size: 16))
+                        .font(AppTheme.avenir(size: AppTheme.avenirBody))
                         .opacity(0.9)
-                    
                     TextField(AppStrings.addTitlePlaceholder, text: $name)
                         .textInputAutocapitalization(.sentences)
-                        .padding(12)
+                        .padding(AppLayout.paddingStandard)
                         .background(
                             .ultraThinMaterial.opacity(0.2),
-                            in: RoundedRectangle(cornerRadius: 12, style: .continuous)
+                            in: RoundedRectangle(cornerRadius: AppLayout.cornerRadiusMedium, style: .continuous)
                         )
                         .onChange(of: name) { _, newVal in
                             if newVal.count > AppConstants.projectTitleLimit {
@@ -95,17 +90,16 @@ struct AddNewProject: View {
                         }
                 }
                 
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading, spacing: AppLayout.spacingSmall) {
                     Text(AppStrings.description)
-                        .font(.custom("Avenir", size: 16))
+                        .font(AppTheme.avenir(size: AppTheme.avenirBody))
                         .opacity(0.9)
-                    
                     TextField(AppStrings.addDetailsPlaceholder, text: $details, axis: .vertical)
                         .lineLimit(3...8)
-                        .padding(12)
+                        .padding(AppLayout.paddingStandard)
                         .background(
                             .ultraThinMaterial.opacity(0.2),
-                            in: RoundedRectangle(cornerRadius: 12, style: .continuous)
+                            in: RoundedRectangle(cornerRadius: AppLayout.cornerRadiusMedium, style: .continuous)
                         )
                         .onChange(of: details) { _, newVal in
                             if newVal.count > AppConstants.projectDescriptionLimit {
@@ -114,11 +108,10 @@ struct AddNewProject: View {
                         }
                 }
                 
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading, spacing: AppLayout.spacingSmall) {
                     Text(AppStrings.tag)
-                        .font(.custom("Avenir", size: 16))
+                        .font(AppTheme.avenir(size: AppTheme.avenirBody))
                         .opacity(1)
-                    
                     Menu {
                         ForEach(tags) { tag in
                             Button {
@@ -145,40 +138,37 @@ struct AddNewProject: View {
                             Spacer()
                             Image(systemName: "chevron.down")
                         }
-                        .padding(12)
+                        .padding(AppLayout.paddingStandard)
                         .background(
                             .ultraThinMaterial.opacity(0.2),
-                            in: RoundedRectangle(cornerRadius: 12, style: .continuous)
+                            in: RoundedRectangle(cornerRadius: AppLayout.cornerRadiusMedium, style: .continuous)
                         )
                     }
                 }
-                
                 Button(action: save) {
                     Text(AppStrings.save)
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 10)
+                        .padding(.vertical, AppLayout.paddingMedium)
                         .foregroundStyle(canSave ? .white : .white.opacity(0.4))
                         .background(
                             .ultraThinMaterial.opacity(0.2),
-                            in: RoundedRectangle(cornerRadius: 12, style: .continuous)
+                            in: RoundedRectangle(cornerRadius: AppLayout.cornerRadiusMedium, style: .continuous)
                         )
                 }
                 .disabled(!canSave)
-                .padding(.top, 8)
+                .padding(.top, AppLayout.spacingSmall)
             }
             .frame(maxWidth: .infinity)
-          //  .padding(.horizontal)
-            .padding(.bottom, 24)
+            .padding(.bottom, AppLayout.paddingBottomSheet)
         }
         
         .scrollDismissesKeyboard(.interactively)
-        .alert(AppStrings.newLabel, isPresented: $showAddTagDialog) {
-            TextField(AppStrings.labelName, text: $newTagName)
-            Button(AppStrings.cancel, role: .cancel) { newTagName = "" }
-            Button(AppStrings.add) { addTag() }
-        } message: {
-            Text(AppStrings.createTagMessageNew)
-        }
+        .addTagAlert(
+            isPresented: $showAddTagDialog,
+            tagName: $newTagName,
+            message: AppStrings.createTagMessageNew,
+            onAdd: addTag
+        )
     }
 
     private var canSave: Bool {
