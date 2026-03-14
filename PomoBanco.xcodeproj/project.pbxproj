@@ -26,7 +26,7 @@
 		B57388692F2194F100B18F0D /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57388682F2194F100B18F0D /* Tag.swift */; };
 		B573886B2F21A0DD00B18F0D /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573886A2F21A0DD00B18F0D /* TagModel.swift */; };
 		B573886D2F21AC9E00B18F0D /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573886C2F21AC9E00B18F0D /* Color+Extensions.swift */; };
-		B573886F2F21C93A00B18F0D /* ProjectViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573886E2F21C93A00B18F0D /* ProjectViewRow.swift */; };
+		B573886F2F21C93A00B18F0D /* ProjectRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573886E2F21C93A00B18F0D /* ProjectRowView.swift */; };
 		B57388712F22E90600B18F0D /* PreviewSamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57388702F22E90600B18F0D /* PreviewSamples.swift */; };
 		B57388732F22EA8B00B18F0D /* GlassCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57388722F22EA8B00B18F0D /* GlassCard.swift */; };
 		B580BC5E2CD589D9002EB3CD /* SplineRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = B580BC5D2CD589D9002EB3CD /* SplineRuntime */; };
@@ -35,6 +35,9 @@
 		B59E79612C90CC9600C3ADD0 /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59E79602C90CC9600C3ADD0 /* TimerModel.swift */; };
 		B5A100042F33000100B18F0D /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A100012F33000100B18F0D /* AppConstants.swift */; };
 		B5A100052F33000100B18F0D /* AppStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A100022F33000100B18F0D /* AppStrings.swift */; };
+		B5A100062F33000200B18F0D /* AppLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A100072F33000200B18F0D /* AppLayout.swift */; };
+		B5A100082F33000200B18F0D /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A100092F33000200B18F0D /* AppTheme.swift */; };
+		B5A1000A2F33000300B18F0D /* AddTagAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A1000B2F33000300B18F0D /* AddTagAlert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,7 +80,7 @@
 		B57388682F2194F100B18F0D /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		B573886A2F21A0DD00B18F0D /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
 		B573886C2F21AC9E00B18F0D /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
-		B573886E2F21C93A00B18F0D /* ProjectViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViewRow.swift; sourceTree = "<group>"; };
+		B573886E2F21C93A00B18F0D /* ProjectRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRowView.swift; sourceTree = "<group>"; };
 		B57388702F22E90600B18F0D /* PreviewSamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewSamples.swift; sourceTree = "<group>"; };
 		B57388722F22EA8B00B18F0D /* GlassCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassCard.swift; sourceTree = "<group>"; };
 		B580BC612CD592F7002EB3CD /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
@@ -85,6 +88,9 @@
 		B59E79602C90CC9600C3ADD0 /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
 		B5A100012F33000100B18F0D /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		B5A100022F33000100B18F0D /* AppStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStrings.swift; sourceTree = "<group>"; };
+		B5A100072F33000200B18F0D /* AppLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLayout.swift; sourceTree = "<group>"; };
+		B5A100092F33000200B18F0D /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		B5A1000B2F33000300B18F0D /* AddTagAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagAlert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +160,8 @@
 			children = (
 				B5A100012F33000100B18F0D /* AppConstants.swift */,
 				B5A100022F33000100B18F0D /* AppStrings.swift */,
+				B5A100072F33000200B18F0D /* AppLayout.swift */,
+				B5A100092F33000200B18F0D /* AppTheme.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -207,12 +215,13 @@
 			isa = PBXGroup;
 			children = (
 				B587E25C2C9E38D500B8E1CD /* TimerView.swift */,
+				B5A1000B2F33000300B18F0D /* AddTagAlert.swift */,
 				B52D758E2CB1E16000943C62 /* AddNewProject.swift */,
 				B51D800B2F295E9100006974 /* Tomato.swift */,
 				B51D802A2F316BB900006974 /* tom.usdz */,
 				B53790342CADB67C00E7FDCE /* SelectedProjectView.swift */,
 				B53790322CADB03A00E7FDCE /* ProjectListView.swift */,
-				B573886E2F21C93A00B18F0D /* ProjectViewRow.swift */,
+				B573886E2F21C93A00B18F0D /* ProjectRowView.swift */,
 				B580BC612CD592F7002EB3CD /* ChartView.swift */,
 				B52393B82CD5ADFD00BC3657 /* BlurBackground.swift */,
 				B517B4CB2CEBFE0000478EE6 /* Background.swift */,
@@ -376,9 +385,12 @@
 				B53790352CADB67C00E7FDCE /* SelectedProjectView.swift in Sources */,
 				B552BC852CA0C250002AD4F5 /* Project.swift in Sources */,
 				B53790332CADB03A00E7FDCE /* ProjectListView.swift in Sources */,
-				B573886F2F21C93A00B18F0D /* ProjectViewRow.swift in Sources */,
+				B573886F2F21C93A00B18F0D /* ProjectRowView.swift in Sources */,
 				B5A100042F33000100B18F0D /* AppConstants.swift in Sources */,
 				B5A100052F33000100B18F0D /* AppStrings.swift in Sources */,
+				B5A100062F33000200B18F0D /* AppLayout.swift in Sources */,
+				B5A100082F33000200B18F0D /* AppTheme.swift in Sources */,
+				B5A1000A2F33000300B18F0D /* AddTagAlert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
