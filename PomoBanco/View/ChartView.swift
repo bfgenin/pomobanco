@@ -47,20 +47,20 @@ struct ChartView: View {
 
     var body: some View {
         VStack {
-            HStack(spacing: 4) {
+            HStack(spacing: AppLayout.spacingTight) {
                 Text(weekBoundLabel(weekStart, isEnd: false))
                     .contentTransition(.numericText())
                     .monospacedDigit()
-                    .frame(width: 60, alignment: .trailing)
+                    .frame(width: AppLayout.chartLabelWidth, alignment: .trailing)
                 Text("–")
                 Text(weekBoundLabel(weekStart, isEnd: true))
                     .contentTransition(.numericText())
                     .monospacedDigit()
-                    .frame(width: 60, alignment: .leading)
+                    .frame(width: AppLayout.chartLabelWidth, alignment: .leading)
             }
             .foregroundStyle(.white.opacity(0.9))
             .font(.headline)
-            .padding(.top, 8)
+            .padding(.top, AppLayout.paddingSmall)
             
             Chart(displayWeekData) { d in
                 BarMark(
@@ -68,7 +68,7 @@ struct ChartView: View {
                     y: .value("Duration", d.duration)
                 )
                 .foregroundStyle(barGradient)
-                .cornerRadius(50)
+                .cornerRadius(AppLayout.chartBarCornerRadius)
             }
             .chartYScale(domain: 0...yAxisMax(for: displayWeekData))
             .chartXAxis {
@@ -91,7 +91,7 @@ struct ChartView: View {
                     }
                 }
             }
-            .frame(height: 200)
+            .frame(height: AppLayout.chartHeight)
             .padding(.horizontal)
                 
             // Buttons
@@ -223,12 +223,7 @@ private extension Calendar {
 
 
 #Preview("ChartView") {
-    let container = try! ModelContainer(
-        for: Project.self,
-        configurations: ModelConfiguration(isStoredInMemoryOnly: true)
-    )
-
     ChartView(project: PreviewSamples.sampleProject())
-        .modelContainer(container)
+        .modelContainer(PreviewSamples.makeContainer())
         .background(Color.blue)
 }

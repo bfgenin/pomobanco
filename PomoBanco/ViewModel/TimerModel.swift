@@ -25,9 +25,13 @@ import Foundation
         // starts the timer with the given amount of minutes
         func start(minutes: Float) {
             self.initialTime = Int(minutes)
-            self.endDate = Date()
+            let now = Date()
+            self.endDate = now
+            guard let end = Calendar.current.date(byAdding: .minute, value: Int(minutes), to: now) else {
+                return
+            }
+            self.endDate = end
             self.isActive = true
-            self.endDate = Calendar.current.date(byAdding: .minute, value: Int(minutes), to: endDate)!
         }
         
         func pause() {

@@ -18,8 +18,6 @@ struct BlurBackground: View {
                 .scaledToFill()
                 .scaleEffect(1.01)
                 .ignoresSafeArea()
-          //      .opacity(focusMode ?  : 0)
-            
             Image("TestScroll")
                 .resizable()
                 .scaledToFill()
@@ -36,15 +34,6 @@ struct BlurBackground: View {
 
 #Preview {
     @Previewable @State var focusMode = false
-
-    do {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Project.self, configurations: config)
-
-
-        return BlurBackground(focusMode: focusMode)
-            .modelContainer(container)
-    } catch {
-        return Text("Failed to create preview: \(error.localizedDescription)")
-    }
+    BlurBackground(focusMode: focusMode)
+        .modelContainer(PreviewSamples.makeContainer())
 }

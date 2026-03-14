@@ -164,10 +164,7 @@ struct SelectedProjectView: View {
 #Preview("SelectedProjectView") {
     @Previewable @State var isExpanded = true
     @Previewable @State var selectedProject: Project? = nil
-
-    let config = ModelConfiguration(isStoredInMemoryOnly: true)
-    let container = try! ModelContainer(for: Project.self, Tag.self, configurations: config)
-
+    let container = PreviewSamples.makeContainer()
     let sampleProject = PreviewSamples.sampleProject()
 
     return SelectedProjectView(

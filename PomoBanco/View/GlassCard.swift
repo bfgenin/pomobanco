@@ -10,9 +10,9 @@ import SwiftUI
 struct GlassCard: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .clipShape(RoundedRectangle(cornerRadius: AppLayout.cornerRadiusCard))
             .overlay(
-                RoundedRectangle(cornerRadius: 16)
+                RoundedRectangle(cornerRadius: AppLayout.cornerRadiusCard)
                     .stroke(Color.white.opacity(0.1))
             )
     }
@@ -23,7 +23,3 @@ extension View {
         modifier(GlassCard())
     }
 }
-//
-//#Preview {
-//    GlassCard()
-//}

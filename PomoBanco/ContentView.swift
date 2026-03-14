@@ -50,10 +50,9 @@ struct ContentView: View {
             let screenH = geo.size.height
             let screenW = geo.size.width
             
-            let timerTopPadding: CGFloat = 12
-            let timerGap: CGFloat = 12
-            let timerSize = min(280, screenW * 0.62)
-            let timerLift: CGFloat = -60
+            let timerTopPadding = AppLayout.timerTopPadding
+            let timerSize = min(AppLayout.timerSizeMax, screenW * 0.62)
+            let timerLift = AppLayout.timerLift
             
             let fallbackBottom = safeTop + timerTopPadding + timerSize
             let effectiveTimerBottom = timerBottomY == 0 ? fallbackBottom : timerBottomY
@@ -79,8 +78,8 @@ struct ContentView: View {
                     showDebugFrames: showDebugFrames
                     
                 )
-                .blur(radius: isTimerRunning && focusMode ? 3 : 0)
-                .blur(radius: topShow ? 10 : 0)
+                .blur(radius: isTimerRunning && focusMode ? AppLayout.timerBlurRadius : 0)
+                .blur(radius: topShow ? AppLayout.timerBlurRadiusPeek : 0)
                 .animation(.easeInOut(duration: 0.8), value: isTimerRunning)
                 .zIndex(5)
                 
@@ -193,13 +192,13 @@ private struct WorkspaceContent: View {
     @Binding var isAdding: Bool
     @Binding var bottomShow: Bool
     
-    private let headerHeight: CGFloat = 72
+    private let headerHeight = AppLayout.workspaceHeaderHeight
     
     var body: some View {
         VStack(spacing: 0) {
             
             AddNewProject(isExpanded: $isAdding)
-                .padding(.horizontal, 16)
+                .padding(.horizontal, AppLayout.paddingScreenHorizontal)
                 .opacity(isExpanded ? 0 : 1)
                 .frame(height: isExpanded ? 0 : nil)
                 .clipped()
@@ -211,7 +210,7 @@ private struct WorkspaceContent: View {
                 maxExpandedHeight: workspaceHeight,
                 collapsedHeight: headerHeight
             )
-            .padding(.horizontal, 16)
+            .padding(.horizontal, AppLayout.paddingScreenHorizontal)
             .frame(
                 height: isAdding ? 0 : (isExpanded ? .infinity : headerHeight),
                 alignment: .top
@@ -220,7 +219,7 @@ private struct WorkspaceContent: View {
             .clipped()
             
             if !isExpanded && !isAdding {
-                Spacer(minLength: 16)
+                Spacer(minLength: AppLayout.spacingLarge)
             }
             
             Spacer(minLength: 0)
@@ -233,8 +232,8 @@ private struct WorkspaceContent: View {
                 peekHeight: 140,
                 pushDown: 0
             )
-            .padding(.bottom, safeBottom + 70)
-            .padding(.horizontal, 16)
+            .padding(.bottom, safeBottom + AppLayout.timerBottomExtra)
+            .padding(.horizontal, AppLayout.paddingScreenHorizontal)
             .opacity(isExpanded || isAdding ? 0 : 1)
             .disabled(isTimerRunning)
             .frame(height: isExpanded || isAdding ? 0 : nil)

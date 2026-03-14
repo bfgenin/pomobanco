@@ -12,9 +12,9 @@ import SwiftData
 enum PreviewSamples {
 
     static func makeContainer() -> ModelContainer {
-         let config = ModelConfiguration(isStoredInMemoryOnly: true)
-         return try! ModelContainer(for: Project.self, configurations: config)
-     }
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        return try! ModelContainer(for: [Project.self, Entry.self, Tag.self], configurations: config)
+    }
 
     @MainActor static func seed(_ container: ModelContainer) {
         let ctx = container.mainContext

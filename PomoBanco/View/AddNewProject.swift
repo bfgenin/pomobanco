@@ -22,14 +22,10 @@ struct AddNewProject: View {
             
             HeaderRow
                 .zIndex(2)
-            
-//        ZStack(alignment: .top) {
-                if isExpanded {
-                    ExpandedForm
-                        .transition(.move(edge: .top).combined(with: .opacity))
-                }
-          //  }
-          //  .frame(maxHeight: isExpanded ? 425 : 0, alignment: .top)
+            if isExpanded {
+                ExpandedForm
+                    .transition(.move(edge: .top).combined(with: .opacity))
+            }
         }
 
         .padding(.vertical, AppLayout.paddingSmall)
@@ -222,23 +218,8 @@ struct AddNewProject: View {
 }
 
 #Preview {
-    
-        @Previewable @State var isExpanded = false
-    
-    do {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Project.self, configurations: config)
-
-        var addProject = false
-        let addBinding = Binding<Bool>(
-            get: { addProject },
-            set: { addProject = $0 }
-        )
-        
-        return AddNewProject(isExpanded: $isExpanded)
-            .background(.darkPink)
-            .modelContainer(container)
-    } catch {
-        return Text("Failed to create preview: \(error.localizedDescription)")
-    }
+    @Previewable @State var isExpanded = false
+    AddNewProject(isExpanded: $isExpanded)
+        .background(.darkPink)
+        .modelContainer(PreviewSamples.makeContainer())
 }

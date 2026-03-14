@@ -53,13 +53,9 @@ struct ProjectRowView: View {
 }
 
 #Preview("ProjectRowView") {
-    @Previewable @State var isExpanded = true
-    @Previewable @State var selectedProject: Project? = nil
-    
-    let config = ModelConfiguration(isStoredInMemoryOnly: true)
-    let container = try! ModelContainer(for: Project.self, Tag.self, configurations: config)
-    
+    let container = PreviewSamples.makeContainer()
     let sampleProject = PreviewSamples.sampleProject()
-    
+    container.mainContext.insert(sampleProject)
     return ProjectRowView(project: sampleProject)
+        .modelContainer(container)
 }

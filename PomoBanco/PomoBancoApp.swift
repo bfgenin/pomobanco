@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct PomoBancoApp: App {
@@ -13,6 +14,6 @@ struct PomoBancoApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: Project.self)
+        .modelContainer(for: [Project.self, Entry.self, Tag.self])
     }
 }

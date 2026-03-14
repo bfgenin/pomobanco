@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		B517B4CA2CEBCC5300478EE6 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B517B4C92CEBCC5300478EE6 /* Entry.swift */; };
 		B517B4CC2CEBFE0000478EE6 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = B517B4CB2CEBFE0000478EE6 /* Background.swift */; };
-		B51D800C2F295E9100006974 /* Tomato.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51D800B2F295E9100006974 /* Tomato.swift */; };
+		B51D800C2F295E9100006974 /* TomatoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51D800B2F295E9100006974 /* TomatoView.swift */; };
 		B51D802B2F316BB900006974 /* tom.usdz in Resources */ = {isa = PBXBuildFile; fileRef = B51D802A2F316BB900006974 /* tom.usdz */; };
 		B52104482C8A4BCC0053CBDB /* PomoBancoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52104472C8A4BCC0053CBDB /* PomoBancoApp.swift */; };
 		B521044A2C8A4BCC0053CBDB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52104492C8A4BCC0053CBDB /* ContentView.swift */; };
@@ -60,7 +60,7 @@
 /* Begin PBXFileReference section */
 		B517B4C92CEBCC5300478EE6 /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		B517B4CB2CEBFE0000478EE6 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
-		B51D800B2F295E9100006974 /* Tomato.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tomato.swift; sourceTree = "<group>"; };
+		B51D800B2F295E9100006974 /* TomatoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TomatoView.swift; sourceTree = "<group>"; };
 		B51D802A2F316BB900006974 /* tom.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = tom.usdz; sourceTree = "<group>"; };
 		B52104442C8A4BCC0053CBDB /* PomoBanco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomoBanco.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B52104472C8A4BCC0053CBDB /* PomoBancoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomoBancoApp.swift; sourceTree = "<group>"; };
@@ -217,7 +217,7 @@
 				B587E25C2C9E38D500B8E1CD /* TimerView.swift */,
 				B5A1000B2F33000300B18F0D /* AddTagAlert.swift */,
 				B52D758E2CB1E16000943C62 /* AddNewProject.swift */,
-				B51D800B2F295E9100006974 /* Tomato.swift */,
+				B51D800B2F295E9100006974 /* TomatoView.swift */,
 				B51D802A2F316BB900006974 /* tom.usdz */,
 				B53790342CADB67C00E7FDCE /* SelectedProjectView.swift */,
 				B53790322CADB03A00E7FDCE /* ProjectListView.swift */,
@@ -371,7 +371,7 @@
 				B57388732F22EA8B00B18F0D /* GlassCard.swift in Sources */,
 				B521044A2C8A4BCC0053CBDB /* ContentView.swift in Sources */,
 				B52104482C8A4BCC0053CBDB /* PomoBancoApp.swift in Sources */,
-				B51D800C2F295E9100006974 /* Tomato.swift in Sources */,
+				B51D800C2F295E9100006974 /* TomatoView.swift in Sources */,
 				B517B4CC2CEBFE0000478EE6 /* Background.swift in Sources */,
 				B580BC622CD592F7002EB3CD /* ChartView.swift in Sources */,
 				B517B4CA2CEBCC5300478EE6 /* Entry.swift in Sources */,

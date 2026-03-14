@@ -15,7 +15,7 @@ struct TimerView: View {
     @Binding var isTimerRunning: Bool
     
     let timer = Timer.publish(every: AppConstants.timerTickInterval, on: .main, in: .common).autoconnect()
-    let width: Double = 200
+    let width: Double = AppLayout.timerDisplayWidth
     let presetWorkTime: [Float] = AppConstants.timerPresetMinutes
     
     var project: Project? // project to acccumlate time to
@@ -34,16 +34,11 @@ struct TimerView: View {
     var body: some View {
         
         ZStack {
-            // Tomato fills the container and gets clipped
-            Tomato(focusMode: $focusMode)
-                .frame(maxWidth: .infinity,maxHeight: 300)
-              //  .frame(maxWidth: .infinty, height: 300)
+            TomatoView(focusMode: $focusMode)
+                .frame(maxWidth: .infinity, maxHeight: AppLayout.timerDisplayHeight)
                 .offset(y: 20)
                 .scaleEffect(2.4)
-        
-            
-            // TimerView.swift
-            VStack(spacing: 20) {
+            VStack(spacing: AppLayout.spacingStack) {
                 TimerTextDisplay(
                     text: focusMode ? vm.stopWatchTime : vm.time,
                     focusMode: focusMode,
@@ -201,7 +196,7 @@ struct TimerTextDisplay: View {
     }
     var body: some View {
         Text(text)
-            .font(.custom("Copperplate", size: 70))
+            .font(AppTheme.copperplate(size: AppTheme.copperplateTimer))
             .monospacedDigit()
             .frame(width: width, alignment: .center)
             .minimumScaleFactor(0.8)
@@ -211,7 +206,7 @@ struct TimerTextDisplay: View {
                 LinearGradient(colors: gradientColors, startPoint: .top, endPoint: .bottom)
                     .mask(
                         Text(text)
-                            .font(.custom("Copperplate", size: 70))
+                            .font(AppTheme.copperplate(size: AppTheme.copperplateTimer))
                             .monospacedDigit()
                             .frame(width: width, alignment: .center)
                             .minimumScaleFactor(0.8)
@@ -233,7 +228,7 @@ struct TimerButtonStyle: ButtonStyle {
     
     func makeBody(configuration: Configuration) -> some View {
         let pressed = configuration.isPressed
-        let size: CGFloat = 38
+        let size = AppLayout.timerButtonSize
         
         let gradientColors: [Color] = focusMode
         ? [Color.darkBlue, Color.hotPurple]
@@ -242,15 +237,14 @@ struct TimerButtonStyle: ButtonStyle {
         let bedColor: Color = focusMode ? Color.hotPurple : Color.hotPink
         
         configuration.label
-            .font(.system(size: 16, weight: .semibold))
+            .font(AppTheme.system(size: AppTheme.systemButton, weight: .semibold))
             .frame(width: size, height: size)
             .foregroundStyle(isDisabled ? Color.white.opacity(0.3) : Color.white)
             .background(
                 ZStack {
-                    RoundedRectangle(cornerRadius: 10)
+                    RoundedRectangle(cornerRadius: AppLayout.cornerRadiusSmall)
                         .fill(bedColor)
-                    
-                    RoundedRectangle(cornerRadius: 10)
+                    RoundedRectangle(cornerRadius: AppLayout.cornerRadiusSmall)
                         .fill(
                             LinearGradient(
                                 colors: gradientColors,
@@ -258,8 +252,7 @@ struct TimerButtonStyle: ButtonStyle {
                                 endPoint: .bottom
                             )
                         )
-                    
-                    RoundedRectangle(cornerRadius: 10)
+                    RoundedRectangle(cornerRadius: AppLayout.cornerRadiusSmall)
                         .fill(
                             LinearGradient(
                                 colors: [Color.white.opacity(0.1), Color.clear],
@@ -291,7 +284,7 @@ struct TimerControls: View {
     let onSkip: () -> Void
 
     var body: some View {
-        HStack(spacing: 16) {
+        HStack(spacing: AppLayout.spacingLarge) {
             Button(action: onStart) {
                 Image(systemName: "play.fill")
             }
@@ -303,8 +296,6 @@ struct TimerControls: View {
             }
             .buttonStyle(TimerButtonStyle(focusMode: focusMode, isDisabled: !isActive))
             .disabled(!isActive)
-    //        .opacity(!focusMode ? 0.3 : 1.0)
-
             Button(action: onEnd) {
                 Image(systemName: "stop.circle.fill")
             }
@@ -321,9 +312,7 @@ struct TimerControls: View {
 }
 
 #Preview {
-    let config = ModelConfiguration(isStoredInMemoryOnly: true)
-    let container = try! ModelContainer(for: Project.self, configurations: config)
-
+    let container = PreviewSamples.makeContainer()
     let previewProject = Project(
         id: UUID(),
         name: "Preview Project",
@@ -331,6 +320,7 @@ struct TimerControls: View {
         startDate: .now,
         entries: []
     )
+    container.mainContext.insert(previewProject)
 
     struct PreviewWrapper: View {
         let project: Project

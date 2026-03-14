@@ -86,9 +86,7 @@ struct ProjectListView: View {
 #Preview("ProjectListView") {
     @Previewable @State var show = true
     @Previewable @State var selectedProject: Project? = nil
-
-    let config = ModelConfiguration(isStoredInMemoryOnly: true)
-    let container = try! ModelContainer(for: Project.self, Tag.self, configurations: config)
+    let container = PreviewSamples.makeContainer()
 
     return ProjectListView(
         bottomShow: $show,
