@@ -33,6 +33,8 @@
 		B580BC622CD592F7002EB3CD /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B580BC612CD592F7002EB3CD /* ChartView.swift */; };
 		B587E25D2C9E38D500B8E1CD /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B587E25C2C9E38D500B8E1CD /* TimerView.swift */; };
 		B59E79612C90CC9600C3ADD0 /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59E79602C90CC9600C3ADD0 /* TimerModel.swift */; };
+		B5A100042F33000100B18F0D /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A100012F33000100B18F0D /* AppConstants.swift */; };
+		B5A100052F33000100B18F0D /* AppStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A100022F33000100B18F0D /* AppStrings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +83,8 @@
 		B580BC612CD592F7002EB3CD /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		B587E25C2C9E38D500B8E1CD /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		B59E79602C90CC9600C3ADD0 /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
+		B5A100012F33000100B18F0D /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		B5A100022F33000100B18F0D /* AppStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStrings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +139,7 @@
 				B52104472C8A4BCC0053CBDB /* PomoBancoApp.swift */,
 				B52104492C8A4BCC0053CBDB /* ContentView.swift */,
 				B57388702F22E90600B18F0D /* PreviewSamples.swift */,
+				B5A100032F33000100B18F0D /* Constants */,
 				B59EF46D2C90D97100D35E4F /* View */,
 				B59EF46B2C90D95000D35E4F /* Model */,
 				B59EF46C2C90D96300D35E4F /* ViewModel */,
@@ -142,6 +147,15 @@
 				B521044D2C8A4BCD0053CBDB /* Preview Content */,
 			);
 			path = PomoBanco;
+			sourceTree = "<group>";
+		};
+		B5A100032F33000100B18F0D /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				B5A100012F33000100B18F0D /* AppConstants.swift */,
+				B5A100022F33000100B18F0D /* AppStrings.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		B521044D2C8A4BCD0053CBDB /* Preview Content */ = {
@@ -363,6 +377,8 @@
 				B552BC852CA0C250002AD4F5 /* Project.swift in Sources */,
 				B53790332CADB03A00E7FDCE /* ProjectListView.swift in Sources */,
 				B573886F2F21C93A00B18F0D /* ProjectViewRow.swift in Sources */,
+				B5A100042F33000100B18F0D /* AppConstants.swift in Sources */,
+				B5A100052F33000100B18F0D /* AppStrings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

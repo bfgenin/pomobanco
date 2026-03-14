@@ -14,9 +14,9 @@ struct TimerView: View {
     
     @Binding var isTimerRunning: Bool
     
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    let timer = Timer.publish(every: AppConstants.timerTickInterval, on: .main, in: .common).autoconnect()
     let width: Double = 200
-    let presetWorkTime: [Float] = [25.0, 35.0, 45.0]
+    let presetWorkTime: [Float] = AppConstants.timerPresetMinutes
     
     var project: Project? // project to acccumlate time to
 
@@ -106,9 +106,9 @@ struct TimerView: View {
                 vm.updateCountdown()
             }
         }
-        .alert("Are you sure?", isPresented: $showSkipAlert) {
-            Button("Cancel", role: .cancel) {}
-            Button("Skip Session", role: .destructive) {
+        .alert(AppStrings.areYouSure, isPresented: $showSkipAlert) {
+            Button(AppStrings.cancel, role: .cancel) {}
+            Button(AppStrings.skipSession, role: .destructive) {
                 if focusMode {
                     vm.reset()
                 } else {
@@ -116,7 +116,7 @@ struct TimerView: View {
                 }
             }
         } message: {
-            Text("Skipping will reset the timer and the elapsed time will not be saved.")
+            Text(AppStrings.skipSessionMessage)
         }
         .onChange(of: vm.isActive) { _, newValue in
             isTimerRunning = newValue

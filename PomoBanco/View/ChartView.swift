@@ -19,7 +19,7 @@ struct ChartView: View {
     // chart renders
     @State private var displayWeekData: [DailyDuration] = []
 
-    private var barColor: Color { Color.from(name: project.tag?.color ?? "red") }
+    private var barColor: Color { Color.from(name: project.tag?.color ?? AppConstants.defaultTagColor) }
 
     private var barGradient: LinearGradient {
         LinearGradient(

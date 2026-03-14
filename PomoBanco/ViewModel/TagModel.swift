@@ -47,21 +47,9 @@ enum TagModel {
     }
     
     static func nextAvailableColor(context: ModelContext) -> String {
-        let palette = [
-            "red",
-            "pink",
-            "purple",
-            "green",
-            "blue",
-            "yellow",
-            "orange",
-            "brown",
-            "gray",
-        ]
-
+        let palette = AppConstants.tagColorPalette
         let usedColors = (try? context.fetch(FetchDescriptor<Tag>()))?
             .map { $0.color } ?? []
-
         return palette.first { !usedColors.contains($0) } ?? palette.randomElement()!
     }
 }

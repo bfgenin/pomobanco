@@ -1,9 +1,6 @@
 import SwiftUI
 import SwiftData
 
-private let titleLimit = 20
-private let descLimit  = 100
-
 struct SelectedProjectView: View {
     @Environment(\.modelContext) var modelContext
     @Query(sort: \Tag.name) private var tags: [Tag]
@@ -25,7 +22,7 @@ struct SelectedProjectView: View {
     @Namespace private var namespace
     
     private var barColor: Color {
-        Color.from(name: selectedProject?.tag?.color ?? "red")
+        Color.from(name: selectedProject?.tag?.color ?? AppConstants.defaultTagColor)
     }
     
     var body: some View {
@@ -102,10 +99,10 @@ struct SelectedProjectView: View {
                     Button {
                         showAddTagDialog = true
                     } label: {
-                        Label("Add new label", systemImage: "plus")
+                        Label(AppStrings.addNewLabel, systemImage: "plus")
                     }
                 } label: {
-                    Text(project.tag?.name ?? "Add a tag")
+                    Text(project.tag?.name ?? AppStrings.addTag)
                         .padding(.horizontal, 10)
                         .background(project.tag != nil ? barColor : Color.white.opacity(0.2))
                         .clipShape(RoundedRectangle(cornerRadius: 10))
@@ -127,11 +124,11 @@ struct SelectedProjectView: View {
             .padding(.horizontal, 6)
         
             TextField(
-                "add description here",
+                AppStrings.addDescriptionPlaceholder,
                 text: Binding(
                     get: { project.details },
                     set: { newVal in
-                        project.details = String(newVal.prefix(descLimit))
+                        project.details = String(newVal.prefix(AppConstants.projectDescriptionLimit))
                     }
                 ),
                 axis: .vertical
@@ -156,12 +153,12 @@ struct SelectedProjectView: View {
                 .frame(maxWidth: .infinity, alignment: .center)
                 .multilineTextAlignment(.center)
         }
-        .alert("New label", isPresented: $showAddTagDialog) {
-            TextField("Label name", text: $newTagName)
-            Button("Cancel", role: .cancel) { newTagName = "" }
-            Button("Add") { addNewTag() }
+        .alert(AppStrings.newLabel, isPresented: $showAddTagDialog) {
+            TextField(AppStrings.labelName, text: $newTagName)
+            Button(AppStrings.cancel, role: .cancel) { newTagName = "" }
+            Button(AppStrings.add) { addNewTag() }
         } message: {
-            Text("Create a new tag for this project.")
+            Text(AppStrings.createTagMessageEdit)
         }
         .foregroundStyle(.white)
         .font(.custom("Avenir", size: 18))

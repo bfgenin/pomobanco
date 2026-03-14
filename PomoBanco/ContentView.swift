@@ -37,7 +37,8 @@ struct ContentView: View {
     @State private var isTimerRunning = false
     @State private var focusMode = false
     
-    @State private var showDebugFrames = true
+    /// Set to true in DEBUG to show layout bounds; keep false for release.
+    @State private var showDebugFrames = false
     
     @State private var timerBottomY: CGFloat = 0
     

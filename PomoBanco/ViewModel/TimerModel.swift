@@ -10,14 +10,14 @@ import Foundation
     final class TimerModel: ObservableObject {
         @Published var isActive = false
         @Published var showingAlert = false
-        @Published var time: String = "25:00"
-        @Published var minutes: Float = 25.0 {
+        @Published var time: String = AppConstants.timerDefaultTimeString
+        @Published var minutes: Float = AppConstants.timerDefaultMinutes {
             didSet {
                 self.time = "\(Int(minutes)):00"
             }
         }
         @Published var elapsedTime: Float = 0.0
-        @Published var stopWatchTime: String = "00:00"
+        @Published var stopWatchTime: String = AppConstants.timerResetTimeString
         
         var initialTime = 0
         private var endDate = Date()
@@ -45,7 +45,7 @@ import Foundation
         func reset() {
             self.minutes = 0.0
             self.isActive = false
-            self.stopWatchTime = "00:00"
+            self.stopWatchTime = AppConstants.timerResetTimeString
             self.elapsedTime = 0.0
         }
         
@@ -61,9 +61,9 @@ import Foundation
             let hours = totalSeconds / 3600
             
             if hours > 0 {
-                stopWatchTime = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+                stopWatchTime = String(format: AppConstants.timeFormatHoursMinutesSeconds, hours, minutes, seconds)
             } else {
-                stopWatchTime = String(format: "%02d:%02d", minutes, seconds)
+                stopWatchTime = String(format: AppConstants.timeFormatPaddedMinutesSeconds, minutes, seconds)
             }
         }
 
@@ -96,7 +96,7 @@ import Foundation
 
             // Updates the time string with the formatted time
             self.minutes = Float(minutes)
-            self.time = String(format:"%d:%02d", minutes, seconds)
+            self.time = String(format: AppConstants.timeFormatMinutesSeconds, minutes, seconds)
         }
         
         

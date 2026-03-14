@@ -9,6 +9,7 @@ import Foundation
 import SwiftUICore
 
 extension Color {
+    /// Maps tag color names (from AppConstants.tagColorPalette) to SwiftUI colors.
     static func from(name: String) -> Color {
         switch name {
         case "red": return .red
@@ -18,6 +19,9 @@ extension Color {
         case "green": return .green
         case "orange": return .orange
         case "teal": return .teal
+        case "yellow": return .yellow
+        case "brown": return .brown
+        case "gray": return .gray
         default: return .gray
         }
     }

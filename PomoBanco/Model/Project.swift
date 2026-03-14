@@ -37,7 +37,7 @@ final class Project {
         let totalHours = totalSeconds / 3600
         let totalMinutes = (totalSeconds % 3600) / 60
         
-        return String(format: "%02d:%02d", totalHours, totalMinutes)
+        return String(format: AppConstants.timeFormatPaddedMinutesSeconds, totalHours, totalMinutes)
     }
     
     func durationPerDay(for project: Project) -> [Date: Float] {

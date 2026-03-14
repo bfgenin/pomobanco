@@ -1,9 +1,6 @@
 import SwiftUI
 import SwiftData
 
-private let titleLimit = 20
-private let descLimit  = 100
-
 struct AddNewProject: View {
     @Environment(\.modelContext) private var modelContext
     @Binding var isExpanded: Bool
@@ -12,7 +9,7 @@ struct AddNewProject: View {
     @State private var name: String = ""
     @State private var details: String = ""
 
-    private let defaultTags = ["Work", "Personal", "Health", "School"]
+    private let defaultTags = AppConstants.defaultTagNames
 
     @Query(sort: \Tag.name) private var tags: [Tag]
     @State private var selectedTag: Tag? = nil
@@ -58,7 +55,7 @@ struct AddNewProject: View {
             
             
             if isExpanded {
-                Text("New Project")
+                Text(AppStrings.newProject)
                     .font(.custom("Avenir", size: 24))
                     .fontWeight(.bold)
                 
@@ -80,11 +77,11 @@ struct AddNewProject: View {
             VStack(alignment: .leading, spacing: 16) {
                 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Name")
+                    Text(AppStrings.name)
                         .font(.custom("Avenir", size: 16))
                         .opacity(0.9)
                     
-                    TextField("add a title", text: $name)
+                    TextField(AppStrings.addTitlePlaceholder, text: $name)
                         .textInputAutocapitalization(.sentences)
                         .padding(12)
                         .background(
@@ -92,18 +89,18 @@ struct AddNewProject: View {
                             in: RoundedRectangle(cornerRadius: 12, style: .continuous)
                         )
                         .onChange(of: name) { _, newVal in
-                            if newVal.count > titleLimit {
-                                name = String(newVal.prefix(titleLimit))
+                            if newVal.count > AppConstants.projectTitleLimit {
+                                name = String(newVal.prefix(AppConstants.projectTitleLimit))
                             }
                         }
                 }
                 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Description")
+                    Text(AppStrings.description)
                         .font(.custom("Avenir", size: 16))
                         .opacity(0.9)
                     
-                    TextField("optional: add details", text: $details, axis: .vertical)
+                    TextField(AppStrings.addDetailsPlaceholder, text: $details, axis: .vertical)
                         .lineLimit(3...8)
                         .padding(12)
                         .background(
@@ -111,14 +108,14 @@ struct AddNewProject: View {
                             in: RoundedRectangle(cornerRadius: 12, style: .continuous)
                         )
                         .onChange(of: details) { _, newVal in
-                            if newVal.count > descLimit {
-                                details = String(newVal.prefix(descLimit))
+                            if newVal.count > AppConstants.projectDescriptionLimit {
+                                details = String(newVal.prefix(AppConstants.projectDescriptionLimit))
                             }
                         }
                 }
                 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Tag")
+                    Text(AppStrings.tag)
                         .font(.custom("Avenir", size: 16))
                         .opacity(1)
                     
@@ -140,11 +137,11 @@ struct AddNewProject: View {
                         Button {
                             showAddTagDialog = true
                         } label: {
-                            Label("Add new label", systemImage: "plus")
+                            Label(AppStrings.addNewLabel, systemImage: "plus")
                         }
                     } label: {
                         HStack {
-                            Text(selectedTag?.name ?? "Select a tag")
+                            Text(selectedTag?.name ?? AppStrings.selectTag)
                             Spacer()
                             Image(systemName: "chevron.down")
                         }
@@ -157,7 +154,7 @@ struct AddNewProject: View {
                 }
                 
                 Button(action: save) {
-                    Text("Save")
+                    Text(AppStrings.save)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 10)
                         .foregroundStyle(canSave ? .white : .white.opacity(0.4))
@@ -175,12 +172,12 @@ struct AddNewProject: View {
         }
         
         .scrollDismissesKeyboard(.interactively)
-        .alert("New label", isPresented: $showAddTagDialog) {
-            TextField("Label name", text: $newTagName)
-            Button("Cancel", role: .cancel) { newTagName = "" }
-            Button("Add") { addTag() }
+        .alert(AppStrings.newLabel, isPresented: $showAddTagDialog) {
+            TextField(AppStrings.labelName, text: $newTagName)
+            Button(AppStrings.cancel, role: .cancel) { newTagName = "" }
+            Button(AppStrings.add) { addTag() }
         } message: {
-            Text("Create a new tag to use for this project.")
+            Text(AppStrings.createTagMessageNew)
         }
     }
 

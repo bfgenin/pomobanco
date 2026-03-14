@@ -41,7 +41,7 @@ struct ProjectListView: View {
                                     projectToDelete = project
                                     deleteConfirmation = true
                                 } label: {
-                                    Label("Delete", systemImage: "trash")
+                                    Label(AppStrings.delete, systemImage: "trash")
                                 }
                             }
                             .transition(.move(edge: .top).combined(with: .opacity))
@@ -62,9 +62,9 @@ struct ProjectListView: View {
         .animation(.spring(response: 0.55, dampingFraction: 0.85), value: pushDown)
         .alert(isPresented: $deleteConfirmation) {
             Alert(
-                title: Text("Delete Project"),
-                message: Text("Are you sure you want to delete this project permanently?"),
-                primaryButton: .destructive(Text("Delete")) {
+                title: Text(AppStrings.deleteProject),
+                message: Text(AppStrings.deleteProjectMessage),
+                primaryButton: .destructive(Text(AppStrings.delete)) {
                     if let projectToDelete = projectToDelete {
                           withAnimation(.spring(response: 0.45, dampingFraction: 0.82)) {
                               modelContext.delete(projectToDelete)
