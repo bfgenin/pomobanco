@@ -210,7 +210,9 @@ private struct WorkspaceContent: View {
             )
             .padding(.horizontal, AppLayout.paddingScreenHorizontal)
             .frame( // invalid frame dimension (neg/non-finite)
-                height: isAdding ? 0 : (isExpanded ? .infinity : headerHeight),
+                // SwiftUI `frame(height:)` requires a finite value; use `nil` to avoid constraining
+                // height when expanded.
+                height: isAdding ? 0 : (isExpanded ? nil : headerHeight),
                 alignment: .top
             )
             .opacity(isAdding ? 0 : 1)

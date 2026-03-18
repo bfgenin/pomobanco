@@ -18,11 +18,60 @@ enum PreviewSamples {
 
     @MainActor static func seed(_ container: ModelContainer) async {
         let ctx = container.mainContext
+
+        // Avoid concurrent executions (SwiftUI `.task` can run more than once).
+        guard !isSeeding else { return }
+        isSeeding = true
+        defer { isSeeding = false }
+
+        // Reset sample data deterministically so repeated calls won't accumulate duplicates.
+        let sampleProjectNames: [String] = [
+            "Sample Project",
+            "WordHop",
+            "Math Academy",
+            "Early Computers",
+            "Sample No Tag"
+        ]
+
+        for name in sampleProjectNames {
+            let descriptor = FetchDescriptor<Project>(
+                predicate: #Predicate {
+                    $0.name == name
+                }
+            )
+            if let existing = try? ctx.fetch(descriptor) {
+                existing.forEach { ctx.delete($0) }
+            }
+        }
+
+        // Sample tags we create in `sampleProjects()`.
+        let sampleTagNormalizedNames: [String] = [
+            "work",
+            "school",
+            "research",
+            "sample"
+        ]
+
+        for normalized in sampleTagNormalizedNames {
+            let descriptor = FetchDescriptor<Tag>(
+                predicate: #Predicate {
+                    $0.normalizedName == normalized
+                }
+            )
+            if let existing = try? ctx.fetch(descriptor) {
+                existing.forEach { ctx.delete($0) }
+            }
+        }
+
         ctx.insert(sampleProject())
         for project in sampleProjects() {
             ctx.insert(project)
         }
+
+        try? ctx.save()
     }
+
+    private static var isSeeding: Bool = false
 
     private static func daysAgo(_ n: Int) -> Date {
         Calendar.current.date(byAdding: .day, value: -n, to: .now) ?? .now
