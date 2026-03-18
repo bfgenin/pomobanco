@@ -3,12 +3,9 @@
 //  PomoBanco
 //
 //  3D tomato (RealityKit); fallback is a rounded rectangle when load fails or iOS < 18.
-//
 
 import SwiftUI
 import RealityKit
-
-// MARK: - Tomato colors (RealityKit materials + fallback)
 
 private extension UIColor {
     static let tomatoRed = UIColor(red: 56/255, green: 19/255, blue: 28/255, alpha: 1)
@@ -157,7 +154,7 @@ struct TomatoView: View {
         animateMaterialColor(entity: topCube, focusMode: focusMode)
         animateMaterialColor(entity: botCube, focusMode: focusMode)
 
-        guard let topRotation = try? FromToByAnimation<Transform>(
+        guard let topRotation = try? FromToByAnimation<Transform>( // no calls to throwing func
             name: "top-rotation",
             from: .init(rotation: topCurrentRotation),
             to: .init(rotation: topTargetRotation),
@@ -165,7 +162,7 @@ struct TomatoView: View {
             timing: .easeOut,
             bindTarget: .transform
         ),
-        let botRotation = try? FromToByAnimation<Transform>(
+        let botRotation = try? FromToByAnimation<Transform>( // no calls to throwing function
             name: "bot-rotation",
             from: .init(rotation: botCurrentRotation),
             to: .init(rotation: botTargetRotation),

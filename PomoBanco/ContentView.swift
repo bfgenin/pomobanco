@@ -1,8 +1,6 @@
 import SwiftUI
 import SwiftData
 
-// MARK: - Preference Keys
-
 private struct TimerBoundsKey: PreferenceKey {
     static var defaultValue: Anchor<CGRect>? = nil
     static func reduce(value: inout Anchor<CGRect>?, nextValue: () -> Anchor<CGRect>?) {
@@ -211,7 +209,7 @@ private struct WorkspaceContent: View {
                 collapsedHeight: headerHeight
             )
             .padding(.horizontal, AppLayout.paddingScreenHorizontal)
-            .frame(
+            .frame( // invalid frame dimension (neg/non-finite)
                 height: isAdding ? 0 : (isExpanded ? .infinity : headerHeight),
                 alignment: .top
             )
@@ -250,10 +248,13 @@ private struct WorkspaceContent: View {
 }
 
 private struct PreviewContainerView: View {
+    let container = PreviewSamples.makeContainer()
+
     var body: some View {
-        let container = PreviewSamples.makeContainer()
-        PreviewSamples.seed(container)
-        return ContentView()
+        ContentView()
             .modelContainer(container)
+            .task {
+                await PreviewSamples.seed(container)
+            }
     }
 }
