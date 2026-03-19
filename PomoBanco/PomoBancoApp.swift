@@ -11,16 +11,27 @@ import SwiftData
 @main
 struct PomoBancoApp: App {
     let container = try! ModelContainer(for: Project.self, Entry.self, Tag.self)
+    @State private var hasCompletedSeeding = false
+
+    private var shouldSeedPreviewData: Bool {
+        CommandLine.arguments.contains("-seedPreviewData")
+    }
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-            #if DEBUG
-                .task {
-                    if CommandLine.arguments.contains("-seedPreviewData") {
-                        await PreviewSamples.seed(container)
-                    }
+            Group {
+                if !shouldSeedPreviewData || hasCompletedSeeding {
+                    ContentView()
+                } else {
+                    ProgressView()
                 }
+            }
+            #if DEBUG
+            .task {
+                guard shouldSeedPreviewData, !hasCompletedSeeding else { return }
+                await PreviewSamples.seed(container)
+                hasCompletedSeeding = true
+            }
             #endif
         }
         .modelContainer(container)

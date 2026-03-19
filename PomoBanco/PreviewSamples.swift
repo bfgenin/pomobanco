@@ -16,7 +16,7 @@ enum PreviewSamples {
         return try! ModelContainer(for: Project.self, Entry.self, Tag.self, configurations: config)
     }
 
-    @MainActor static func seed(_ container: ModelContainer) async {
+    @MainActor static func seed(_ container: ModelContainer, reset: Bool = false) async {
         let ctx = container.mainContext
 
         // Avoid concurrent executions (SwiftUI `.task` can run more than once).
@@ -24,12 +24,11 @@ enum PreviewSamples {
         isSeeding = true
         defer { isSeeding = false }
 
-        // Never delete existing SwiftData model instances during UI lifetime.
-        // Deleting/replacing `Tag` objects can invalidate instances currently
-        // referenced by SwiftUI, causing crashes like:
-        // "model instance was invalidated because its backing data could no longer be found".
+        // Never delete model instances here.
+        // Deleting/replacing `Tag`/`Project` rows can invalidate SwiftUI-held objects
+        // and crash with "instance was invalidated because its backing data could no longer be found".
         //
-        // Instead, seed only when the store is empty for this container.
+        // To keep the app stable, we only seed when the store is empty.
         if let existingProject = try? ctx.fetch(FetchDescriptor<Project>()).first,
            existingProject != nil {
             return
