@@ -29,7 +29,7 @@ struct PomoBancoApp: App {
             #if DEBUG
             .task {
                 guard shouldSeedPreviewData, !hasCompletedSeeding else { return }
-                await PreviewSamples.seed(container)
+                await PreviewSamples.seed(container, reset: true)
                 hasCompletedSeeding = true
             }
             #endif

@@ -24,14 +24,21 @@ enum PreviewSamples {
         isSeeding = true
         defer { isSeeding = false }
 
-        // Never delete model instances here.
-        // Deleting/replacing `Tag`/`Project` rows can invalidate SwiftUI-held objects
-        // and crash with "instance was invalidated because its backing data could no longer be found".
-        //
-        // To keep the app stable, we only seed when the store is empty.
-        if let existingProject = try? ctx.fetch(FetchDescriptor<Project>()).first,
-           existingProject != nil {
-            return
+        if reset {
+            // Full reset to recover from corrupted/dangling relationships
+            // caused by earlier seeding runs.
+            // NOTE: This is intended to run only when the app is started with
+            // `-seedPreviewData`, and `PomoBancoApp` keeps the UI from rendering
+            // until seeding completes.
+            (try? ctx.fetch(FetchDescriptor<Project>()))?.forEach { ctx.delete($0) }
+            (try? ctx.fetch(FetchDescriptor<Entry>()))?.forEach { ctx.delete($0) }
+            (try? ctx.fetch(FetchDescriptor<Tag>()))?.forEach { ctx.delete($0) }
+        } else {
+            // Normal mode: only seed if the store is empty.
+            if let existingProject = try? ctx.fetch(FetchDescriptor<Project>()).first,
+               existingProject != nil {
+                return
+            }
         }
 
         ctx.insert(sampleProject())
