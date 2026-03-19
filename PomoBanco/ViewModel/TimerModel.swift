@@ -6,9 +6,13 @@
 //
 
 import Foundation
+import AudioToolbox
 
     final class TimerModel: ObservableObject {
         @Published var isActive = false
+        /// True once a timer session has started, even if it is currently paused.
+        /// Used to prevent mode switching while paused, and to enable end/skip while paused.
+        @Published var hasStarted = false
         @Published var showingAlert = false
         @Published var time: String = AppConstants.timerDefaultTimeString
         @Published var minutes: Float = AppConstants.timerDefaultMinutes {
@@ -21,6 +25,7 @@ import Foundation
         
         var initialTime = 0
         private var endDate = Date()
+        private var didPlayEndSound = false
         
         // starts the timer with the given amount of minutes
         func start(minutes: Float) {
@@ -32,6 +37,9 @@ import Foundation
             }
             self.endDate = end
             self.isActive = true
+            self.hasStarted = true
+            self.showingAlert = false
+            self.didPlayEndSound = false
         }
         
         func pause() {
@@ -41,16 +49,22 @@ import Foundation
         func end() {
             self.minutes = Float(initialTime)
             self.isActive = false
+            self.hasStarted = false
             self.time = "\(Int(minutes)):00"
             self.elapsedTime = 0.0
+            self.didPlayEndSound = false
         }
         
         // resets stopwatch to 00:00
         func reset() {
-            self.minutes = 0.0
+            // Reset focus-mode stopwatch display to 00:00, while preparing the
+            // regular countdown to its default preset (25 minutes).
+            self.minutes = AppConstants.timerDefaultMinutes
             self.isActive = false
+            self.hasStarted = false
             self.stopWatchTime = AppConstants.timerResetTimeString
             self.elapsedTime = 0.0
+            self.didPlayEndSound = false
         }
         
         
@@ -84,8 +98,15 @@ import Foundation
             // Checks that the countdown is not <= 0
             if diff <= 0 {
                 self.isActive = false
-                self.time = "0:00"
+                self.hasStarted = false
+                self.minutes = 0
+                self.time = "00:00"
                 self.showingAlert = true
+                if !didPlayEndSound {
+                    // Built-in system sound (no asset).
+                    AudioServicesPlaySystemSound(1005)
+                    didPlayEndSound = true
+                }
                 return
             }
             
