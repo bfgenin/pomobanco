@@ -24,43 +24,15 @@ enum PreviewSamples {
         isSeeding = true
         defer { isSeeding = false }
 
-        // Reset sample data deterministically so repeated calls won't accumulate duplicates.
-        let sampleProjectNames: [String] = [
-            "Sample Project",
-            "WordHop",
-            "Math Academy",
-            "Early Computers",
-            "Sample No Tag"
-        ]
-
-        for name in sampleProjectNames {
-            let descriptor = FetchDescriptor<Project>(
-                predicate: #Predicate {
-                    $0.name == name
-                }
-            )
-            if let existing = try? ctx.fetch(descriptor) {
-                existing.forEach { ctx.delete($0) }
-            }
-        }
-
-        // Sample tags we create in `sampleProjects()`.
-        let sampleTagNormalizedNames: [String] = [
-            "work",
-            "school",
-            "research",
-            "sample"
-        ]
-
-        for normalized in sampleTagNormalizedNames {
-            let descriptor = FetchDescriptor<Tag>(
-                predicate: #Predicate {
-                    $0.normalizedName == normalized
-                }
-            )
-            if let existing = try? ctx.fetch(descriptor) {
-                existing.forEach { ctx.delete($0) }
-            }
+        // Never delete existing SwiftData model instances during UI lifetime.
+        // Deleting/replacing `Tag` objects can invalidate instances currently
+        // referenced by SwiftUI, causing crashes like:
+        // "model instance was invalidated because its backing data could no longer be found".
+        //
+        // Instead, seed only when the store is empty for this container.
+        if let existingProject = try? ctx.fetch(FetchDescriptor<Project>()).first,
+           existingProject != nil {
+            return
         }
 
         ctx.insert(sampleProject())
