@@ -55,12 +55,13 @@ struct TimerView: View {
                     .frame(width: width)
                     .pickerStyle(.palette)
                     .colorScheme(.dark)
-                    .disabled(vm.isActive)
+                    .disabled(vm.hasStarted)
        
                 } else {
                     TimerControls(
                         focusMode: focusMode,
                         isActive: vm.isActive,
+                        hasStarted: vm.hasStarted,
                         hasProject: project != nil,
                         width: width,
                         onStart: {
@@ -80,7 +81,6 @@ struct TimerView: View {
                                 
                                 addTime(time: vm.elapsedTime)
                                 focusMode ? vm.reset() : vm.end()
-                                if !focusMode { isTimerRunning = false }
                             }
                         },
                         onSkip: {
@@ -113,13 +113,15 @@ struct TimerView: View {
         } message: {
             Text(AppStrings.skipSessionMessage)
         }
-        .onChange(of: vm.isActive) { _, newValue in
+        .onChange(of: vm.hasStarted) { _, newValue in
             isTimerRunning = newValue
         }
         .frame(maxWidth: .infinity,maxHeight: 300)
         .clipped()
         .padding()
-        .gesture(vm.isActive ? nil : dragGesture())
+        // Prevent focus mode / timer preset switching once the session has started
+        // (even if the timer is currently paused).
+        .gesture(vm.hasStarted ? nil : dragGesture())
     }
     private func addTime(time: Float) {
         let entry = Entry(date: Date.now, duration: time)
@@ -276,6 +278,7 @@ struct TimerButtonStyle: ButtonStyle {
 struct TimerControls: View {
     let focusMode: Bool
     let isActive: Bool
+    let hasStarted: Bool
     let hasProject: Bool
     let width: Double
     let onStart: () -> Void
@@ -299,14 +302,14 @@ struct TimerControls: View {
             Button(action: onEnd) {
                 Image(systemName: "stop.circle.fill")
             }
-            .buttonStyle(TimerButtonStyle(focusMode: focusMode, isDisabled: !isActive))
-            .disabled(!isActive)
+            .buttonStyle(TimerButtonStyle(focusMode: focusMode, isDisabled: !hasStarted))
+            .disabled(!hasStarted)
 
             Button(action: onSkip) {
                 Image(systemName: "forward.end.fill")
             }
-            .buttonStyle(TimerButtonStyle(focusMode: focusMode, isDisabled: !isActive))
-            .disabled(!isActive)
+            .buttonStyle(TimerButtonStyle(focusMode: focusMode, isDisabled: !hasStarted))
+            .disabled(!hasStarted)
         }
     }
 }

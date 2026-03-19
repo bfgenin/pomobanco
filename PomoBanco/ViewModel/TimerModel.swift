@@ -9,6 +9,9 @@ import Foundation
 
     final class TimerModel: ObservableObject {
         @Published var isActive = false
+        /// True once a timer session has started, even if it is currently paused.
+        /// Used to prevent mode switching while paused, and to enable end/skip while paused.
+        @Published var hasStarted = false
         @Published var showingAlert = false
         @Published var time: String = AppConstants.timerDefaultTimeString
         @Published var minutes: Float = AppConstants.timerDefaultMinutes {
@@ -32,6 +35,8 @@ import Foundation
             }
             self.endDate = end
             self.isActive = true
+            self.hasStarted = true
+            self.showingAlert = false
         }
         
         func pause() {
@@ -41,14 +46,18 @@ import Foundation
         func end() {
             self.minutes = Float(initialTime)
             self.isActive = false
+            self.hasStarted = false
             self.time = "\(Int(minutes)):00"
             self.elapsedTime = 0.0
         }
         
         // resets stopwatch to 00:00
         func reset() {
-            self.minutes = 0.0
+            // Reset focus-mode stopwatch display to 00:00, while preparing the
+            // regular countdown to its default preset (25 minutes).
+            self.minutes = AppConstants.timerDefaultMinutes
             self.isActive = false
+            self.hasStarted = false
             self.stopWatchTime = AppConstants.timerResetTimeString
             self.elapsedTime = 0.0
         }
@@ -84,6 +93,8 @@ import Foundation
             // Checks that the countdown is not <= 0
             if diff <= 0 {
                 self.isActive = false
+                self.hasStarted = false
+                self.minutes = 0
                 self.time = "0:00"
                 self.showingAlert = true
                 return
