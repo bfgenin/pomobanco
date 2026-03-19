@@ -13,6 +13,11 @@ struct TimerView: View {
 
     
     @Binding var isTimerRunning: Bool
+
+    /// Tracks whether the user has started a session.
+    /// This lets us reset time when the selected project is dismissed
+    /// without accidentally resetting the default timer before any session starts.
+    @State private var sessionStarted = false
     
     let timer = Timer.publish(every: AppConstants.timerTickInterval, on: .main, in: .common).autoconnect()
     let width: Double = AppLayout.timerDisplayWidth
@@ -66,6 +71,7 @@ struct TimerView: View {
                         onStart: {
                             withAnimation(.easeInOut(duration: 0.35)) {
                                 vm.start(minutes: focusMode ? 0.0 : vm.minutes)
+                                sessionStarted = true
                             }
                             editTimer = false
                         },
@@ -80,7 +86,7 @@ struct TimerView: View {
                                 
                                 addTime(time: vm.elapsedTime)
                                 focusMode ? vm.reset() : vm.end()
-                                if !focusMode { isTimerRunning = false }
+                                sessionStarted = false
                             }
                         },
                         onSkip: {
@@ -109,12 +115,27 @@ struct TimerView: View {
                 } else {
                     vm.end()
                 }
+                sessionStarted = false
             }
         } message: {
             Text(AppStrings.skipSessionMessage)
         }
         .onChange(of: vm.isActive) { _, newValue in
             isTimerRunning = newValue
+        }
+        .onChange(of: project?.id) { _, newProjectID in
+            // If the user dismisses/de-selects the project while a session has started
+            // (even if paused), reset time as if "Skip session" was chosen.
+            if newProjectID == nil, sessionStarted {
+                withAnimation(.easeInOut(duration: 0.25)) {
+                    if focusMode {
+                        vm.reset()
+                    } else {
+                        vm.end()
+                    }
+                    sessionStarted = false
+                }
+            }
         }
         .frame(maxWidth: .infinity,maxHeight: 300)
         .clipped()

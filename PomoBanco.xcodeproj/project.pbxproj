@@ -37,6 +37,16 @@
 		B5A100062F33000200B18F0D /* AppLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A100072F33000200B18F0D /* AppLayout.swift */; };
 		B5A100082F33000200B18F0D /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A100092F33000200B18F0D /* AppTheme.swift */; };
 		B5A1000A2F33000300B18F0D /* AddTagAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A1000B2F33000300B18F0D /* AddTagAlert.swift */; };
+		B5FAEA122F7486D0009167EB /* focus-mode-flow.mov in Resources */ = {isa = PBXBuildFile; fileRef = B5FAEA092F7486D0009167EB /* focus-mode-flow.mov */; };
+		B5FAEA132F7486D0009167EB /* Screenshot 2026-03-13 at 1.49.20 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = B5FAEA0F2F7486D0009167EB /* Screenshot 2026-03-13 at 1.49.20 PM.png */; };
+		B5FAEA142F7486D0009167EB /* pomo-workflow.mov in Resources */ = {isa = PBXBuildFile; fileRef = B5FAEA0E2F7486D0009167EB /* pomo-workflow.mov */; };
+		B5FAEA152F7486D0009167EB /* pomo-skip-session.mov in Resources */ = {isa = PBXBuildFile; fileRef = B5FAEA0C2F7486D0009167EB /* pomo-skip-session.mov */; };
+		B5FAEA162F7486D0009167EB /* focus-time-end.mov in Resources */ = {isa = PBXBuildFile; fileRef = B5FAEA0A2F7486D0009167EB /* focus-time-end.mov */; };
+		B5FAEA172F7486D0009167EB /* add-delete-workflow.mov in Resources */ = {isa = PBXBuildFile; fileRef = B5FAEA072F7486D0009167EB /* add-delete-workflow.mov */; };
+		B5FAEA182F7486D0009167EB /* change-timer-length.mov in Resources */ = {isa = PBXBuildFile; fileRef = B5FAEA082F7486D0009167EB /* change-timer-length.mov */; };
+		B5FAEA192F7486D0009167EB /* mode-flip.mov in Resources */ = {isa = PBXBuildFile; fileRef = B5FAEA0B2F7486D0009167EB /* mode-flip.mov */; };
+		B5FAEA1A2F7486D0009167EB /* view-project-details.mov in Resources */ = {isa = PBXBuildFile; fileRef = B5FAEA102F7486D0009167EB /* view-project-details.mov */; };
+		B5FAEA1B2F7486D0009167EB /* POMO-timer.mov in Resources */ = {isa = PBXBuildFile; fileRef = B5FAEA0D2F7486D0009167EB /* POMO-timer.mov */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,7 +71,6 @@
 		B517B4CB2CEBFE0000478EE6 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		B51D800B2F295E9100006974 /* TomatoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TomatoView.swift; sourceTree = "<group>"; };
 		B51D802A2F316BB900006974 /* tom.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = tom.usdz; sourceTree = "<group>"; };
-		B5RES0102F316BB900006974 /* Resources */ = {isa = PBXGroup; children = (B51D802A2F316BB900006974 /* tom.usdz */); path = Resources; sourceTree = "<group>"; };
 		B52104442C8A4BCC0053CBDB /* PomoBanco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomoBanco.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B52104472C8A4BCC0053CBDB /* PomoBancoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomoBancoApp.swift; sourceTree = "<group>"; };
 		B52104492C8A4BCC0053CBDB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -90,6 +99,16 @@
 		B5A100072F33000200B18F0D /* AppLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLayout.swift; sourceTree = "<group>"; };
 		B5A100092F33000200B18F0D /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		B5A1000B2F33000300B18F0D /* AddTagAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagAlert.swift; sourceTree = "<group>"; };
+		B5FAEA072F7486D0009167EB /* add-delete-workflow.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "add-delete-workflow.mov"; sourceTree = "<group>"; };
+		B5FAEA082F7486D0009167EB /* change-timer-length.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "change-timer-length.mov"; sourceTree = "<group>"; };
+		B5FAEA092F7486D0009167EB /* focus-mode-flow.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "focus-mode-flow.mov"; sourceTree = "<group>"; };
+		B5FAEA0A2F7486D0009167EB /* focus-time-end.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "focus-time-end.mov"; sourceTree = "<group>"; };
+		B5FAEA0B2F7486D0009167EB /* mode-flip.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "mode-flip.mov"; sourceTree = "<group>"; };
+		B5FAEA0C2F7486D0009167EB /* pomo-skip-session.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "pomo-skip-session.mov"; sourceTree = "<group>"; };
+		B5FAEA0D2F7486D0009167EB /* POMO-timer.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "POMO-timer.mov"; sourceTree = "<group>"; };
+		B5FAEA0E2F7486D0009167EB /* pomo-workflow.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "pomo-workflow.mov"; sourceTree = "<group>"; };
+		B5FAEA0F2F7486D0009167EB /* Screenshot 2026-03-13 at 1.49.20 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2026-03-13 at 1.49.20 PM.png"; sourceTree = "<group>"; };
+		B5FAEA102F7486D0009167EB /* view-project-details.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "view-project-details.mov"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +160,7 @@
 		B52104462C8A4BCC0053CBDB /* PomoBanco */ = {
 			isa = PBXGroup;
 			children = (
+				B5FAEA112F7486D0009167EB /* videos */,
 				B52104472C8A4BCC0053CBDB /* PomoBancoApp.swift */,
 				B52104492C8A4BCC0053CBDB /* ContentView.swift */,
 				B57388702F22E90600B18F0D /* PreviewSamples.swift */,
@@ -153,17 +173,6 @@
 				B521044D2C8A4BCD0053CBDB /* Preview Content */,
 			);
 			path = PomoBanco;
-			sourceTree = "<group>";
-		};
-		B5A100032F33000100B18F0D /* Constants */ = {
-			isa = PBXGroup;
-			children = (
-				B5A100012F33000100B18F0D /* AppConstants.swift */,
-				B5A100022F33000100B18F0D /* AppStrings.swift */,
-				B5A100072F33000200B18F0D /* AppLayout.swift */,
-				B5A100092F33000200B18F0D /* AppTheme.swift */,
-			);
-			path = Constants;
 			sourceTree = "<group>";
 		};
 		B521044D2C8A4BCD0053CBDB /* Preview Content */ = {
@@ -226,6 +235,42 @@
 				B517B4CB2CEBFE0000478EE6 /* Background.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		B5A100032F33000100B18F0D /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				B5A100012F33000100B18F0D /* AppConstants.swift */,
+				B5A100022F33000100B18F0D /* AppStrings.swift */,
+				B5A100072F33000200B18F0D /* AppLayout.swift */,
+				B5A100092F33000200B18F0D /* AppTheme.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		B5FAEA112F7486D0009167EB /* videos */ = {
+			isa = PBXGroup;
+			children = (
+				B5FAEA072F7486D0009167EB /* add-delete-workflow.mov */,
+				B5FAEA082F7486D0009167EB /* change-timer-length.mov */,
+				B5FAEA092F7486D0009167EB /* focus-mode-flow.mov */,
+				B5FAEA0A2F7486D0009167EB /* focus-time-end.mov */,
+				B5FAEA0B2F7486D0009167EB /* mode-flip.mov */,
+				B5FAEA0C2F7486D0009167EB /* pomo-skip-session.mov */,
+				B5FAEA0D2F7486D0009167EB /* POMO-timer.mov */,
+				B5FAEA0E2F7486D0009167EB /* pomo-workflow.mov */,
+				B5FAEA0F2F7486D0009167EB /* Screenshot 2026-03-13 at 1.49.20 PM.png */,
+				B5FAEA102F7486D0009167EB /* view-project-details.mov */,
+			);
+			path = videos;
+			sourceTree = "<group>";
+		};
+		B5RES0102F316BB900006974 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B51D802A2F316BB900006974 /* tom.usdz */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -340,6 +385,16 @@
 			files = (
 				B521044F2C8A4BCD0053CBDB /* Preview Assets.xcassets in Resources */,
 				B521044C2C8A4BCD0053CBDB /* Assets.xcassets in Resources */,
+				B5FAEA122F7486D0009167EB /* focus-mode-flow.mov in Resources */,
+				B5FAEA132F7486D0009167EB /* Screenshot 2026-03-13 at 1.49.20 PM.png in Resources */,
+				B5FAEA142F7486D0009167EB /* pomo-workflow.mov in Resources */,
+				B5FAEA152F7486D0009167EB /* pomo-skip-session.mov in Resources */,
+				B5FAEA162F7486D0009167EB /* focus-time-end.mov in Resources */,
+				B5FAEA172F7486D0009167EB /* add-delete-workflow.mov in Resources */,
+				B5FAEA182F7486D0009167EB /* change-timer-length.mov in Resources */,
+				B5FAEA192F7486D0009167EB /* mode-flip.mov in Resources */,
+				B5FAEA1A2F7486D0009167EB /* view-project-details.mov in Resources */,
+				B5FAEA1B2F7486D0009167EB /* POMO-timer.mov in Resources */,
 				B51D802B2F316BB900006974 /* tom.usdz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
