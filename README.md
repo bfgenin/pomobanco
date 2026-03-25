@@ -6,7 +6,7 @@
 
 <p align="center"><em>A Pomodoro-style timer and lightweight project tracker for iOS.</em></p>
 
-<p align="center"><video controls loop width="320" src="docs/videos/pomo-workflow.mov"></video></p>
+<p align="center"><strong><a href="https://bfgenin.github.io/pomobanco/">Full walkthrough with videos →</a></strong></p>
 
 ## Quick overview
 
@@ -19,55 +19,9 @@ Core features:
 - See how much time you spent per project **weekly** and **all time** in the chart view
 - Manage projects with a simple **add / select / delete** workflow—organize as lightly or as thoroughly as you like
 
----
+Screen recordings (timer modes, projects, weekly chart) are on the **GitHub Pages** site so `<video>` works in the browser: [bfgenin.github.io/pomobanco](https://bfgenin.github.io/pomobanco/).
 
-## Feature walkthrough
-
-### Timer
-
-<p align="center"><video controls loop width="320" src="docs/videos/mode-flip.mov"></video></p>
-
-Flip between **Pomodoro** and **Focus** timer modes.
-
-#### Pomodoro mode
-
-<p align="center"><video controls loop width="320" src="docs/videos/change-timer-length.mov"></video></p>
-
-Set a timer to a preset length (25, 35, or 45 minutes) and work until it ends, then take a break.
-
-#### Focus mode
-
-<p align="center"><video controls loop width="320" src="docs/videos/focus-mode-end.mov"></video></p>
-
-Run a stopwatch for as long as you work—handy for deep work without countdown alerts.
-
-<p align="center"><video controls loop width="320" src="docs/videos/focus-mode-flow.mov"></video></p>
-
-- Focus mode can blur project details for fewer distractions.
-
-#### Skip session
-
-Started a timer by mistake or did no real work? Skip the session so that time is not added to your project.
-
-<p align="center"><video controls loop width="320" src="docs/videos/pomo-skip-session.mov"></video></p>
-
-### Projects
-
-<p align="center"><video controls loop width="320" src="docs/videos/add-delete-workflow.mov"></video></p>
-
-Track time against **projects** (name plus optional tag and description).
-
-Projects can be tagged for easier organization. The tag picker supports creating new tags on the fly. Remove a project by tap-and-holding it in the project list.
-
----
-
-#### Weekly tracking (chart)
-
-<p align="center"><video controls loop width="320" src="docs/videos/view-project-details.mov"></video></p>
-
-- Track progress week by week in the chart view. Bars show total duration per day; new sessions appear when you complete them.
-
-Built with **SwiftUI**, **SwiftData**, and **RealityKit** (optional 3D "tomato" timer; falls back to a simple placeholder when unavailable).
+Built with **SwiftUI**, **SwiftData**, and **RealityKit** (optional 3D “tomato” timer; falls back to a simple placeholder when unavailable).
 
 ## Requirements
 
@@ -80,5 +34,12 @@ Built with **SwiftUI**, **SwiftData**, and **RealityKit** (optional 3D "tomato" 
 1. Clone the repo.
 2. Open `PomoBanco.xcodeproj` in Xcode.
 3. Pick an iOS simulator or device and run (⌘R).
+
+## GitHub Pages (repo settings)
+
+1. Repository **Settings → Pages**
+2. **Build and deployment**: Source **Deploy from a branch**
+3. Branch your default branch (e.g. **main**), folder **`/docs`**
+4. Save; the site URL will be **https://bfgenin.github.io/pomobanco/**
 
 <img src="docs/videos/header-scroll-blue.svg" alt="PomoBanco" width="100%" height="50%"/>
