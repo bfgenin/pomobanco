@@ -35,11 +35,24 @@ Built with **SwiftUI**, **SwiftData**, and **RealityKit** (optional 3D “tomato
 2. Open `PomoBanco.xcodeproj` in Xcode.
 3. Pick an iOS simulator or device and run (⌘R).
 
-## GitHub Pages (repo settings)
+## GitHub Pages (turn the site on once)
 
-1. Repository **Settings → Pages**
-2. **Build and deployment**: Source **Deploy from a branch**
-3. Branch your default branch (e.g. **main**), folder **`/docs`**
-4. Save; the site URL will be **https://bfgenin.github.io/pomobanco/**
+The docs site only appears after Pages is enabled and a build succeeds. **The “There isn’t a GitHub Pages site here” page means Pages isn’t deployed yet** (or the repo is private on a free plan—Pages then requires an upgrade).
+
+### Option A — GitHub Actions (recommended; workflow is in this repo)
+
+1. Open **Settings → Pages** in the **pomobanco** repo (not your profile).
+2. Under **Build and deployment**, set **Source** to **GitHub Actions** (not “Deploy from a branch”).
+3. After the next push, open the **Actions** tab and confirm **Deploy GitHub Pages** completes (green). Approve the workflow if GitHub asks for first-time permission.
+4. Visit **https://bfgenin.github.io/pomobanco/** (can take a minute after the first deploy).
+
+The workflow (`.github/workflows/pages.yml`) builds Jekyll from the **`/docs`** folder on pushes to **`main`** or **`revamp2`**.
+
+### Option B — Deploy from branch
+
+1. **Settings → Pages**.
+2. **Source**: **Deploy from a branch**.
+3. Branch **main** or **revamp2**, folder **`/docs`** (the folder that contains `docs/index.md` in the tree).
+4. Save and wait for the Pages build to finish; check **Settings → Pages** for errors.
 
 <img src="docs/videos/header-scroll-blue.svg" alt="PomoBanco" width="100%" height="50%"/>
