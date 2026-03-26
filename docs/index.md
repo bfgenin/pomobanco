@@ -2,6 +2,26 @@
 layout: default
 ---
 
+<style>
+  body {
+    background: #2b2b2b !important;
+    color: #ffffff !important;
+  }
+
+
+  .container {
+    max-width: 1400px !important;
+  }
+
+ 
+  .page-content {
+    background: #e6e6e6 !important;
+    color: #111111 !important;
+    border-radius: 12px;
+    padding: 2rem 1.75rem;
+  }
+</style>
+
 <img src="{{ '/videos/header-scroll.svg' | relative_url }}" alt="PomoBanco" width="100%"/>
 
 <h1 align="center">
@@ -10,7 +30,7 @@ layout: default
 
 <p align="center"><em>A Pomodoro-style timer and lightweight project tracker for iOS.</em></p>
 
-<p align="center"><video controls loop width="320" src="{{ '/videos/pomo-workflow.mov' | relative_url }}"></video></p>
+<p align="center"><video autoplay muted loop playsinline controls width="320" src="{{ '/videos/pomo-workflow.mov' | relative_url }}"></video></p>
 
 ## Quick overview
 
@@ -29,23 +49,23 @@ Core features:
 
 ### Timer
 
-<p align="center"><video controls loop width="320" src="{{ '/videos/mode-flip.mov' | relative_url }}"></video></p>
+<p align="center"><video autoplay muted loop playsinline controls width="320" src="{{ '/videos/mode-flip.mov' | relative_url }}"></video></p>
 
 Flip between **Pomodoro** and **Focus** timer modes.
 
 #### Pomodoro mode
 
-<p align="center"><video controls loop width="320" src="{{ '/videos/change-timer-length.mov' | relative_url }}"></video></p>
+<p align="center"><video autoplay muted loop playsinline controls width="320" src="{{ '/videos/change-timer-length.mov' | relative_url }}"></video></p>
 
 Set a timer to a preset length (25, 35, or 45 minutes) and work until it ends, then take a break.
 
 #### Focus mode
 
-<p align="center"><video controls loop width="320" src="{{ '/videos/focus-time-end.mov' | relative_url }}"></video></p>
+<p align="center"><video autoplay muted loop playsinline controls width="320" src="{{ '/videos/focus-time-end.mov' | relative_url }}"></video></p>
 
 Run a stopwatch for as long as you work—handy for deep work without countdown alerts.
 
-<p align="center"><video controls loop width="320" src="{{ '/videos/focus-mode-flow.mov' | relative_url }}"></video></p>
+<p align="center"><video autoplay muted loop playsinline controls width="320" src="{{ '/videos/focus-mode-flow.mov' | relative_url }}"></video></p>
 
 - Focus mode can blur project details for fewer distractions.
 
@@ -53,11 +73,11 @@ Run a stopwatch for as long as you work—handy for deep work without countdown 
 
 Started a timer by mistake or did no real work? Skip the session so that time is not added to your project.
 
-<p align="center"><video controls loop width="320" src="{{ '/videos/pomo-skip-session.mov' | relative_url }}"></video></p>
+<p align="center"><video autoplay muted loop playsinline controls width="320" src="{{ '/videos/pomo-skip-session.mov' | relative_url }}"></video></p>
 
 ### Projects
 
-<p align="center"><video controls loop width="320" src="{{ '/videos/add-delete-workflow.mov' | relative_url }}"></video></p>
+<p align="center"><video autoplay muted loop playsinline controls width="320" src="{{ '/videos/add-delete-workflow.mov' | relative_url }}"></video></p>
 
 Track time against **projects** (name plus optional tag and description).
 
@@ -67,7 +87,7 @@ Projects can be tagged for easier organization. The tag picker supports creating
 
 #### Weekly tracking (chart)
 
-<p align="center"><video controls loop width="320" src="{{ '/videos/view-project-details.mov' | relative_url }}"></video></p>
+<p align="center"><video autoplay muted loop playsinline controls width="320" src="{{ '/videos/view-project-details.mov' | relative_url }}"></video></p>
 
 - Track progress week by week in the chart view. Bars show total duration per day; new sessions appear when you complete them.
 
@@ -76,3 +96,4 @@ Built with **SwiftUI**, **SwiftData**, and **RealityKit** (optional 3D “tomato
 ---
 
 [← Repository on GitHub](https://github.com/bfgenin/pomobanco)
+
