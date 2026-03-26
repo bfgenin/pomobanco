@@ -5,7 +5,7 @@ layout: default
 <style>
   body {
     background: #2b2b2b !important;
-    color: #ffffff !important;
+    color:#ffffff !important;
   }
 
 
@@ -13,19 +13,22 @@ layout: default
     max-width: 1400px !important;
   }
 
+  .wrapper, main {
+    max-width: 1400px !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
  
   .page-content {
-    background: #e6e6e6 !important;
-    color: #111111 !important;
+    background: #141414 !important;
     border-radius: 12px;
     padding: 2rem 1.75rem;
   }
 </style>
 
-<img src="{{ '/videos/header-scroll.svg' | relative_url }}" alt="PomoBanco" width="100%"/>
-
 <h1 align="center">
-  <span style="color:#D31140;font-weight:800;letter-spacing:-0.02em;text-shadow:-1px -1px 0 #38131C,1px -1px 0 #38131C,-1px 1px 0 #38131C,1px 1px 0 #38131C,0 0 8px rgba(211,17,64,0.9),0 0 18px rgba(211,17,64,0.5);">Pomo</span><span style="color:#220F58;font-weight:800;letter-spacing:0.1em;text-shadow:-1px -1px 0 #38131C,1px -1px 0 #38131C,-1px 1px 0 #38131C,1px 1px 0 #38131C,0 0 8px rgba(211,17,64,0.9),0 0 18px rgba(211,17,64,0.5);">Banco</span>
+  <span style="color:#D31140;font-weight:800;letter-spacing:-0.02em">Pomo</span><span style="color:#220F58;font-weight:800;letter-spacing:0.1em"> Banco</span>
 </h1>
 
 <p align="center"><em>A Pomodoro-style timer and lightweight project tracker for iOS.</em></p>
