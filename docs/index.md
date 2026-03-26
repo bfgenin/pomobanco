@@ -4,8 +4,16 @@ layout: default
 
 <style>
   body {
-    background: #2b2b2b !important;
-    color:#ffffff !important;
+    background:  #2b2b2b !important;
+    color: #ffffff !important;
+  } 
+
+  header, .site-header, .page-header {
+    display: none !important;
+  }
+
+  .site-header, .page-header, .border-bottom {
+    border-bottom: none !important;
   }
 
 
@@ -28,7 +36,7 @@ layout: default
 </style>
 
 <h1 align="center">
-  <span style="color:#D31140;font-weight:800;letter-spacing:-0.02em">Pomo</span><span style="color:#220F58;font-weight:800;letter-spacing:0.1em"> Banco</span>
+  <span style="color:#D31140;font-weight:800;letter-spacing:0.1em;-webkit-text-stroke:0.2px white">Pomo</span><span style="color:#220F58;font-weight:800;letter-spacing:0.1em;-webkit-text-stroke:0.2px white">Banco</span>
 </h1>
 
 <p align="center"><em>A Pomodoro-style timer and lightweight project tracker for iOS.</em></p>
@@ -45,6 +53,10 @@ Core features:
 - Attach the session to a **Project** (stored with SwiftData)
 - See how much time you spent per project **weekly** and **all time** in the chart view
 - Manage projects with a simple **add / select / delete** workflow—organize as lightly or as thoroughly as you like
+
+
+Built with **SwiftUI**, **SwiftData**, and **RealityKit** (a 3D “tomato” timer; falls back to a simple placeholder when unavailable).
+
 
 ---
 
@@ -93,8 +105,6 @@ Projects can be tagged for easier organization. The tag picker supports creating
 <p align="center"><video autoplay muted loop playsinline controls width="320" src="{{ '/videos/view-project-details.mov' | relative_url }}"></video></p>
 
 - Track progress week by week in the chart view. Bars show total duration per day; new sessions appear when you complete them.
-
-Built with **SwiftUI**, **SwiftData**, and **RealityKit** (optional 3D “tomato” timer; falls back to a simple placeholder when unavailable).
 
 ---
 
